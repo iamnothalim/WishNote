@@ -1,4 +1,3 @@
-//import User from "../../models/user";
 const User = require("../../models/user");
 const express = require('express');
 const router = express.Router();
@@ -21,7 +20,6 @@ router.post("/", async function(req, res) {
         //username이 이미 존재하는지 확인
         const exists = await User.findByUsername(username);
         if (exists) {
-            //ctx.status = 409; //conflict
             return res
                 .status(400)
                 .json({errors:[{msg:"User already exists"}]});

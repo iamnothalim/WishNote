@@ -1,10 +1,44 @@
-var express = require('express');
-var router = express.Router();
+const User = require("../../models/user");
+const express = require('express');
+const router = express.Router();
 
 
-router.get("/", function(req, res, next) {
+router.post("/",async function(req, res) {
     console.log('여긴 로그인');
-    res.send('login다잉');
+    const { username, password } = req.body;
+    //둘중 하나라도 없으면 에러
+    if (!username || !password) {
+        return res
+                .status(400)
+                .json({errors:[{msg:"User not exists"}]});
+    }
+    try {
+        const user = await User.findByUsername(username);
+        //계정이 없으면 에러
+        if (!user) {
+            return res
+                .status(400)
+                .json({errors:[{msg:"User not exists"}]});
+        }
+        const valid = await user.checkPassword(password);
+        // 잘못된 비번이라면
+        if (!valid) {
+            return res
+                .status(400)
+                .json({errors:[{msg:"Password wrong"}]});
+        }
+        req.body = user.serialize();
+        
+        res.send("Success");
+        //const token = user.generateToken();
+        // ctx.cookies.set("access_token", token, {
+        //     maxAge: 1000 * 60 * 60 * 24 * 7, //7일
+        //     httpOnly: true,
+        // });
+    } catch (e) {
+        console.log(e.message);
+        res.status(500).send("Server Error");
+    }
 } );
 
 module.exports = router;
