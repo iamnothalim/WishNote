@@ -9,9 +9,7 @@ var mainRouter = require("./routes/main");
 var authRouter = require("./routes/auth");
 
 var app = express();
-//찐막!!!!!
-//21.04.24 je
-//마지막확인
+//21.04.24 jeasdasd
 //mongoDB
 mongoose
   .connect("mongodb://132.226.18.214:27017/wishnote", {
