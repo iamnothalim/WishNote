@@ -9,7 +9,7 @@ var mainRouter = require("./routes/main");
 var authRouter = require("./routes/auth");
 
 var app = express();
-
+//찐막!!!!!
 //21.04.24 je
 //마지막확인
 //mongoDB
