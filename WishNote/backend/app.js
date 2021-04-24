@@ -10,6 +10,9 @@ var authRouter = require("./routes/auth");
 
 var app = express();
 //나는 하림
+
+//나는 정원이다.
+
 //mongoDB
 mongoose
   .connect("mongodb://132.226.18.214:27017/wishnote", {
