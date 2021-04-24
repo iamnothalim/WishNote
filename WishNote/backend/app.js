@@ -10,7 +10,7 @@ var authRouter = require('./routes/auth');
 
 var app = express();
 
-
+//asdhaisdhias
 //mongoDB
 mongoose
   .connect('mongodb://132.226.18.214:27017/wishnote', { 
