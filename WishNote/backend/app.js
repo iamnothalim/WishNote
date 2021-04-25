@@ -9,9 +9,6 @@ var mainRouter = require("./routes/main");
 var authRouter = require("./routes/auth");
 
 var app = express();
-//나는 하림
-
-//나는 정원이다.
 
 //mongoDB
 mongoose
