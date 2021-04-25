@@ -9,13 +9,10 @@ var mainRouter = require("./routes/main");
 var authRouter = require("./routes/auth");
 
 var app = express();
-//나는 하림
-
-//나는 정원이다.
 
 //mongoDB
 mongoose
-  .connect("mongodb://132.226.18.214:27017/wishnote", {
+  .connect("mongodb+srv://iamnothalim:blockchain1!@wishnote.ccf0r.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useFindAndModify: false,
     useUnifiedTopology: true,
