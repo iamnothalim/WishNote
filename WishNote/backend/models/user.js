@@ -31,11 +31,13 @@ UserSchema.methods.serialize = function () {
 };
 
 UserSchema.methods.generateToken = function () {
+  //console.log(this.id);
+  //console.log(this.username);
     const token = jwt.sign(
         //첫번째 파라미터에는 토큰안에 집어 넣고 싶은 데이터를 넣는다.
         {
-            _id: this.id,
-            username: this.username,
+          _id: this.id,
+          username: this.username,
         },
         'secret', //두번째 파라미터에는 JWT암호
         {
