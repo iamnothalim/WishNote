@@ -4,6 +4,7 @@
 
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const UserSchema = new mongoose.Schema({
   username: String,
@@ -29,20 +30,20 @@ UserSchema.methods.serialize = function () {
   return data;
 };
 
-// UserSchema.methods.generateToken = function () {
-//     const token = jwt.sign(
-//         //첫번째 파라미터에는 토큰안에 집어 넣고 싶은 데이터를 넣는다.
-//         {
-//             _id: this.id,
-//             username: this.username,
-//         },
-//         process.env.JWT_SECRET, //두번째 파라미터에는 JWT암호
-//         {
-//             expiresIn: "7d", //7일동안만
-//         }
-//     );
-//     return token;
-// };
+UserSchema.methods.generateToken = function () {
+    const token = jwt.sign(
+        //첫번째 파라미터에는 토큰안에 집어 넣고 싶은 데이터를 넣는다.
+        {
+            _id: this.id,
+            username: this.username,
+        },
+        'secret', //두번째 파라미터에는 JWT암호
+        {
+            expiresIn: "7d", //7일동안만
+        }
+    );
+    return token;
+};
 //스태틱 메서드
 //모델에서 바로 사용할수 있는 함수
 
