@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const autoIncrement = require("mongoose-auto-increment");
 autoIncrement.initialize(mongoose.connection);
 
-const challengeSchema = new mongoose.Schema({
+//스키마 작성
+const ChallengeSchema = new mongoose.Schema({
   //챌린지 인덱스 (자산, 건강, 역량, 관계, 취미분야 1~5)
   challengeIndex: {
     type: Number,
@@ -50,12 +51,19 @@ const challengeSchema = new mongoose.Schema({
   },
 });
 
-challengeSchema.plugin(autoIncrement.plugin, {
+//인덱스 auto increment 설정
+ChallengeSchema.plugin(autoIncrement.plugin, {
   model: "challengeSchema", //모델명
   field: "challengeIndex", //자동증가할 db컬럼명
   startAt: 1, //시작
   increment: 1, // 증가
 });
 
-const Challenge = mongoose.model("Challenge", challengeSchema);
-module.exports = { Challenge };
+//스태틱 메서드 함수 추가
+ChallengeSchema.statics.findByChallengeName = function (challengeName) {
+  return this.findOne({ challengeName });
+};
+
+//스키마 만든 거 모델 내보내기
+const Challenge = mongoose.model("Challenge", ChallengeSchema);
+module.exports = Challenge;

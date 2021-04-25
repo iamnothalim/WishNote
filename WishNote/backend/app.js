@@ -1,22 +1,25 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
 const mongoose = require("mongoose");
 
-var mainRouter = require("./routes/main");
-var authRouter = require("./routes/auth");
+const mainRouter = require("./routes/main");
+const authRouter = require("./routes/auth");
 
-var app = express();
+const app = express();
 
 //mongoDB
 mongoose
-  .connect("mongodb+srv://iamnothalim:blockchain1!@wishnote.ccf0r.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
-    useNewUrlParser: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://iamnothalim:blockchain1!@wishnote.ccf0r.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useFindAndModify: false,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() => {
     console.log("몽고디비 오랜만이얌");
   })
