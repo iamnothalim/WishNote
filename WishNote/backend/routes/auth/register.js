@@ -31,12 +31,11 @@ router.post("/", async function (req, res) {
     req.body = user.serialize();
 
     res.send("Success");
-
     // const token = user.generateToken();
-    // ctx.cookies.set("access_token", token, {
+    // res.cookie("access_token", token, {
     //     maxAge: 1000 * 60 * 60 * 24 * 7, //7일
     //     httpOnly: true,
-    // });
+    // }).json({msg:"success"});
   } catch (e) {
     console.log(e.message);
     res.status(500).send("Server Error");

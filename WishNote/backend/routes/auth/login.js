@@ -15,10 +15,30 @@ router.post("/", async function (req, res) {
     if (!user) {
       return res.status(400).json({ errors: [{ msg: "User not exists" }] });
     }
-    const valid = await user.checkPassword(password);
-    // 잘못된 비번이라면
-    if (!valid) {
-      return res.status(400).json({ errors: [{ msg: "Password wrong" }] });
+    try {
+      const user = await User.findByUsername(username);
+      //계정이 없으면 에러
+      if (!user) {
+        return res.status(400).json({ errors: [{ msg: "User not exists" }] });
+      }
+      const valid = await user.checkPassword(password);
+      // 잘못된 비번이라면
+      if (!valid) {
+        return res.status(400).json({ errors: [{ msg: "Password wrong" }] });
+      }
+      req.body = user.serialize();
+
+      //res.send("Success");
+      const token = user.generateToken();
+      res
+        .cookie("access_token", token, {
+          maxAge: 1000 * 60 * 60 * 24 * 7, //7일
+          httpOnly: true,
+        })
+        .json({ msg: "success" });
+    } catch (e) {
+      console.log(e.message);
+      res.status(500).send("Server Error");
     }
     req.body = user.serialize();
 
