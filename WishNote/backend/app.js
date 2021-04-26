@@ -40,6 +40,9 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", mainRouter);
 app.use("/auth", authRouter);
 
+//proxyTest
+//app.get('/api/hello',(req,res)=>{res.send("안녕 이건 프록시 테스트")});
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
