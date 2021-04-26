@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import {useDispatch} from 'react-redux';
+import {loginUser} from '../../../_actions/user_action';
 
 function LoginPage() {
-
+    const dispatch = useDispatch();
     const [Username, setUsername] = useState('');
     const [Password, setPassword] = useState('');
 
@@ -13,6 +15,13 @@ function LoginPage() {
     }
     const onSubmitHandler = (e) =>{
         e.preventDefault();
+
+        let body = {
+            username:Username,
+            password:Password
+        }
+
+        dispatch(loginUser(body))
     }
 
     return (
