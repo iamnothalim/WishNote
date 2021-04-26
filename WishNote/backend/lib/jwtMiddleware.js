@@ -3,13 +3,13 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
-const jwtMiddleware = async (req,res,next) => {
+const jwtMiddleware = async (req, res, next) => {
   const token = req.cookies.access_token;
   //console.log('이게 어세스 토큰: ',req.cookies.access_token);
   if (!token) return next(); //토큰 없음
   try {
-    console.log('middleware try안쪽');
-    const decoded = jwt.verify(token, 'secret');
+    console.log("middleware try안쪽");
+    const decoded = jwt.verify(token, "secret");
     req.user = {
       _id: decoded._id,
       username: decoded.username,
