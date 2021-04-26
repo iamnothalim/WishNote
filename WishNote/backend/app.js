@@ -14,11 +14,14 @@ const app = express();
 
 //mongoDB
 mongoose
-  .connect("mongodb+srv://iamnothalim:blockchain1!@wishnote.ccf0r.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
-    useNewUrlParser: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://iamnothalim:blockchain1!@wishnote.ccf0r.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useFindAndModify: false,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() => {
     console.log("몽고디비 오랜만이얌");
   })
