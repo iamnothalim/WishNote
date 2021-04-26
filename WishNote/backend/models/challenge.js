@@ -12,34 +12,42 @@ const ChallengeSchema = new mongoose.Schema({
   //작성자 아이디
   registerId: {
     type: String,
+    required: true,
   },
   //카테고리
   category: {
     type: String,
+    required: true,
   },
   //챌린지 제목
   challengeName: {
     type: String,
+    required: true,
   },
   //인증 방법(text)
   howTo: {
     type: String,
+    required: true,
   },
   //인증 횟수
   howMany: {
     type: Number,
+    required: true,
   },
   //시작일
   startDate: {
     type: Date,
+    required: true,
   },
   //종료일
   finishDate: {
     type: Date,
+    required: true,
   },
   //참가비
   deposit: {
     type: Number,
+    required: true,
   },
   //조회수
   views: {

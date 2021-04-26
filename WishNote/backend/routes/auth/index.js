@@ -10,14 +10,14 @@
 
 // export default auth;
 
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const login = require('./login');
-const register =require('./register');
-const logout = require('./logout');
+const login = require("./login");
+const register = require("./register");
+const logout = require("./logout");
 
 router.use("/login", login);
-router.use("/logout",logout);
-router.use("/register",register);
+router.use("/logout", logout);
+router.use("/register", register);
 
 module.exports = router;
