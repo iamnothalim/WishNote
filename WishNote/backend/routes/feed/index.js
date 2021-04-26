@@ -1,11 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const write = require('./write');
+const write = require("./write");
 
-router.use('/write',write);
-
-
+router.use("/write", write);
 
 // router.get("/", function(req, res, next) {
 //   console.log('여긴 feed의  index안!!');

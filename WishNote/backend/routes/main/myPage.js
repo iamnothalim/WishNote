@@ -10,6 +10,7 @@ writingDate:2021-04-30T00:00:00.000+00:00
 - GET : /myPage/author/:author
 */
 
+//21.04.26 JE 마이페이지 데이터 조회
 const express = require("express");
 const router = express.Router();
 const checkLoggedIn = require("../../lib/checkLoggedIn");

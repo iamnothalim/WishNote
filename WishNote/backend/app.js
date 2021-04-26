@@ -40,7 +40,7 @@ app.use(cookieParser());
 app.use(jwtMiddleware);
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", mainRouter);
+app.use("/api", mainRouter);
 app.use("/api/auth", authRouter);
 
 //proxyTest
