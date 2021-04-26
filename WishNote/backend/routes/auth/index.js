@@ -12,6 +12,7 @@
 
 const express = require('express');
 const router = express.Router();
+
 const login = require('./login');
 const register =require('./register');
 const logout = require('./logout');

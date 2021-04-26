@@ -9,6 +9,7 @@ const jwtMiddleware = require("./lib/jwtMiddleware");
 
 const mainRouter = require("./routes/main");
 const authRouter = require("./routes/auth");
+const feedRouter = require("./routes/feed");
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", mainRouter);
 app.use("/auth", authRouter);
+app.use("/feed", feedRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
