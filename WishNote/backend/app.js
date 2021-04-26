@@ -41,7 +41,7 @@ app.use(jwtMiddleware);
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", mainRouter);
-app.use("/auth", authRouter);
+app.use("/api/auth", authRouter);
 
 //proxyTest
 //app.get('/api/hello',(req,res)=>{res.send("안녕 이건 프록시 테스트")});

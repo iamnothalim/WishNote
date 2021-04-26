@@ -5,4 +5,5 @@ const checkLoggedIn = (req, res, next) => {
   }
   return next();
 };
-export default checkLoggedIn;
+
+module.exports = checkLoggedIn;
