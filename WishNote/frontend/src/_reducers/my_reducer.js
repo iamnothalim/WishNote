@@ -1,4 +1,4 @@
-import { CHALLENGE_ME } from "./types";
+import { CHALLENGE_ME } from "../_actions/types";
 
 export default function (state = {}, action) {
   switch (action.type) {

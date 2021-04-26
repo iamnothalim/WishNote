@@ -35,7 +35,7 @@ router.post("/", async function (req, res) {
           maxAge: 1000 * 60 * 60 * 24 * 7, //7일
           httpOnly: true,
         })
-        .json({ loginSuccess: true, userId:user._id });
+        .json({ loginSuccess: true, userId:user._id, user:username });
     } catch (e) {
       console.log(e.message);
       res.status(500).send("Server Error");
