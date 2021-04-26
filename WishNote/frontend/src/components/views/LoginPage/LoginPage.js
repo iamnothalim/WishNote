@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
-
-function LoginPage() {
-
+import React, { useState } from 'react';
+import {useDispatch} from 'react-redux';
+import {loginUser} from '../../../_actions/user_action';
+import { withRouter} from 'react-router-dom';
+function LoginPage(props) {
+    const dispatch = useDispatch();
     const [Username, setUsername] = useState('');
     const [Password, setPassword] = useState('');
 
@@ -13,6 +15,20 @@ function LoginPage() {
     }
     const onSubmitHandler = (e) =>{
         e.preventDefault();
+
+        let body = {
+            username:Username,
+            password:Password
+        }
+
+        dispatch(loginUser(body))
+            .then(response=>{
+                if(response.payload.loginSuccess){
+                    props.history.push('/');
+                }else{
+                    alert('Error');
+                }
+            })
     }
 
     return (
@@ -36,4 +52,4 @@ function LoginPage() {
     )
 }
 
-export default LoginPage
+export default withRouter(LoginPage) 

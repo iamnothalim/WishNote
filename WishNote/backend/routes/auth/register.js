@@ -30,7 +30,7 @@ router.post("/", async function (req, res) {
 
     req.body = user.serialize();
 
-    res.send("Success");
+    res.json({ success: true, userId:user._id });
     // const token = user.generateToken();
     // res.cookie("access_token", token, {
     //     maxAge: 1000 * 60 * 60 * 24 * 7, //7일
