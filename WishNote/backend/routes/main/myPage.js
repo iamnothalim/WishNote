@@ -7,7 +7,8 @@ username:"halim",
 writingDate:2021-04-30T00:00:00.000+00:00
 
 2. 마이페이지에 필요한 월간 리포트 라우터 
-- GET : /myPage/author/:author
+- GET http://localhost:8001/api/myPage
+- GET http://localhost:8001/api/myPage/health
 */
 
 //21.04.26 JE 마이페이지 데이터 조회
@@ -40,6 +41,7 @@ router.get("/:category", checkLoggedIn, (req, res) => {
 });
 
 module.exports = router;
+
 /*
 획득 습관
 마이페이지 획득 습관 데이터 받아오는 프로세스

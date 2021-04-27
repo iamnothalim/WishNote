@@ -5,7 +5,7 @@ autoIncrement.initialize(mongoose.connection);
 
 //스키마 작성
 const ChallengeSchema = new mongoose.Schema({
-  //챌린지 인덱스 (자산, 건강, 역량, 관계, 취미분야 1~5)
+  //챌린지 인덱스 (자산, 건강, 역량, 관계, 취미분야 1~5) : asset, health, performance, relationship, hobby
   challengeIndex: {
     type: Number,
   },
