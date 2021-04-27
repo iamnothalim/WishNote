@@ -1,43 +1,7 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { withRouter } from "react-router";
-import { registerUser } from "../_actions/user_action";
+import React from "react";
+import RegisterContainer from "../containers/auth/RegisterContainer";
 
-function RegisterPage(props) {
-  const dispatch = useDispatch();
-  const [Username, setUsername] = useState("");
-  const [Password, setPassword] = useState("");
-  const [ConfirmPassword, setConfirmPassword] = useState("");
-
-  const onUsernameHandler = (e) => {
-    setUsername(e.currentTarget.value);
-  };
-  const onPasswordHandler = (e) => {
-    setPassword(e.currentTarget.value);
-  };
-  const onConfirmPasswordHandler = (e) => {
-    setConfirmPassword(e.currentTarget.value);
-  };
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-
-    if (Password !== ConfirmPassword) {
-      return alert("비밀번호를 다시한번 확인해주세요.");
-    }
-
-    let body = {
-      username: Username,
-      password: Password,
-    };
-
-    dispatch(registerUser(body)).then((response) => {
-      if (response.payload.success) {
-        props.history.push("/login");
-      } else {
-        alert("failed to sign up");
-      }
-    });
-  };
+function RegisterPage() {
   return (
     <div
       style={{
@@ -48,7 +12,7 @@ function RegisterPage(props) {
         height: "100vh",
       }}
     >
-      <form
+      {/* <form
         style={{ display: "flex", flexDirection: "column" }}
         onSubmit={onSubmitHandler}
       >
@@ -64,9 +28,10 @@ function RegisterPage(props) {
         />
         <br />
         <button>회원가입</button>
-      </form>
+      </form> */}
+      <RegisterContainer/>
     </div>
   );
 }
 
-export default withRouter(RegisterPage);
+export default RegisterPage;
