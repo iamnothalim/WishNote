@@ -5,7 +5,7 @@ export function loginUser(dataToSubmit) {
   const request = axios
     .post("/api/auth/login", dataToSubmit)
     .then((response) => response.data);
-
+  console.log('로그인 페이로드',request)
   return {
     type: LOGIN_USER,
     payload: request,
