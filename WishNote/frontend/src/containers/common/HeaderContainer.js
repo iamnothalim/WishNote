@@ -22,6 +22,7 @@ import axios from "axios";
 import { auth } from "../../_actions/user_action";
 import { withRouter } from "react-router";
 
+
 const HeaderContainer = (props) => {
     // const  user  = useSelector((state) => (
     //     state.user
@@ -43,7 +44,9 @@ const HeaderContainer = (props) => {
             }
         });
     };
-    return <Header user={user} onLogout={onLogout} />;
+    return (
+        <Header user={user} onLogout={onLogout} />
+    );
 };
 
 export default withRouter(HeaderContainer);
