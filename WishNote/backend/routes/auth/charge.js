@@ -3,19 +3,8 @@ const express = require("express");
 const router = express.Router();
 
 router.post("/", async function (req, res) {
-  console.log("여긴 회원가입");
-  //Request Body 검증
-  // const schema = Joi.object().keys({
-  //     username: Joi.string().alphanum().min(3).max(20).required(),
-  //     password: Joi.string().required(),
-  // });
-  // const result = schema.validate(req.body);
-  // if (result.error) {
-  //     ctx.status = 400;
-  //     ctx.body = result.error;
-  //     return;
-  // }
-  const { nickname, password, name, id } = req.body;
+  console.log("여긴 충전소");
+  const charge = req.body.charge;
   try {
     //username이 이미 존재하는지 확인
     const exists = await User.findByUsername(nickname);

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useSelector } from "react-redux";
 import { LOGIN_USER, REGISTER_USER, AUTH_USER, CHALLENGE_ME } from "./types";
 
 export function loginUser(dataToSubmit) {
@@ -13,6 +14,7 @@ export function loginUser(dataToSubmit) {
 }
 
 export function registerUser(dataToSubmit) {
+  console.log('회원가입 데이터 들어갑니다!',dataToSubmit)
   const request = axios
     .post("/api/auth/register", dataToSubmit)
     .then((response) => response.data);
@@ -32,4 +34,10 @@ export function auth() {
     type: AUTH_USER,
     payload: request,
   };
+}
+
+export function charge(dataToSubmit){
+  
+  // const request = axios
+  //   .post("/api/auth/charge",dataToSubmit)
 }
