@@ -16,7 +16,7 @@ const tailLayout = {
     },
 };
 
-const ChargePoint = ({onSubmitHandler}) => {
+const ChargePoint = ({onSubmitHandler,userdata}) => {
     const [form] = Form.useForm();
 
     // const onGenderChange = (value) => {
@@ -49,8 +49,10 @@ const ChargePoint = ({onSubmitHandler}) => {
     };
 
     return (
+        <>
+            <p>{userdata.id}님</p>
+            <p>보유잔고: {userdata.point}원</p>
         <Form {...layout} form={form} name="control-hooks" onFinish={onSubmitHandler}>
-            
             <Form.Item
                 name="charge"
                 label="충전금액"
@@ -99,6 +101,7 @@ const ChargePoint = ({onSubmitHandler}) => {
                 </Button>
             </Form.Item>
         </Form>
+        </>
     );
 };
 

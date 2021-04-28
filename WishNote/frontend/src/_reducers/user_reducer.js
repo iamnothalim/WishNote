@@ -1,9 +1,7 @@
-import { LOGIN_USER, REGISTER_USER, AUTH_USER } from "../_actions/types";
+import { LOGIN_USER, REGISTER_USER, AUTH_USER, CHARGE_USER } from "../_actions/types";
 
 const initialstate = {
   userData:{
-    isAuth:false,
-    username:''
   }
 }
 
@@ -16,6 +14,8 @@ export default function (state = initialstate, action) {
     case REGISTER_USER:
       return { ...state, register: action.payload };
     case AUTH_USER:
+      return { ...state, userData: action.payload };
+    case CHARGE_USER:
       return { ...state, userData: action.payload };
     default:
       return state;
