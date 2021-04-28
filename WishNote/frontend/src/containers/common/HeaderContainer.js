@@ -26,13 +26,18 @@ const HeaderContainer = (props) => {
   // const  user  = useSelector((state) => (
   //     state.user
   // ));
-  const [user, setUser] = useState("");
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(auth()).then((response) => {
-      setUser(response.payload.username);
-    });
-  }, [dispatch]);
+  // const [user, setUser] = useState("")
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //     dispatch(auth()).then((response) => {
+  //         setUser(response.payload.username);
+  //     });
+  // }, [dispatch]);
+  const user = useSelector((state) => ({
+    user: state.user.userData.username,
+    //user:state
+  }));
+
   console.log("요게 테스트 데이타", user);
   const onLogout = () => {
     axios.get("/api/auth/logout").then((response) => {

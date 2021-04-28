@@ -1,10 +1,13 @@
 import { LOGIN_USER, REGISTER_USER, AUTH_USER } from "../_actions/types";
 
-// const initialstate = {
-//   user:''
-// }
+const initialstate = {
+  userData:{
+    isAuth:false,
+    username:''
+  }
+}
 
-export default function (state = {}, action) {
+export default function (state = initialstate, action) {
   switch (action.type) {
     case LOGIN_USER:
       return { ...state, loginSuccess: action.payload };

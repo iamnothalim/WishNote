@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import React from 'react';
 import {useDispatch} from 'react-redux';
 import {registerUser} from '../../_actions/user_action';
 import { withRouter} from 'react-router-dom';
@@ -7,31 +7,14 @@ import RegisterComponent from '../../components/auth/RegisterComponent';
 
 const RegisterContainer = (props) => {
     const dispatch = useDispatch();
-    const [Username, setUsername] = useState("");
-    const [Password, setPassword] = useState("");
-    const [ConfirmPassword, setConfirmPassword] = useState("");
-
-    const onUsernameHandler = (e) => {
-        setUsername(e.currentTarget.value);
-    };
-    const onPasswordHandler = (e) => {
-        setPassword(e.currentTarget.value);
-    };
-    const onConfirmPasswordHandler = (e) => {
-        setConfirmPassword(e.currentTarget.value);
-    };
-    const onSubmitHandler = (e) => {
-        e.preventDefault();
-
-        // if (Password !== ConfirmPassword) {
-        //     return alert("비밀번호를 다시한번 확인해주세요.");
-        // }
-
+    const onSubmitHandler= (values) => {
         let body = {
-            username: Username,
-            password: Password,
+            nickname: values.Nickname,
+            password: values.Password,
+            name:values.Name,
+            id:values.Id,
         };
-
+        console.log('여기 들어왔나?')
         dispatch(registerUser(body)).then((response) => {
             if (response.payload.success) {
                 props.history.push("/login");
@@ -41,11 +24,7 @@ const RegisterContainer = (props) => {
         });
     };
     return (
-        <RegisterComponent 
-            onUsernameHandler={onUsernameHandler}
-            onPasswordHandler={onPasswordHandler}
-            Username={Username}
-            Password={Password}
+        <RegisterComponent
             onSubmitHandler={onSubmitHandler}
         />
     )

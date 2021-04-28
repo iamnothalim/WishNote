@@ -1,6 +1,5 @@
 import React from 'react';
-import { Form, Input, Select, Checkbox, Button} from 'antd';
-const { Option } = Select;
+import { Form, Input, Checkbox, Button} from 'antd';
 
 const formItemLayout = {
     labelCol: {
@@ -33,40 +32,25 @@ const tailFormItemLayout = {
     },
 };
 
-const RegisterComponent = ({onUsernameHandler,onPasswordHandler,onSubmitHandler,Username,Password}) => {
+const RegisterComponent = ({
+    onSubmitHandler,
+    }) => {
     const [form] = Form.useForm();
 
-    const onFinish = (values) => {
-        console.log('Received values of form: ', values);
-    };
-
-    const prefixSelector = (
-        <Form.Item name="prefix" noStyle>
-            <Select
-                style={{
-                    width: 70,
-                }}
-            >
-                <Option value="86">+86</Option>
-                <Option value="87">+87</Option>
-            </Select>
-        </Form.Item>
-    );
+    // const onFinish = (values) => {
+    //     console.log('Received values of form: ', values);
+    // };
 
     return (
         <Form
             {...formItemLayout}
             form={form}
             name="register"
-            onFinish={onFinish}
-            initialValues={{
-                prefix: '86',
-            }}
+            onFinish={onSubmitHandler}
             scrollToFirstError
-            onSubmit={onSubmitHandler}
         >
             <Form.Item
-                name="ID"
+                name="Id"
                 label="ID"
                 rules={[
                     {
@@ -75,14 +59,12 @@ const RegisterComponent = ({onUsernameHandler,onPasswordHandler,onSubmitHandler,
                         whitespace: true,
                     },
                 ]}
-                value={Username} 
-                onChange={onUsernameHandler}
             >
-                <Input />
+                <Input/>
             </Form.Item>
 
             <Form.Item
-                name="password"
+                name="Password"
                 label="Password"
                 rules={[
                     {
@@ -98,7 +80,7 @@ const RegisterComponent = ({onUsernameHandler,onPasswordHandler,onSubmitHandler,
             <Form.Item
                 name="confirm"
                 label="Confirm Password"
-                dependencies={['password']}
+                dependencies={['Password']}
                 hasFeedback
                 rules={[
                     {
@@ -107,7 +89,7 @@ const RegisterComponent = ({onUsernameHandler,onPasswordHandler,onSubmitHandler,
                     },
                     ({ getFieldValue }) => ({
                         validator(_, value) {
-                            if (!value || getFieldValue('password') === value) {
+                            if (!value || getFieldValue('Password') === value) {
                                 return Promise.resolve();
                             }
 
@@ -115,15 +97,28 @@ const RegisterComponent = ({onUsernameHandler,onPasswordHandler,onSubmitHandler,
                         },
                     }),
                 ]}
-                value={Password} 
-                onChange={onPasswordHandler}
             >
                 <Input.Password />
             </Form.Item>
-
+            
             <Form.Item
-                name="Username"
-                label="Username"
+                name="Name"
+                label="Name"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please input your Name!',
+                        whitespace: true,
+                    },
+                ]}
+                
+            >
+                <Input />
+            </Form.Item>
+            
+            <Form.Item
+                name="Nickname"
+                label="Nickname"
                 tooltip="What do you want others to call you?"
                 rules={[
                     {
@@ -132,8 +127,6 @@ const RegisterComponent = ({onUsernameHandler,onPasswordHandler,onSubmitHandler,
                         whitespace: true,
                     },
                 ]}
-                value={Username} 
-                onChange={onUsernameHandler}
             >
                 <Input />
             </Form.Item>
@@ -165,12 +158,7 @@ const RegisterComponent = ({onUsernameHandler,onPasswordHandler,onSubmitHandler,
                     },
                 ]}
             >
-                <Input
-                    addonBefore={prefixSelector}
-                    style={{
-                        width: '100%',
-                    }}
-                />
+                <Input/>
             </Form.Item>
 
             <Form.Item
@@ -191,7 +179,7 @@ const RegisterComponent = ({onUsernameHandler,onPasswordHandler,onSubmitHandler,
             <Form.Item {...tailFormItemLayout}>
                 <Button type="primary" htmlType="submit">
                     Register
-        </Button>
+                </Button>
             </Form.Item>
         </Form>
     );

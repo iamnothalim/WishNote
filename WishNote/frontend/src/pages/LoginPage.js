@@ -1,18 +1,21 @@
 import React from "react";
 import LoginContainer from "../containers/auth/LoginContainer";
+import HeaderContainer from "../containers/common/HeaderContainer";
 
 function LoginPage() {
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        width: "100%",
-        height: "100vh",
-      }}
-    >
-      {/* <form style={{display:'flex',flexDirection:'column'}}
+    <>
+      <HeaderContainer />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+          height: "100vh",
+        }}
+      >
+        {/* <form style={{display:'flex',flexDirection:'column'}}
                 onSubmit={onSubmitHandler}
             >
                 <label>username</label>
@@ -24,8 +27,9 @@ function LoginPage() {
                     Login
                 </button>
             </form> */}
-      <LoginContainer />
-    </div>
+        <LoginContainer />
+      </div>
+    </>
   );
 }
 

@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 //import axios from "axios";
 import { withRouter } from "react-router";
 //import { useSelector } from "react-redux";
 import HeaderContainer from "../containers/common/HeaderContainer";
+import PointContainer from "../containers/point/PointContainer";
 
 function LandingPage() {
     // const testData = useSelector((state) => state.user);
@@ -30,7 +31,7 @@ function LandingPage() {
                 width: "100%",
                 height: "100vh",
             }}
-        >
+            >
             <h2>시작 페이지</h2>
             {/* <button>로그아웃</button> */}
         </div>

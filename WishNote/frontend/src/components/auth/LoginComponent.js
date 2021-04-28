@@ -15,26 +15,24 @@ const LoginComponent = ({onSubmitHandler,onUsernameHandler,onPasswordHandler,Use
             initialValues={{
                 remember: true,
             }}
-            onClick={onSubmitHandler}
+            onFinish={onSubmitHandler}
         >
             <Form.Item
-                name="username"
+                name="Id"
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your Username!',
+                        message: 'Please input your ID!',
                     },
                 ]}
             >
                 <Input 
                 prefix={<UserOutlined className="site-form-item-icon" />} 
-                placeholder="Username" 
-                value={Username} 
-                onChange={onUsernameHandler}
+                placeholder="ID" 
                 />
             </Form.Item>
             <Form.Item
-                name="password"
+                name="Password"
                 rules={[
                     {
                         required: true,
@@ -46,8 +44,6 @@ const LoginComponent = ({onSubmitHandler,onUsernameHandler,onPasswordHandler,Use
                     prefix={<LockOutlined className="site-form-item-icon" />}
                     type="password"
                     placeholder="Password"
-                    value={Password} 
-                    onChange={onPasswordHandler}
                 />
             </Form.Item>
             {/* <Form.Item>

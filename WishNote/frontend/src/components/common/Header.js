@@ -34,6 +34,7 @@ const UserInfo = styled.div`
 `;
 
 const Header = ({ user, onLogout }) => {
+<<<<<<< HEAD
   return (
     <>
       <HeaderBlock>
@@ -57,6 +58,33 @@ const Header = ({ user, onLogout }) => {
       <Spacer />
     </>
   );
+=======
+    console.log(user);
+    return (
+        <>
+            <HeaderBlock>
+                <Wrapper>
+                    <Link to="/" className="logo">
+                        Wish Note
+                    </Link>
+                    {user.user ===null ? 
+                        <div className="right">
+                        <Button to="/login">로그인</Button>
+                        </div>
+                    : 
+                        
+                        <div className="right">
+                        <UserInfo>{user.user}</UserInfo>
+                        <Button onClick={onLogout}>로그아웃</Button>
+                        </div>
+                    }
+                </Wrapper>
+                <TopMenu/>
+            </HeaderBlock>
+            <Spacer />
+        </>
+    );
+>>>>>>> origin/halim_aca
 };
 
 export default Header;
