@@ -4,14 +4,16 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const mongoose = require("mongoose");
+// const api = require("./routes");
 
 const jwtMiddleware = require("./lib/jwtMiddleware");
 
 const mainRouter = require("./routes/main");
 const authRouter = require("./routes/auth");
 const feedRouter = require("./routes/feed");
-
 const app = express();
+
+// app.use("/api", api);
 
 //mongoDB
 mongoose
@@ -41,6 +43,7 @@ app.use(cookieParser());
 app.use(jwtMiddleware);
 app.use(express.static(path.join(__dirname, "public")));
 
+//라우터 설정
 app.use("/api", mainRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/feed", feedRouter);

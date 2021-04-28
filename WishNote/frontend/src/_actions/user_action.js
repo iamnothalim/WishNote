@@ -1,11 +1,11 @@
 import axios from "axios";
-import { LOGIN_USER, REGISTER_USER, AUTH_USER, CHALLENGE_ME } from "./types";
+import { LOGIN_USER, REGISTER_USER, AUTH_USER } from "./types";
 
 export function loginUser(dataToSubmit) {
   const request = axios
     .post("/api/auth/login", dataToSubmit)
     .then((response) => response.data);
-  console.log('로그인 페이로드',request)
+  console.log("로그인 페이로드", request);
   return {
     type: LOGIN_USER,
     payload: request,
