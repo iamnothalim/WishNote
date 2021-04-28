@@ -1,18 +1,13 @@
-import { LOGIN_USER, REGISTER_USER, AUTH_USER, CHARGE_USER } from "../_actions/types";
+import {
+  LOGIN_USER,
+  REGISTER_USER,
+  AUTH_USER,
+  CHARGE_USER,
+} from "../_actions/types";
 
-<<<<<<< HEAD
 const initialState = {
-  userData: {
-    isAuth: false,
-    username: "",
-  },
+  userData: {},
 };
-=======
-const initialstate = {
-  userData:{
-  }
-}
->>>>>>> origin/halim_aca
 
 export default function (state = initialState, action) {
   switch (action.type) {
