@@ -1,19 +1,22 @@
 import React from "react";
 //월간리포트
 import MonthContainer from "../containers/common/MonthContainer";
-import 
+import Month from "../components/common/Month";
 //챌린지 현황
-import CurrentContainer from "../containers/common/CurrentContainer";
+//import CurrentContainer from "../containers/common/CurrentContainer";
 //획득습관
-import HabbitContainer from "../containers/common/HabbitContainer";
+//import HabbitContainer from "../containers/common/HabbitContainer";
 
 const MyPage = () => {
   return (
-    <>
-      <MonthContainer />
+    <div>
+      <Month>
+        <MonthContainer />
+      </Month>
+      {/* <MonthContainer />
       <CurrentContainer />
-      <HabbitContainer />
-    </>
+      <HabbitContainer /> */}
+    </div>
   );
 };
 
