@@ -29,7 +29,7 @@ function RegisterPage() {
         <br />
         <button>회원가입</button>
       </form> */}
-      <RegisterContainer/>
+      <RegisterContainer />
     </div>
   );
 }

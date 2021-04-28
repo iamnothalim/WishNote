@@ -18,13 +18,10 @@ const MonthContainer = (props) => {
       setCategory(response.payload.category);
     });
   }, [dispatch]);
-  //console.log(response);
-  //console.log(response.payload);
-  console.log("유저 있니?", user);
   const profile = (category) => {
     axios.get(`/api/myPage/${category}`).then((response) => {
       console.log("props 가 뭔지 궁금", props);
-      console.log(response);
+      console.log("response", response);
     });
   };
   return <Month user={user} profile={profile} />;

@@ -1,7 +1,6 @@
 import React from "react";
 //월간리포트
 import MonthContainer from "../containers/common/MonthContainer";
-import Month from "../components/common/Month";
 //챌린지 현황
 //import CurrentContainer from "../containers/common/CurrentContainer";
 //획득습관
@@ -10,9 +9,7 @@ import Month from "../components/common/Month";
 const MyPage = () => {
   return (
     <div>
-      <Month>
-        <MonthContainer />
-      </Month>
+      <MonthContainer />
       {/* <MonthContainer />
       <CurrentContainer />
       <HabbitContainer /> */}

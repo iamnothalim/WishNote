@@ -37,7 +37,7 @@ const Month = ({ user, profile }) => {
         <Wrapper>
           {user ? (
             <div className="right">
-              <UserInfo>{user.username}</UserInfo>
+              <UserInfo>{user.user._id}</UserInfo>
               <UserInfo>{profile}</UserInfo>
             </div>
           ) : (
