@@ -4,26 +4,20 @@ const router = express.Router();
 
 router.post("/", async function (req, res) {
   console.log("여긴 충전소");
-  const charge = req.body.charge;
+  const charge = req.body.dataToSubmit;
+  const id =req.body.id.id;
+  console.log('이게 차지',charge);
+  console.log('이게 id',id);
   try {
-    //username이 이미 존재하는지 확인
-    const exists = await User.findByUsername(nickname);
-    if (exists) {
-      return res.status(400).json({ errors: [{ msg: "User already exists" }] });
-    }
-    const user = new User({
-      nickname,
-      password,
-      name,
-      id,
-      point:0,
-    });
-    await user.setPassword(password); //비번설정
-    await user.save(); //데이터 베이스 저장
+    const user= await User.findByUsername(id);
+    const userPoint = user.point;
+    console.log(userPoint);
 
-    req.body = user.serialize();
+    await User.updateOne({id:id},{$set:{point:userPoint+charge}});
+    res.json({point:userPoint+charge,id:id})
+    const updateUser = await User.findByUsername(id);
+    console.log('업데이트 된 유저',updateUser);
 
-    res.json({ success: true, userId:user._id });
   } catch (e) {
     console.log(e.message);
     res.status(500).send("Server Error");

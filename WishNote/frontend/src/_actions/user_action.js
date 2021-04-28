@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LOGIN_USER, REGISTER_USER, AUTH_USER } from "./types";
+import { LOGIN_USER, REGISTER_USER, AUTH_USER, CHARGE_USER } from "./types";
 
 export function loginUser(dataToSubmit) {
   const request = axios
@@ -35,7 +35,17 @@ export function auth() {
   };
 }
 
-export function charge(dataToSubmit) {
-  // const request = axios
-  //   .post("/api/auth/charge",dataToSubmit)
+export function charge(dataToSubmit, id) {
+  let body = {
+    dataToSubmit,
+    id,
+  };
+  const request = axios
+    .post("/api/auth/charge", body)
+    .then((response) => response.data);
+
+  return {
+    type: CHARGE_USER,
+    payload: request,
+  };
 }

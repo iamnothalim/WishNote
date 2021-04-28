@@ -35,7 +35,11 @@ router.post("/", async function (req, res) {
           maxAge: 1000 * 60 * 60 * 24 * 7, //7일
           httpOnly: true,
         })
+<<<<<<< HEAD
         .json({ loginSuccess: true, userId: user._id, user: id });
+=======
+        .json({ loginSuccess: true,  user:id });
+>>>>>>> origin/halim_aca
     } catch (e) {
       console.log(e.message);
       res.status(500).send("Server Error");

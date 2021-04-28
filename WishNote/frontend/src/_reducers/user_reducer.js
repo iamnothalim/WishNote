@@ -1,11 +1,18 @@
-import { LOGIN_USER, REGISTER_USER, AUTH_USER } from "../_actions/types";
+import { LOGIN_USER, REGISTER_USER, AUTH_USER, CHARGE_USER } from "../_actions/types";
 
+<<<<<<< HEAD
 const initialState = {
   userData: {
     isAuth: false,
     username: "",
   },
 };
+=======
+const initialstate = {
+  userData:{
+  }
+}
+>>>>>>> origin/halim_aca
 
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -16,6 +23,8 @@ export default function (state = initialState, action) {
     case REGISTER_USER:
       return { ...state, register: action.payload };
     case AUTH_USER:
+      return { ...state, userData: action.payload };
+    case CHARGE_USER:
       return { ...state, userData: action.payload };
     default:
       return state;
