@@ -22,7 +22,9 @@ import axios from "axios";
 import { auth } from "../../_actions/user_action";
 import { withRouter } from "react-router";
 
+
 const HeaderContainer = (props) => {
+<<<<<<< HEAD
   // const  user  = useSelector((state) => (
   //     state.user
   // ));
@@ -44,6 +46,31 @@ const HeaderContainer = (props) => {
     });
   };
   return <Header user={user} onLogout={onLogout} />;
+=======
+    // const  user  = useSelector((state) => (
+    //     state.user
+    // ));
+    const [user, setUser] = useState("")
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(auth()).then((response) => {
+            setUser(response.payload.username); 
+        });
+    }, [dispatch]);
+    console.log("요게 테스트 데이타", user);
+    const onLogout = () => {
+        axios.get("/api/auth/logout").then((response) => {
+            if (response.data.success) {
+                props.history.push("/login");
+            } else {
+                alert("로그아웃 하는데 실패 했습니다.");
+            }
+        });
+    };
+    return (
+        <Header user={user} onLogout={onLogout} />
+    );
+>>>>>>> e2392fb376863cff9e61e317feb67649bd004001
 };
 
 export default withRouter(HeaderContainer);

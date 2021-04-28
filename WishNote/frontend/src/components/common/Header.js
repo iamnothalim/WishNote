@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from './Button';
 import { Link } from 'react-router-dom';
+import TopMenu from '../../components/antd/TopMenu';
 const HeaderBlock = styled.div`
     position: fixed;
     width: 100%;
@@ -51,6 +52,7 @@ const Header = ({ user, onLogout }) => {
                         </div>
                     )}
                 </Wrapper>
+                <TopMenu/>
             </HeaderBlock>
             <Spacer />
         </>

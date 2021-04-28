@@ -1,36 +1,7 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { loginUser } from "../_actions/user_action";
-import { withRouter } from "react-router-dom";
-function LoginPage(props) {
-  console.log("로그인 페이지 렌더링 시작!");
-  const dispatch = useDispatch();
-  const [Username, setUsername] = useState("");
-  const [Password, setPassword] = useState("");
+import React from "react";
+import LoginContainer from "../containers/auth/LoginContainer";
 
-  const onUsernameHandler = (e) => {
-    setUsername(e.currentTarget.value);
-  };
-  const onPasswordHandler = (e) => {
-    setPassword(e.currentTarget.value);
-  };
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-
-    let body = {
-      username: Username,
-      password: Password,
-    };
-
-    dispatch(loginUser(body)).then((response) => {
-      if (response.payload.loginSuccess) {
-        props.history.push("/");
-      } else {
-        alert("Error");
-      }
-    });
-  };
-
+function LoginPage() {
   return (
     <div
       style={{
@@ -41,19 +12,21 @@ function LoginPage(props) {
         height: "100vh",
       }}
     >
-      <form
-        style={{ display: "flex", flexDirection: "column" }}
-        onSubmit={onSubmitHandler}
-      >
-        <label>username</label>
-        <input type="text" value={Username} onChange={onUsernameHandler} />
-        <label>password</label>
-        <input type="password" value={Password} onChange={onPasswordHandler} />
-        <br />
-        <button>Login</button>
-      </form>
+      {/* <form style={{display:'flex',flexDirection:'column'}}
+                onSubmit={onSubmitHandler}
+            >
+                <label>username</label>
+                <input type="text" value={Username} onChange={onUsernameHandler} />
+                <label>password</label>
+                <input type="password" value={Password} onChange={onPasswordHandler} />
+                <br/>
+                <button>
+                    Login
+                </button>
+            </form> */}
+      <LoginContainer />
     </div>
   );
 }
 
-export default withRouter(LoginPage);
+export default LoginPage;
