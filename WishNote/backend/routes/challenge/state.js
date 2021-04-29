@@ -50,11 +50,6 @@ router.post("/",async function(req,res){
         console.log(e.message);
         res.status(500).send("server error");
     }
-    
-
-
-
-
     //res.send('조회 성공!');
 })
 
