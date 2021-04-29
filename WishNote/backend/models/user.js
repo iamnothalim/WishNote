@@ -7,8 +7,11 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const UserSchema = new mongoose.Schema({
-  username: String,
+  nickname: String,
   hashedPassword: String,
+  name: String,
+  id: String,
+  point: Number,
 });
 
 //setPassword,checkPassword->인스턴스 메서드
@@ -36,8 +39,10 @@ UserSchema.methods.generateToken = function () {
     const token = jwt.sign(
         //첫번째 파라미터에는 토큰안에 집어 넣고 싶은 데이터를 넣는다.
         {
-          _id: this.id,
-          username: this.username,
+          id: this.id,
+          nickname: this.nickname,
+          point: this.point,
+          name: this.name
         },
         'secret', //두번째 파라미터에는 JWT암호
         {
@@ -49,8 +54,8 @@ UserSchema.methods.generateToken = function () {
 //스태틱 메서드
 //모델에서 바로 사용할수 있는 함수
 
-UserSchema.statics.findByUsername = function (username) {
-  return this.findOne({ username });
+UserSchema.statics.findByUsername = function (id) {
+  return this.findOne({ id });
 };
 const User = mongoose.model("User", UserSchema);
 module.exports = User;

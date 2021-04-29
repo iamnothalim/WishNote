@@ -11,10 +11,10 @@ export default function (SpecificComponent, option, adminRoute = null) {
     const dispatch = useDispatch();
     useEffect(() => {
       dispatch(auth()).then((response) => {
-        console.log(response);
+        console.log('auth안에 데이더',response);
 
         //로그인 하지 않은 상태
-        if (!response.payload._id) {
+        if (!response.payload.id) {
           if (option) {
             console.log("바부똥꼬");
             props.history.push("/login");
@@ -31,6 +31,5 @@ export default function (SpecificComponent, option, adminRoute = null) {
 
     return <SpecificComponent />;
   }
-
   return AuthenticationCheck;
 }

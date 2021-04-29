@@ -15,38 +15,40 @@
 
 // export default HeaderContainer;
 
-import React,{useEffect, useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Header from '../../components/common/Header';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Header from "../../components/common/Header";
 import axios from "axios";
 import { auth } from "../../_actions/user_action";
 import { withRouter } from "react-router";
 
-
 const HeaderContainer = (props) => {
-    // const  user  = useSelector((state) => (
-    //     state.user
-    // ));
-    const [user, setUser] = useState("")
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(auth()).then((response) => {
-            setUser(response.payload.username); 
-        });
-    }, [dispatch]);
-    console.log("요게 테스트 데이타", user);
-    const onLogout = () => {
-        axios.get("/api/auth/logout").then((response) => {
-            if (response.data.success) {
-                props.history.push("/login");
-            } else {
-                alert("로그아웃 하는데 실패 했습니다.");
-            }
-        });
-    };
-    return (
-        <Header user={user} onLogout={onLogout} />
-    );
+  // const  user  = useSelector((state) => (
+  //     state.user
+  // ));
+  // const [user, setUser] = useState("")
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //     dispatch(auth()).then((response) => {
+  //         setUser(response.payload.username);
+  //     });
+  // }, [dispatch]);
+  const user = useSelector((state) => ({
+    user: state.user.userData.username,
+    //user:state
+  }));
+
+  console.log("요게 테스트 데이타", user);
+  const onLogout = () => {
+    axios.get("/api/auth/logout").then((response) => {
+      if (response.data.success) {
+        props.history.push("/login");
+      } else {
+        alert("로그아웃 하는데 실패 했습니다.");
+      }
+    });
+  };
+  return <Header user={user} onLogout={onLogout} />;
 };
 
 export default withRouter(HeaderContainer);
