@@ -32,4 +32,35 @@ feedCommentSchema.plugin(autoIncrement.plugin, {
 
 const feedComment = mongoose.model("feedComment", feedCommentSchema);
 module.exports = feedComment;
- 
+
+
+// const mongoose = require('mongoose');
+// const Schema = mongoose.Schema;
+
+// const feedCommentSchema = mongoose.Schema({
+//     writer: {
+//         type: Schema.Types.ObjectId,
+//         ref: 'User'
+//     }, 
+//     postId: {
+//         type: Schema.Types.ObjectId,
+//         ref: 'Feed'
+//     },
+//     responseTo: {
+//         type: Schema.Types.ObjectId,
+//         ref: 'User'
+//     },
+//     content: {
+//         type: String
+//     }
+//   //     commentTime:{
+//   //   type:Date,
+//   //   default: Date.now(),
+//   // }
+
+// }, { timestamps: true })
+
+
+// const feedComment = mongoose.model('feedComment', feedCommentSchema);
+
+// module.exports = { feedComment }
