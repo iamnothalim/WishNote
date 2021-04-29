@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CurrentContainer = () => {
+const StateContainer = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const CurrentContainer = () => {
     )
 };
 
-export default CurrentContainer;
+export default StateContainer;
