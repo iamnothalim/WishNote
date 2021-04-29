@@ -1,5 +1,4 @@
 import React from "react";
-//월간리포트
 import MonthContainer from "../containers/common/MonthContainer";
 //챌린지 현황
 //import CurrentContainer from "../containers/common/CurrentContainer";
@@ -10,9 +9,6 @@ const MyPage = () => {
   return (
     <div>
       <MonthContainer />
-      {/* <MonthContainer />
-      <CurrentContainer />
-      <HabbitContainer /> */}
     </div>
   );
 };
