@@ -85,6 +85,7 @@ router.put('/:post_id', async function(req,res,next){
     res.status(200).json({
       message:"수정 성공",
       data:output
+      
     });
   }catch (err){
     res.status(500).json({
@@ -143,9 +144,9 @@ router.delete("/:post_id", function(req,res,next){
 
 router.post("/feedComment/:postId", async (req, res) => {
   console.log("req", req.body);
-  console.log("댓글 등록 On");
+  // console.log("댓글 등록 On");
   const { writer,content} = req.body;
-  console.log("피드 디비 댓글 등록 on");
+  // console.log("피드 디비 댓글 등록 on");
   const postId =req.params.postId;
   
   const feedComment = new FeedComment();
@@ -157,7 +158,7 @@ router.post("/feedComment/:postId", async (req, res) => {
   await feedComment
     .save()
     .then((feedComment) => {
-      console.log("d");
+    //   console.log("d");
       res.status(200).json({
         data: feedComment,
       });
