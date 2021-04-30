@@ -50,6 +50,8 @@ app.use("/api/auth", authRouter);
 app.use("/api/feed", feedRouter);
 app.use("/api/challenge", challengeRouter);
 
+app.use('/api/uploads',express.static('./uploads'));
+
 //proxyTest
 //app.get('/api/hello',(req,res)=>{res.send("안녕 이건 프록시 테스트")});
 

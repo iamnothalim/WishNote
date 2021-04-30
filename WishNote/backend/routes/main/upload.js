@@ -1,5 +1,5 @@
 const express = require('express');
-
+const fs = require('fs');
 const multer = require('multer');
 const path = require('path');
 
@@ -23,6 +23,12 @@ router.post('/', upload.single('img'),(req,res)=>{
     console.log('/api/upload 라우팅 호출');
     console.log(req.file.filename);
     console.log(req.file.path);
+    //fs.unlink(req.file.path);
+    res.send({
+        "name": req.file.filename,
+        "status": "done",
+    })
+
 } );
 
 module.exports = router;
