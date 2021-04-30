@@ -10,14 +10,18 @@ import rootReducer from "../../_reducers/index";
 //import { challengeMy } from "../../_actions/my_action";
 //import { auth } from "../../_actions/user_action";
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware()));
+//const store = createStore(rootReducer, composeWithDevTools(applyMiddleware()));
 
 const MonthContainer = (props) => {
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   const user = useSelector((state) => ({
     nickname: state.user.userData.nickname,
   }));
 
+  // const challenge = useSelector((state) => ({
+  //   challengeName: state.challenge.challengeName.challengeName,
+  // }));
+  //challenge={challenge}
   return (
     <div>
       <Month user={user} />

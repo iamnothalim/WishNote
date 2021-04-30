@@ -2,7 +2,6 @@ import React from "react";
 import styled, { css } from "styled-components";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
-import DoneIcon from "@material-ui/icons/Done";
 const borderColor = "#D5D5D5";
 
 const StyledCalendar = styled.div`
@@ -88,39 +87,39 @@ const StyledDay = styled.div`
     `}
 `;
 
-const CheckCircle = styled.div`
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  margin: 0;
-  border-radius: 7px;
-  border: 1px solid #ced4da;
-  font-size: 10px;
-  vertical-align: middle;
-  ${(props) =>
-    props.done &&
-    css`
-      border: 1px solid #38d9a9;
-      color: #38d9a9;
-    `}
-`;
+// const CheckCircle = styled.div`
+//   display: inline-block;
+//   width: 14px;
+//   height: 14px;
+//   margin: 0;
+//   border-radius: 7px;
+//   border: 1px solid #ced4da;
+//   font-size: 10px;
+//   vertical-align: middle;
+//   ${(props) =>
+//     props.done &&
+//     css`
+//       border: 1px solid #38d9a9;
+//       color: #38d9a9;
+//     `}
+// `;
 
-const StyledSection = styled.div`
-  width: 100%;
-  margin-top: 4px;
-  text-align: left;
-  &:first-child {
-    margin-top: 28px;
-  }
-  & span {
-    margin-left: 6px;
-    vertical-align: middle;
-    color: black;
-  }
-  & path {
-    color: #38d9a9;
-  }
-`;
+// const StyledSection = styled.div`
+//   width: 100%;
+//   margin-top: 4px;
+//   text-align: left;
+//   &:first-child {
+//     margin-top: 28px;
+//   }
+//   & span {
+//     margin-left: 6px;
+//     vertical-align: middle;
+//     color: black;
+//   }
+//   & path {
+//     color: #38d9a9;
+//   }
+// `;
 
 const ViewComponent = ({
   today,
@@ -130,7 +129,7 @@ const ViewComponent = ({
   fixYear,
   previous,
   next,
-  selectCalendar,
+  SelectCalendar,
 }) => {
   let firstDay = new Date(currentYear, currentMonth).getDay();
   let daysInMonth = 32 - new Date(currentYear, currentMonth, 32).getDate();
@@ -138,13 +137,13 @@ const ViewComponent = ({
   let date = 1;
   let end = false;
   for (let i = 0; i < 6; i++) {
-    const weekly = [];
+    let weekly = [];
     let did = false;
     for (let j = 0; j < 7; j++) {
       let innerDate = date;
       let innerWeek = j;
       const innerSelect = () => {
-        selectCalendar({
+        SelectCalendar({
           currentDay: innerDate,
           currentMonth: currentMonth + 1,
           currentWeek: innerWeek,

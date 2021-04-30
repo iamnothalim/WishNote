@@ -36,20 +36,20 @@ UserSchema.methods.serialize = function () {
 UserSchema.methods.generateToken = function () {
   //console.log(this.id);
   //console.log(this.username);
-    const token = jwt.sign(
-        //첫번째 파라미터에는 토큰안에 집어 넣고 싶은 데이터를 넣는다.
-        {
-          id: this.id,
-          nickname: this.nickname,
-          point: this.point,
-          name: this.name
-        },
-        'secret', //두번째 파라미터에는 JWT암호
-        {
-            expiresIn: "7d", //7일동안만
-        }
-    );
-    return token;
+  const token = jwt.sign(
+    //첫번째 파라미터에는 토큰안에 집어 넣고 싶은 데이터를 넣는다.
+    {
+      id: this.id,
+      nickname: this.nickname,
+      point: this.point,
+      name: this.name,
+    },
+    "secret", //두번째 파라미터에는 JWT암호
+    {
+      expiresIn: "7d", //7일동안만
+    }
+  );
+  return token;
 };
 //스태틱 메서드
 //모델에서 바로 사용할수 있는 함수

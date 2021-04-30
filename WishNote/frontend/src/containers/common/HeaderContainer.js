@@ -35,7 +35,6 @@ const HeaderContainer = (props) => {
   // }, [dispatch]);
   const user = useSelector((state) => ({
     user: state.user.userData.username,
-    //user:state
   }));
 
   console.log("요게 테스트 데이타", user);

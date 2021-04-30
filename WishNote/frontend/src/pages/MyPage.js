@@ -1,21 +1,50 @@
 import React from "react";
 import MonthContainer from "../containers/common/MonthContainer";
+import Radar from "../components/common/Habbit";
 //챌린지 현황
 //import CurrentContainer from "../containers/common/CurrentContainer";
 //획득습관
 //import HabbitContainer from "../containers/common/HabbitContainer";
 
+let data = [
+  {
+    taste: "fruity",
+    chardonay: 102,
+    carmenere: 70,
+    syrah: 38,
+  },
+  {
+    taste: "bitter",
+    chardonay: 28,
+    carmenere: 111,
+    syrah: 22,
+  },
+  {
+    taste: "heavy",
+    chardonay: 70,
+    carmenere: 66,
+    syrah: 45,
+  },
+  {
+    taste: "sunny",
+    chardonay: 98,
+    carmenere: 59,
+    syrah: 93,
+  },
+];
+
 const MyPage = () => {
   return (
     <div>
       <MonthContainer />
+      <Radar />
     </div>
   );
 };
 
 export default MyPage;
 
-// import React, { useEffect } from "react";
+// import React,  { useEffect } from "react";
 // import axios from "axios";
 // import { withRouter } from "react-router";
 // //import { useSelector } from "react-redux";

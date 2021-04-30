@@ -13,7 +13,7 @@ const PointContainer = (props) => {
 
   const onSubmitHandler = (values) => {
     let body = parseInt(values.charge);
-    console.log(body);
+    console.log("body", body);
     dispatch(charge(body, userdata));
   };
 

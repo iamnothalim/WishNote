@@ -22,6 +22,7 @@ router.get("/", checkLoggedIn, (req, res) => {
   Challenge.find((err, challenges) => {
     if (err) return res.status(500).send({ error: "database failure" });
     res.json(challenges);
+    console.log("challenge", challenge);
     console.log("마이페이지 로딩 완료");
   });
 });

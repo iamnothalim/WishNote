@@ -31,12 +31,15 @@ const UserInfo = styled.div`
 `;
 
 const Month = ({ user }) => {
+  console.log("user", user);
+  //console.log("challenge", challenge);
   return (
     <>
       <MonthBlock>
         <Wrapper>
           <div className="right">
             <UserInfo>{user.nickname}</UserInfo>
+            {/* <UserInfo>{challenge.challengeName}</UserInfo> */}
           </div>
         </Wrapper>
       </MonthBlock>
