@@ -1,4 +1,5 @@
 const Challenge = require("../../models/challenge");
+const ChallengeStatus = require("../../models/challengeStatus");
 const express = require("express");
 const router = express.Router();
 
@@ -53,6 +54,16 @@ router.post("/", async (req, res) => {
       deposit,
     });
     await challenge.save();
+
+    //챌린지 현황 업데이트
+    const updateChallengeState = new ChallengeStatus({
+      userid:registerId,
+      challenge_name:challengeName,
+      creator:registerId,
+      challenge_state:0
+    });
+    await updateChallengeState.save();
+    
     res.send("챌린지 등록 성공");
   } catch (e) {
     console.log(e.message);
