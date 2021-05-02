@@ -18,12 +18,13 @@ export default function (SpecificComponent, option, adminRoute = null) {
           if (option) {
             console.log("바부똥꼬");
             props.history.push("/login");
+            alert("로그인이 필요한 페이지 입니다.");
           }
         } else {
           //로그인 한 상태
           if (option === false) {
-            console.log("여기");
             props.history.push("/");
+            alert("이미 로그인 하셨습니다!");
           }
         }
       });

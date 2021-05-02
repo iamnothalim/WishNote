@@ -15,7 +15,7 @@ router.post("/", async function (req, res) {
   let unfinished = [];
   let categoryArr = [];
 
-  /*
+  
   try {
     console.log("여긴 챌린지 현황 상태 조회");
     await getInfo.forEach((el) => {
@@ -59,7 +59,7 @@ router.post("/", async function (req, res) {
         console.log("data", data);
       }
     });
-*/
+
     //console.log('개설: ',created.length);
     participated.forEach((el) => {
       if (el.challenge_state == 1) {

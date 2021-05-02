@@ -15,12 +15,12 @@
 
 // export default HeaderContainer;
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../../components/common/Header";
 import axios from "axios";
-import { auth } from "../../_actions/user_action";
 import { withRouter } from "react-router";
+import { logoutUser } from "../../_actions/user_action";
 
 const HeaderContainer = (props) => {
   // const  user  = useSelector((state) => (
@@ -34,18 +34,19 @@ const HeaderContainer = (props) => {
   //     });
   // }, [dispatch]);
   const user = useSelector((state) => ({
-    user: state.user.userData.username,
+    user: state.user.userData.id,
   }));
 
-  console.log("요게 테스트 데이타", user);
+  const dispatch = useDispatch();
+
   const onLogout = () => {
-    axios.get("/api/auth/logout").then((response) => {
-      if (response.data.success) {
+    dispatch(logoutUser()).then((response)=>{
+      if (!response.payload.loginSuccess) {
         props.history.push("/login");
       } else {
         alert("로그아웃 하는데 실패 했습니다.");
       }
-    });
+    })
   };
   return <Header user={user} onLogout={onLogout} />;
 };

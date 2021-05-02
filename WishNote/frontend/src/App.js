@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import MyPage from "./pages/MyPage";
 import PointPage from "./pages/PointPage";
+import ChallengePage from "./pages/ChallengePage";
 import Auth from "./hoc/auth";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route exact path="/register" component={Auth(RegisterPage, false)} />
           <Route exact path="/myPage" component={Auth(MyPage, true)} />
           <Route exact path="/point" component={Auth(PointPage, true)} />
+          <Route exact path="/createChallenge" component={Auth(ChallengePage, true)} />
         </Switch>
       </div>
     </Router>

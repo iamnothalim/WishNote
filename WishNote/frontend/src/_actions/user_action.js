@@ -12,6 +12,17 @@ export function loginUser(dataToSubmit) {
   };
 }
 
+export function logoutUser(){
+  const request = axios
+    .get("/api/auth/logout")
+    .then((response) => response.data);
+
+  return {
+    type: LOGIN_USER,
+    payload: request,
+  };
+}
+
 export function registerUser(dataToSubmit) {
   console.log("회원가입 데이터 들어갑니다!", dataToSubmit);
   const request = axios
