@@ -13,13 +13,13 @@ const MonthContainer = (props) => {
     nickname: state.user.userData.nickname,
   }));
 
-  const challenges = axios.get("api/myPage").then((response) => {
-    return response.data.challengeName;
-  });
+  // const challenges = axios.get("api/myPage").then((response) => {
+  //   return response.data.challengeName;
+  // });
 
   return (
     <div>
-      <Month user={user} challenges={challenges} />
+      <Month user={user} />
       <Calendar />
     </div>
   );

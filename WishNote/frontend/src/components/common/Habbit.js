@@ -31,9 +31,8 @@ const Habbit = () => {
       height={500}
       margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
       data={data}
-      keys={["chardonay", "carmenere", "syrah"]}
-      indexBy="taste"
-      keys={["chardonay", "carmenere"]}
+      keys={["count"]}
+      indexBy="habit"
       colors={["#ddcb38", "@2b70e2"]}
       dotSize={30}
       enableDotLabel={true}

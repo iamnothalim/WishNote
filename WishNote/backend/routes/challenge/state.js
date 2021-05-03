@@ -25,90 +25,77 @@ router.post("/", async function (req, res) {
       }
     });
 
-    // let data = [];
-    // let habitData = {};
-    // let count = 0;
-    // let num = 0;
-    // //내 챌린지 정보들 중 카테고리만 뽑아오기
-    // await getInfo.forEach((el) => {
-    //   categoryArr.push(el.category);
-    // });
-    // console.log("categoryArr", categoryArr);
-    // //챌린지 유형 갯수 파악하기
-
-    // await categoryArr.forEach((el) => {
-    //   console.log("el", el);
-    //   const habitList = [
-    //     "hobby",
-    //     "relationship",
-    //     "performance",
-    //     "asset",
-    //     "health",
-    //   ];
-    //   //const map1 = array1.map((x) => x * 2);
-    //   for (let i = 0; i < habitList.length; i++) {
-    //     if (habitList[i] === el) {
-    //       habitData.hobby = habitList[i];
-    //       console.log("i", i, "habitList[i]", habitList[i]);
-    //       count++;
-    //       console.log("count", count);
-    //     } else if (habitList[i] !== el) {
-    //     }
-    //     console.log("habitData", habitData);
-    //     data.push(habitData);
-    //     console.log("data", data);
-    //   }
-    // });
-
-    //////////////////
     await getInfo.forEach((el) => {
       categoryArr.push(el.category);
     });
     console.log("categoryArr", categoryArr);
-    let count;
-    let habitData = {};
-    let data = [];
-    const habitList = [
-      "hobby",
-      "relationship",
-      "performance",
-      "asset",
-      "health",
-    ];
-    //halim : categoryArr [ 'hobby', 'relationship', 'hobby', 'performance' ]
-    await habitList.forEach((element) => {
-      count = categoryArr.filter((el) => element === el).length;
-      console.log("element", element);
-      console.log("count", count);
-      switch (element) {
-        case "hobby":
-          habitData.habit = "hobby";
-          habitData.count = count;
-          data.push(habitData);
-          break;
-        case "relationship":
-          habitData.habit = "relationship";
-          habitData.count = count;
-          data.push(habitData);
-          break;
-        case "performance":
-          habitData.habit = "performance";
-          habitData.count = count;
-          data.push(habitData);
-          break;
-        case "asset":
-          habitData.habit = "asset";
-          habitData.count = count;
-          data.push(habitData);
-          break;
-        case "health":
-          habitData.habit = "health";
-          habitData.count = count;
-          data.push(habitData);
-          break;
+
+    //////////////////
+    //중복된 요소 갯수 추출 함수
+    const dupCounter = function (accumulator, val, index, array) {
+      if (accumulator.hasOwnProperty(val)) {
+        accumulator[val] = accumulator[val] + 1;
+      } else {
+        accumulator[val] = 1;
       }
-    });
-    console.log("data", data);
+      return accumulator;
+    };
+
+    //위 함수 실행 맟 확인
+    const dupCount = categoryArr.reduce(dupCounter, {});
+    //console.log(dupCount);
+    //console.log(Object.keys(dupCount)); //키값들의 배열 반환
+    //console.log(dupCount[Object.keys(dupCount)[0]]);
+
+    //a,b,c,d,e인덱스 순서 알아내기
+    const hobby = Object.keys(dupCount).indexOf("hobby");
+    const relationship = Object.keys(dupCount).indexOf("relationship");
+    const performance = Object.keys(dupCount).indexOf("performance");
+    const asset = Object.keys(dupCount).indexOf("asset");
+    const health = Object.keys(dupCount).indexOf("health");
+    //console.log(a,b,c,d,e)
+
+    //해당 인덱스 키값 알아내기 (갯수 알아내기)
+    const hobby_count = dupCount[Object.keys(dupCount)[hobby]];
+    const relationship_count = dupCount[Object.keys(dupCount)[relationship]];
+    const performance_count = dupCount[Object.keys(dupCount)[performance]];
+    const asset_count = dupCount[Object.keys(dupCount)[asset]];
+    const health_count = dupCount[Object.keys(dupCount)[health]];
+    //console.log(a_count,b_count,c_count,d_count,e_count);
+
+    //객체 반환
+    let data_hobby = {};
+    if (hobby !== "0") {
+      data_hobby.habbit = "hobby";
+      data_hobby.count = hobby_count;
+    }
+    let data_relationship = {};
+    if (relationship !== "0") {
+      data_relationship.habbit = "relationship";
+      data_relationship.count = relationship_count;
+    }
+    let data_performance = {};
+    if (performance !== "0") {
+      data_performance.habbit = "performance";
+      data_performance.count = performance_count;
+    }
+    let data_asset = {};
+    if (asset !== "0") {
+      data_asset.habbit = "asset";
+      data_asset.count = asset_count;
+    }
+    let data_health = {};
+    if (health !== "0") {
+      data_health.habbit = "health";
+      data_health.count = health_count;
+    }
+    let data = {
+      data_hobby,
+      data_relationship,
+      data_performance,
+      data_asset,
+      data_health,
+    };
     //{ hobby: 2, relationship: 1, performance: 1, asset: 0, health: 0 }
 
     //console.log('개설: ',created.length);
@@ -131,6 +118,7 @@ router.post("/", async function (req, res) {
       "완료: ": finished.length,
       "개설: ": created.length,
       "보유 캐시": userPoint,
+      data: data,
     });
   } catch (e) {
     console.log(e.message);
