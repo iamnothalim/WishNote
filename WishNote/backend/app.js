@@ -10,12 +10,8 @@ const jwtMiddleware = require("./lib/jwtMiddleware");
 
 const mainRouter = require("./routes/main");
 const authRouter = require("./routes/auth");
-<<<<<<< HEAD
-const FeedRouter = require("./routes/Feed");
-=======
 const feedRouter = require("./routes/feed");
 const challengeRouter = require("./routes/challenge");
->>>>>>> origin/je
 const app = express();
 
 // app.use("/api", api);
@@ -51,12 +47,8 @@ app.use(express.static(path.join(__dirname, "public")));
 //라우터 설정
 app.use("/api", mainRouter);
 app.use("/api/auth", authRouter);
-<<<<<<< HEAD
-app.use("/api/Feed", FeedRouter);
-=======
 app.use("/api/feed", feedRouter);
 app.use("/api/challenge", challengeRouter);
->>>>>>> origin/je
 
 //proxyTest
 //app.get('/api/hello',(req,res)=>{res.send("안녕 이건 프록시 테스트")});
