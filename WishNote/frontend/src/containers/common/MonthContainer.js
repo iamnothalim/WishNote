@@ -18,10 +18,10 @@ const MonthContainer = (props) => {
     nickname: state.user.userData.nickname,
   }));
 
-  const challenge = useSelector((state) => ({
-    challengeName: state.challenge.challengeName.challengeName,
-  }));
-  challenge = { challenge };
+  // const challenge = useSelector((state) => ({
+  //   challengeName: state.challenge.challengeName.challengeName,
+  // }));
+  // challenge = { challenge };
   return (
     <div>
       <Month user={user} />
