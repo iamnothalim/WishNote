@@ -1,30 +1,7 @@
 import React from "react";
 import { Radar } from "@nivo/radar";
 
-const data = [
-  {
-    habit: "hobby",
-    count: 102,
-  },
-  {
-    habit: "relationship",
-    count: 58,
-  },
-  {
-    habit: "performance",
-    count: 70,
-  },
-  {
-    habit: "asset",
-    count: 48,
-  },
-  {
-    habit: "health",
-    count: 83,
-  },
-];
-
-const Habbit = () => {
+const Habit = ({ data }) => {
   return (
     <Radar
       width={500}
@@ -84,4 +61,4 @@ const Habbit = () => {
   );
 };
 
-export default Habbit;
+export default Habit;

@@ -1,6 +1,6 @@
 import React from "react";
 import MonthContainer from "../containers/common/MonthContainer";
-import HabbitContainer from "../containers/common/HabbitContainer";
+import HabitContainer from "../containers/common/HabitContainer";
 //챌린지 현황
 //import CurrentContainer from "../containers/common/CurrentContainer";
 //획득습관
@@ -10,7 +10,7 @@ const MyPage = () => {
   return (
     <div>
       <MonthContainer />
-      <HabbitContainer />
+      <HabitContainer />
     </div>
   );
 };

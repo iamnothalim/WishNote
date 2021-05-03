@@ -87,39 +87,39 @@ const StyledDay = styled.div`
     `}
 `;
 
-// const CheckCircle = styled.div`
-//   display: inline-block;
-//   width: 14px;
-//   height: 14px;
-//   margin: 0;
-//   border-radius: 7px;
-//   border: 1px solid #ced4da;
-//   font-size: 10px;
-//   vertical-align: middle;
-//   ${(props) =>
-//     props.done &&
-//     css`
-//       border: 1px solid #38d9a9;
-//       color: #38d9a9;
-//     `}
-// `;
+const CheckCircle = styled.div`
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  border-radius: 7px;
+  border: 1px solid #ced4da;
+  font-size: 10px;
+  vertical-align: middle;
+  ${(props) =>
+    props.done &&
+    css`
+      border: 1px solid #38d9a9;
+      color: #38d9a9;
+    `}
+`;
 
-// const StyledSection = styled.div`
-//   width: 100%;
-//   margin-top: 4px;
-//   text-align: left;
-//   &:first-child {
-//     margin-top: 28px;
-//   }
-//   & span {
-//     margin-left: 6px;
-//     vertical-align: middle;
-//     color: black;
-//   }
-//   & path {
-//     color: #38d9a9;
-//   }
-// `;
+const StyledSection = styled.div`
+  width: 100%;
+  margin-top: 4px;
+  text-align: left;
+  &:first-child {
+    margin-top: 28px;
+  }
+  & span {
+    margin-left: 6px;
+    vertical-align: middle;
+    color: black;
+  }
+  & path {
+    color: #38d9a9;
+  }
+`;
 
 const ViewComponent = ({
   today,
