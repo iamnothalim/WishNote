@@ -25,7 +25,7 @@ class TopMenu extends React.Component {
           인증 게시판
         </Menu.Item>
         <Menu.Item key="challenge" icon={<FormOutlined />}>
-          챌린지 등록
+          <Link to="/createChallenge">챌린지 등록</Link> 
         </Menu.Item>
         <Menu.Item key="myPage" icon={<UserOutlined />}>
           <Link to="/myPage">마이 페이지</Link>

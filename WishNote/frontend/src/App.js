@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import MyPage from "./pages/MyPage";
 import PointPage from "./pages/PointPage";
+import ChallengePage from "./pages/ChallengePage";
 import Auth from "./hoc/auth";
 import FeedUploadPage from './components/feed/FeedUploadPage';
 import DetailFeedPage from './components/feed/DetailFeedPage';
@@ -20,9 +21,13 @@ function App() {
           <Route exact path="/register" component={Auth(RegisterPage, false)} />
           <Route exact path="/myPage" component={Auth(MyPage, true)} />
           <Route exact path="/point" component={Auth(PointPage, true)} />
+<<<<<<< HEAD
           <Route exact path="/feed/upload" component={Auth(FeedUploadPage, true)} />
           <Route exact path="/feed/:feedId" component={Auth(DetailFeedPage, null)} />
         
+=======
+          <Route exact path="/createChallenge" component={Auth(ChallengePage, true)} />
+>>>>>>> origin/halim
         </Switch>
       </div>
     </Router>
