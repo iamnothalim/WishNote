@@ -11,8 +11,8 @@ router.post("/", async function (req, res) {
   }
   try {
     const user = await User.findByUsername(id);
-    console.log(id);
-    console.log(user);
+    console.log("id", id);
+    console.log("user", user);
     //계정이 없으면 에러
     if (!user) {
       return res.status(400).json({ errors: [{ msg: "User not exists" }] });

@@ -1,10 +1,10 @@
 const mainRouter = require("./routes/main");
 const authRouter = require("./routes/auth");
-const feedRouter = require("./routes/feed");
+const FeedRouter = require("./routes/feed");
 
 app.use("/api", mainRouter);
 app.use("/api/auth", authRouter);
-app.use("/api/feed", feedRouter);
+app.use("/api/Feed", FeedRouter);
 
 const express = require("express");
 const router = express.Router();

@@ -15,28 +15,26 @@ writingDate:2021-04-30T00:00:00.000+00:00
 const express = require("express");
 const router = express.Router();
 const checkLoggedIn = require("../../lib/checkLoggedIn");
-const ChallengeSchema = require("../../models/challenge");
+const Challenge = require("../../models/challenge");
 
 router.get("/", checkLoggedIn, (req, res) => {
   console.log("마이페이지 그냥 들어왔습니다. ");
-  ChallengeSchema.find((err, challenges) => {
+  Challenge.find((err, challenges) => {
     if (err) return res.status(500).send({ error: "database failure" });
-    res.json(challenges);
+    res.json({ challengeName: challenges[0].challengeName });
+    console.log("challenge", challenges[0].challengeName);
     console.log("마이페이지 로딩 완료");
   });
 });
 
 router.get("/:category", checkLoggedIn, (req, res) => {
   console.log("마이페이지 카테고리별로 들어왔습니다.");
-  ChallengeSchema.findOne(
-    { category: req.params.category },
-    (err, challenges) => {
-      if (err) return res.status(500).send({ error: "database failure" });
-      if (!challenges)
-        return res.status(404).json({ error: "challenge not found" });
-      res.json(challenges);
-    }
-  );
+  Challenge.findOne({ category: req.params.category }, (err, challenges) => {
+    if (err) return res.status(500).send({ error: "database failure" });
+    if (!challenges)
+      return res.status(404).json({ error: "challenge not found" });
+    res.json(challenges);
+  });
   //res.send("마이페이지 로딩 완료");
 });
 

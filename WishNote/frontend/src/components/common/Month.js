@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Button from "./Button";
+//import Button from "./Button";
 
 const MonthBlock = styled.div`
   position: fixed;
@@ -30,21 +30,17 @@ const UserInfo = styled.div`
   margin-right: 1rem;
 `;
 
-const Month = ({ user, profile }) => {
+const Month = ({ user, challenges }) => {
+  console.log("user", user);
+  console.log("challenges", challenges);
   return (
     <>
       <MonthBlock>
         <Wrapper>
-          {user ? (
-            <div className="right">
-              <UserInfo>{user.user._id}</UserInfo>
-              <UserInfo>{profile}</UserInfo>
-            </div>
-          ) : (
-            <div className="right">
-              <Button to="login">로그인</Button>
-            </div>
-          )}
+          <div className="right">
+            <UserInfo>{user.nickname}</UserInfo>
+            <UserInfo>{challenges}</UserInfo>
+          </div>
         </Wrapper>
       </MonthBlock>
     </>
