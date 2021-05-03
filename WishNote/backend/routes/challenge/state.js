@@ -15,7 +15,6 @@ router.post("/", async function (req, res) {
   let unfinished = [];
   let categoryArr = [];
 
-  /*
   try {
     console.log("여긴 챌린지 현황 상태 조회");
     await getInfo.forEach((el) => {
@@ -25,41 +24,93 @@ router.post("/", async function (req, res) {
         participated.push(el);
       }
     });
-    let data = [];
-    let habitData = {};
-    let count = 0;
-    let num = 0;
-    //내 챌린지 정보들 중 카테고리만 뽑아오기
+
+    // let data = [];
+    // let habitData = {};
+    // let count = 0;
+    // let num = 0;
+    // //내 챌린지 정보들 중 카테고리만 뽑아오기
+    // await getInfo.forEach((el) => {
+    //   categoryArr.push(el.category);
+    // });
+    // console.log("categoryArr", categoryArr);
+    // //챌린지 유형 갯수 파악하기
+
+    // await categoryArr.forEach((el) => {
+    //   console.log("el", el);
+    //   const habitList = [
+    //     "hobby",
+    //     "relationship",
+    //     "performance",
+    //     "asset",
+    //     "health",
+    //   ];
+    //   //const map1 = array1.map((x) => x * 2);
+    //   for (let i = 0; i < habitList.length; i++) {
+    //     if (habitList[i] === el) {
+    //       habitData.hobby = habitList[i];
+    //       console.log("i", i, "habitList[i]", habitList[i]);
+    //       count++;
+    //       console.log("count", count);
+    //     } else if (habitList[i] !== el) {
+    //     }
+    //     console.log("habitData", habitData);
+    //     data.push(habitData);
+    //     console.log("data", data);
+    //   }
+    // });
+
+    //////////////////
     await getInfo.forEach((el) => {
       categoryArr.push(el.category);
     });
     console.log("categoryArr", categoryArr);
-    //챌린지 유형 갯수 파악하기
-
-    await categoryArr.forEach((el) => {
-      console.log("el", el);
-      const habitList = [
-        "hobby",
-        "relationship",
-        "performance",
-        "asset",
-        "health",
-      ];
-      const map1 = array1.map((x) => x * 2);
-      for (let i = 0; i < habitList.length; i++) {
-        if (habitList[i] === el) {
-          habitData.hobby = habitList[i];
-          console.log("i", i, "habitList[i]", habitList[i]);
-          count++;
-          console.log("count", count);
-        } else if (habitList[i] !== el) {
-        }
-        console.log("habitData", habitData);
-        data.push(habitData);
-        console.log("data", data);
+    let count;
+    let habitData = {};
+    let data = [];
+    const habitList = [
+      "hobby",
+      "relationship",
+      "performance",
+      "asset",
+      "health",
+    ];
+    //halim : categoryArr [ 'hobby', 'relationship', 'hobby', 'performance' ]
+    await habitList.forEach((element) => {
+      count = categoryArr.filter((el) => element === el).length;
+      console.log("element", element);
+      console.log("count", count);
+      switch (element) {
+        case "hobby":
+          habitData.habit = "hobby";
+          habitData.count = count;
+          data.push(habitData);
+          break;
+        case "relationship":
+          habitData.habit = "relationship";
+          habitData.count = count;
+          data.push(habitData);
+          break;
+        case "performance":
+          habitData.habit = "performance";
+          habitData.count = count;
+          data.push(habitData);
+          break;
+        case "asset":
+          habitData.habit = "asset";
+          habitData.count = count;
+          data.push(habitData);
+          break;
+        case "health":
+          habitData.habit = "health";
+          habitData.count = count;
+          data.push(habitData);
+          break;
       }
     });
-*/
+    console.log("data", data);
+    //{ hobby: 2, relationship: 1, performance: 1, asset: 0, health: 0 }
+
     //console.log('개설: ',created.length);
     participated.forEach((el) => {
       if (el.challenge_state == 1) {
@@ -67,7 +118,7 @@ router.post("/", async function (req, res) {
       } else {
         unfinished.push(el);
       }
-    })
+    });
     //console.log('참가중: ',unfinished.length);
     //console.log('완료: ',finished.length);
     /////////////////////////////////////////////

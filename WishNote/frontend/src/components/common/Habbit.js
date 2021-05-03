@@ -3,34 +3,24 @@ import { Radar } from "@nivo/radar";
 
 const data = [
   {
-    taste: "fruity",
-    chardonay: 102,
-    carmenere: 70,
-    syrah: 38,
+    habit: "hobby",
+    count: 102,
   },
   {
-    taste: "bitter",
-    chardonay: 58,
-    carmenere: 111,
-    syrah: 22,
+    habit: "relationship",
+    count: 58,
   },
   {
-    taste: "heavy",
-    chardonay: 70,
-    carmenere: 66,
-    syrah: 45,
+    habit: "performance",
+    count: 70,
   },
   {
-    taste: "sunny",
-    chardonay: 48,
-    carmenere: 59,
-    syrah: 93,
+    habit: "asset",
+    count: 48,
   },
   {
-    taste: "sweety",
-    chardonay: 83,
-    carmenere: 41,
-    syrah: 37,
+    habit: "health",
+    count: 83,
   },
 ];
 
