@@ -22,7 +22,7 @@ class TopMenu extends React.Component {
         mode="horizontal"
       >
         <Menu.Item key="feed" icon={<CameraOutlined />}>
-          인증 게시판
+         <Link to="/feedListView">인증 게시판 </Link>
         </Menu.Item>
         <Menu.Item key="challenge" icon={<FormOutlined />}>
           <Link to="/createChallenge">챌린지 등록</Link> 

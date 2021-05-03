@@ -15,10 +15,6 @@ router.post("/", async function (req, res) {
   let unfinished = [];
   let categoryArr = [];
 
-<<<<<<< HEAD
-=======
-  
->>>>>>> origin/halim
   try {
     console.log("여긴 챌린지 현황 상태 조회");
     await getInfo.forEach((el) => {
@@ -112,11 +108,6 @@ router.post("/", async function (req, res) {
           break;
       }
     });
-<<<<<<< HEAD
-    console.log("data", data);
-    //{ hobby: 2, relationship: 1, performance: 1, asset: 0, health: 0 }
-=======
->>>>>>> origin/halim
 
     //console.log('개설: ',created.length);
     participated.forEach((el) => {

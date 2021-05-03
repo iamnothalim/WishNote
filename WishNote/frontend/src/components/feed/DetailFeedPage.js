@@ -1,84 +1,141 @@
-// import React, { useEffect, useState } from 'react'
-// import { List, Avatar, Row, Col } from 'antd';
-// import FeedComments from './Sections/FeedCommnets';
-// import axios from 'axios';
-// function DetailFeedPage(props) {
+import React, { useEffect, useState } from 'react'
+import FeedComments from './Sections/FeedCommnets';
+import axios from 'axios';
+import { Link } from "react-router-dom";
+import { Card, Avatar, Col, Typography, Row , List} from "antd";
+
+// function DetailFeedPage() {
+//     const [feeds, setFeeds] = useState([
+//         {
+//           userId: "",
+//           title: "",
+//           description: "",
+//           category: "",
+//           views: "",
+//           image:""
+//         },
+//       ]);
 
 
-//     const feedId = props.match.params.feedId
-//     const [Feed, setFeed] = useState([])
-//     const [FeedCommentLists, setFeedCommentLists] = useState([])
+//       useEffect (async ()=>{
+//           const res = await axios.get("/api/feed/feed/getFeeds");
+//           const data = res.data.data.map((data)=>({
+//             userId: data.userId,
+//             title: data.title,
+//             description: data.description,
+//             category: data.category,
+//             views: data.views,
+//             image: data.image,
+//           }));
+//           setFeeds(feeds.concat(data));
+//       },[]);
+//       console.log("feeds", feeds);
+      
+//   return (
+//     <div style={{ width: "85%", margin: "3rem auto" }}>
+    
+//       {feeds.map((feed) => (
 
-//     const feedVariable = {
-//         feedId: feedId
-//     }
+//        <div style={{display:"inline-block"}}>
+//           <div ><img src={feed.image} style={{maxHeight:"250px" ,maxWidth:"250px",minWidth:"250px",minHeight:"250px" }}/></div>
+//           <div>{feed.title}</div>
+//           <div>{feed.userId}</div>
+//           <div>{feed.description}</div>
+//           <div>{feed.category}</div>
+//           <div>{feed.views}</div>
 
-//     useEffect(() => {
-//         axios.post('/api/feed/getFeed', feedVariable)
-//             .then(response => {
-//                 if (response.data.success) {
-//                     console.log(response.data.feed)
-//                     setFeed(response.data.feed)
-//                 } else {
-//                     alert('Failed to get feed Info')
-//                 }
-//             })
-
-//         axios.post('/api/feedComment/getFeedComments', feedVariable)
-//             .then(response => {
-//                 if (response.data.success) {
-//                     console.log('response.data.feedComments',response.data.feedComments)
-//                     setFeedCommentLists(response.data.feedComments)
-//                 } else {
-//                     alert('Failed to get feed Info')
-//                 }
-//             })
-
-
-//     }, [])
-
-//     const updateFeedComment = (newFeedComment) => {
-//         setFeedCommentLists(FeedCommentLists.concat(newFeedComment))
-//     }
+//         </div>
+//       ))}
+        
+//     </div>
+//   );
+// }
 
 
-//     if (Feed.writer) {
-//         return (
-//             <Row>
-//                 <Col lg={18} xs={24}>
-//                     <div className="postPage" style={{ width: '100%', padding: '3rem 4em' }}>
-//                         <feed style={{ width: '100%' }} src={`http://localhost:3000/${Feed.filePath}`} controls></feed>
+function DetailFeedPage(props) {
 
-//                         <List.Item
-//                             // actions={[<LikeDislikes feed feedId={feedId} userId={localStorage.getItem('userId')}  />, <Subscriber userTo={Feed.writer._id} userFrom={localStorage.getItem('userId')} />]}
-//                         >
-//                             <List.Item.Meta
-//                                 avatar={<Avatar src={Feed.writer && Feed.writer.image} />}
-//                                 title={<a href="https://ant.design">{Feed.title}</a>}
-//                                 description={Feed.description}
-//                             />
-//                             <div></div>
-//                         </List.Item>
+    console.log('pass')
+    const feedId = props.match.params.feedId
+    const [feeds, setFeeds] = useState([])
+    const [FeedCommentLists, setFeedCommentLists] = useState([])
 
-//                         <FeedComments FeedCommentLists={FeedCommentLists} postId={Feed._id} refreshFunction={updateFeedComment} />
+    const feedVariable = {
+        feedId: feedId
+    }
 
-//                     </div>
-//                 </Col>
-//                 <Col lg={6} xs={24}>
+    useEffect(async() => {
+        const res = await axios.get("/api/feed/feed/getFeeds");
+        const data = res.data.data.map((data) => ({
+            userId: data.userId,
+            title: data.title,
+            description: data.description,
+            category: data.category,
+            views: data.views,
+            image: data.image,
+          }));
+        axios.post('/api/feed/feed/getFeeds', feedVariable)
+            .then(response => {
+                if (response.data.success) {
+                    console.log(response.data.feed)
+                    setFeeds(response.data.feed)
+                } else {
+                    alert('Failed to get feed Info')
+                }
+            })
+
+        axios.post('/api/feedComment/getFeedComments', feedVariable)
+            .then(response => {
+                if (response.data.success) {
+                    console.log('response.data.feedComments',response.data.feedComments)
+                    setFeedCommentLists(response.data.feedComments)
+                } else {
+                    alert('Failed to get feed Info')
+                }
+            })
+
+
+    }, [])
+
+    const updateFeedComment = (newFeedComment) => {
+        setFeedCommentLists(FeedCommentLists.concat(newFeedComment))
+    }
+
+
+    if (feeds.registerId) {
+        return (
+            <Row>
+                <Col lg={18} xs={24}>
+                    <div className="postPage" style={{ width: '100%', padding: '3rem 4em' }}>
+
+                        <List.Item
+                        >
+                            <List.Item.Meta
+                                avatar={<Avatar src={feeds.userId && feeds.userId.image} />}
+                                title={<a href="https://ant.design">{feeds.title}</a>}
+                                description={feeds.description}
+                            />
+                            <div></div>
+                        </List.Item>
+
+                        <FeedComments FeedCommentLists={FeedCommentLists} postId={feeds._id} refreshFunction={updateFeedComment} />
+
+                    </div>
+                </Col>
+                <Col lg={6} xs={24}>
 
                    
 
-//                 </Col>
-//             </Row>
-//         )
+                </Col>
+            </Row>
+        )
 
-//     } else {
-//         return (
-//             <div>Loading...</div>
-//         )
-//     }
+    } else {
+        return (
+            <div>Loading...</div>
+        )
+    }
 
 
-// }
+}
 
-// export default DetailFeedPage
+export default DetailFeedPage

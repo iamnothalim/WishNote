@@ -9,7 +9,7 @@ const FeedComment = require("../../models/feedComment");
 router.post("/", async (req, res) => {
   console.log("req", req.body);
   console.log("피드 등록 On");
-  const { userId, description, title, category } = req.body;
+  const { userId, description, title, image, category } = req.body;
   //   try {
   console.log("피드 디비 등록 on");
   // const feed = new Feed({
@@ -25,6 +25,7 @@ router.post("/", async (req, res) => {
   feed.description = description;
   feed.title = title;
   feed.category = category;
+  feed.image = image;
 
   console.log(feed);
 
@@ -50,7 +51,7 @@ router.post("/", async (req, res) => {
 });
 
 ///// 피드 리스트 전체 보기
-router.get("/", function (req, res, next) {
+router.get("/getFeeds", function (req, res, next) {
   Feed.find()
     .then((feed) => {
       // console.log('read all 완료');
