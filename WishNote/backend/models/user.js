@@ -54,8 +54,11 @@ UserSchema.methods.generateToken = function () {
 //스태틱 메서드
 //모델에서 바로 사용할수 있는 함수
 
-UserSchema.statics.findByUsername = function (id) {
+UserSchema.statics.findByUserId = function (id) {
   return this.findOne({ id });
+};
+UserSchema.statics.findByUserNickname = function (nickname) {
+  return this.findOne({ nickname });
 };
 const User = mongoose.model("User", UserSchema);
 module.exports = User;

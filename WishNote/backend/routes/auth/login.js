@@ -10,7 +10,7 @@ router.post("/", async function (req, res) {
     return res.status(400).json({ errors: [{ msg: "User not exists" }] });
   }
   try {
-    const user = await User.findByUsername(id);
+    const user = await User.findByUserId(id);
     console.log("id", id);
     console.log("user", user);
     //계정이 없으면 에러
@@ -18,7 +18,7 @@ router.post("/", async function (req, res) {
       return res.status(400).json({ errors: [{ msg: "User not exists" }] });
     }
     try {
-      const user = await User.findByUsername(id);
+      const user = await User.findByUserId(id);
       //계정이 없으면 에러
       if (!user) {
         return res.status(400).json({ errors: [{ msg: "User not exists" }] });

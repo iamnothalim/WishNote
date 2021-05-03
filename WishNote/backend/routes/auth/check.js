@@ -6,11 +6,11 @@ router.get("/", async function (req, res, next) {
   console.log("여긴 check");
   console.log('asdas',req.user)
   if (!req.user) {
-    res.json({ isAuth: false });
+    res.json({ id: null });
     return;
   }else {
     try {
-      const userdata= await User.findByUsername(req.user.id);
+      const userdata= await User.findByUserId(req.user.id);
       
         const user ={
           nickname:userdata.nickname,

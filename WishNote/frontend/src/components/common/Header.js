@@ -42,7 +42,7 @@ const Header = ({ user, onLogout }) => {
           <Link to="/" className="logo">
             Wish Note
           </Link>
-          {user.user === null ? (
+          {user.user === null? (
             <div className="right">
               <Button to="/login">로그인</Button>
             </div>
