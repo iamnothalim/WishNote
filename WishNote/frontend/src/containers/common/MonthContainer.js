@@ -1,19 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Month from "../../components/common/Month";
 import Calendar from "../../components/calendar/Calendar";
-import { Provider } from "react-redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-import { createStore, applyMiddleware } from "redux";
+import axios from "axios";
+import { withRouter } from "react-router";
+import { challengeMy } from "../../_actions/my_action";
 import rootReducer from "../../_reducers/index";
 
-//import { challengeMy } from "../../_actions/my_action";
-//import { auth } from "../../_actions/user_action";
-
-//const store = createStore(rootReducer, composeWithDevTools(applyMiddleware()));
-
 const MonthContainer = (props) => {
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const user = useSelector((state) => ({
     nickname: state.user.userData.nickname,
   }));
@@ -30,7 +25,7 @@ const MonthContainer = (props) => {
   );
 };
 
-export default MonthContainer;
+export default withRouter(MonthContainer);
 
 /*
   const profile = (category) => {

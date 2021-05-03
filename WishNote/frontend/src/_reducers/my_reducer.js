@@ -8,7 +8,9 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case CHALLENGE_MY:
-      return { ...state, challengeName: action.payload };
+      console.log(state);
+      console.log(action.payload);
+      return { ...state, challengeData: action.payload };
     default:
       return state;
   }

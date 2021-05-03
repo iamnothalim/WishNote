@@ -21,8 +21,8 @@ router.get("/", checkLoggedIn, (req, res) => {
   console.log("마이페이지 그냥 들어왔습니다. ");
   Challenge.find((err, challenges) => {
     if (err) return res.status(500).send({ error: "database failure" });
-    res.json(challenges);
-    console.log("challenge", challenge);
+    res.json({ challengeName: challenges[0].challengeName });
+    console.log("challenge", challenges[0].challengeName);
     console.log("마이페이지 로딩 완료");
   });
 });
