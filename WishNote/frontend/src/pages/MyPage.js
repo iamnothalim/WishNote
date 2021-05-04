@@ -7,6 +7,7 @@ import HabitContainer from "../containers/common/HabitContainer";
 //import HabbitContainer from "../containers/common/HabbitContainer";
 
 const MyPage = () => {
+  console.log("마이페이지 들어왔습니다.");
   return (
     <div>
       <MonthContainer />

@@ -30,16 +30,15 @@ const UserInfo = styled.div`
   margin-right: 1rem;
 `;
 
-const Month = ({ user }) => {
-  console.log("user", user);
-  //console.log("challenges", challenges);
+const Month = ({ day, category }) => {
   return (
     <>
       <MonthBlock>
         <Wrapper>
           <div className="right">
-            <UserInfo>{user.nickname}</UserInfo>
-            {/* <UserInfo>{challenges}</UserInfo> */}
+            {/* <UserInfo>{user.nickname}</UserInfo> */}
+            <UserInfo>{day}</UserInfo>
+            <UserInfo>{category}</UserInfo>
           </div>
         </Wrapper>
       </MonthBlock>

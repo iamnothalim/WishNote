@@ -66,6 +66,26 @@ router.get("/getFeeds", function (req, res, next) {
     });
 });
 
+// GET : /api/feed/feed
+//아이디별 피드 리스트 보기
+router.get("/", async function (req, res) {
+  //토큰에 넣어놨당
+  const userid = req.user.id;
+  Feed.findOne({ userId: userid })
+    .then((feed) => {
+      if (!feed) return res.status(404).json({ message: "feed not found" });
+      res.status(200).json({
+        message: "read detail success",
+        data: feed,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        message: "혹시 여기니",
+      });
+    });
+});
+
 //피드 수정
 router.put("/:post_id", async function (req, res, next) {
   const post_id = req.params.post_id;
@@ -164,37 +184,30 @@ router.post("/feedComment/:postId", async (req, res) => {
 
 // 댓글 수정
 
-router.put("/feedComment/:postId", async function(req,res,nxet){
+router.put("/feedComment/:postId", async function (req, res, nxet) {
   const postId = req.params.postId;
   const { content } = req.body;
 
-  try{
+  try {
     var post = await FeedComment.findById(postId);
-    console.log('여기', post)
-    if(!post) return res.status(404).json({message:"댓글 찾을수없음"});
+    console.log("여기", post);
+    if (!post) return res.status(404).json({ message: "댓글 찾을수없음" });
 
-    post.content =content;
+    post.content = content;
     const output = await post.save();
-    console.log('수정완료');
+    console.log("수정완료");
     res.status(200).json({
-      message:"수정성공",
-      data:output
+      message: "수정성공",
+      data: output,
     });
-  }catch (err){
+  } catch (err) {
     res.status(500).json({
-      message:err
+      message: err,
     });
   }
 });
 
-
 module.exports = router;
-
-
-
-
-
-
 
 // const express = require('express');
 // const router = express.Router();
@@ -296,6 +309,5 @@ module.exports = router;
 //         res.status(200).json({ success: true, feed })
 //     })
 // });
-
 
 // module.exports = router;

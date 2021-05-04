@@ -60,5 +60,6 @@ UserSchema.statics.findByUserId = function (id) {
 UserSchema.statics.findByUserNickname = function (nickname) {
   return this.findOne({ nickname });
 };
+
 const User = mongoose.model("User", UserSchema);
 module.exports = User;

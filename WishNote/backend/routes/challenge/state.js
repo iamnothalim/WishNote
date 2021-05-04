@@ -38,7 +38,6 @@ router.post("/", async function (req, res) {
       } else {
         accumulator[val] = 1;
       }
-<<<<<<< HEAD
       return accumulator;
     };
 
@@ -98,9 +97,6 @@ router.post("/", async function (req, res) {
       data_health,
     };
     //{ hobby: 2, relationship: 1, performance: 1, asset: 0, health: 0 }
-=======
-    });
->>>>>>> 02b9ae31ab03a5fb7c86fa7163e138865781c3a3
 
     //console.log('개설: ',created.length);
     participated.forEach((el) => {
