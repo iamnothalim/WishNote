@@ -49,8 +49,8 @@ function FeedUploadPage(props) {
     const [Description, setDescription] = useState("")
     const [Categories, setCategories] = useState("health ")  
     const [FilePath, setFilePath] = useState("")
-    const [Duration, setDuration] = useState("")
-    const [Thumbnail, setThumbnail] = useState("")
+    // const [Duration, setDuration] = useState("")
+    // const [Thumbnail, setThumbnail] = useState("")
 
 
     const onTitleChange = (e) =>{
@@ -112,8 +112,7 @@ function FeedUploadPage(props) {
             description: Description,
             filePath: FilePath,
             category: Categories,
-            duration: Duration,
-            thumbnail: Thumbnail
+
         }
 
         Axios.post('/api/feed/uploadFeed', variables)

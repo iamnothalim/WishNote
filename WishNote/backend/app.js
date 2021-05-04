@@ -49,7 +49,7 @@ app.use("/api", mainRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/feed", feedRouter);
 app.use("/api/challenge", challengeRouter);
-
+app.use("/api/feedComment", require('./routes/feed/feedComment'))
 //proxyTest
 //app.get('/api/hello',(req,res)=>{res.send("안녕 이건 프록시 테스트")});
 
