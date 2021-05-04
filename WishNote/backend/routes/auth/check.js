@@ -64,20 +64,20 @@ router.get("/", async function (req, res, next) {
       let health_count = dupCount[Object.keys(dupCount)[health]];
       //console.log(a_count,b_count,c_count,d_count,e_count);
 
-      if(hobby_count==undefined)hobby_count=0;
-      if(relationship_count==undefined)relationship_count=0;
-      if(performance_count==undefined)performance_count=0;
-      if(asset_count==undefined)asset_count=0;
-      if(health_count==undefined)health_count=0;
-      
+      if (hobby_count == undefined) hobby_count = 0;
+      if (relationship_count == undefined) relationship_count = 0;
+      if (performance_count == undefined) performance_count = 0;
+      if (asset_count == undefined) asset_count = 0;
+      if (health_count == undefined) health_count = 0;
+
       let radarOriginData = [
         {
-          name:'참여한 챌린지 갯수',
-          hobby:hobby_count,
-          relationship:relationship_count,
-          performance:performance_count,
-          asset:asset_count,
-          health:health_count,
+          name: '참여한 챌린지 갯수',
+          hobby: hobby_count,
+          relationship: relationship_count,
+          performance: performance_count,
+          asset: asset_count,
+          health: health_count,
         }
       ];
       const radarTitleMap = {
@@ -86,20 +86,20 @@ router.get("/", async function (req, res, next) {
         performance: 'performance',
         asset: 'asset',
         health: 'health',
-    };
-    const radarData =[];
-    radarOriginData.forEach(item => {
-      Object.keys(item).forEach(key => {
+      };
+      const radarData = [];
+      radarOriginData.forEach(item => {
+        Object.keys(item).forEach(key => {
           if (key !== 'name') {
-              radarData.push({
-                  name: item.name,
-                  label: radarTitleMap[key],
-                  value: item[key],
-              });
+            radarData.push({
+              name: item.name,
+              label: radarTitleMap[key],
+              value: item[key],
+            });
           }
-      });
-  })
-  console.log('여긴 바깥',radarData)
+        });
+      })
+      console.log('여긴 바깥', radarData)
 
 
       //{ hobby: 2, relationship: 1, performance: 1, asset: 0, health: 0 }
@@ -122,11 +122,11 @@ router.get("/", async function (req, res, next) {
         name: userdata.name,
         id: userdata.id,
         point: userdata.point,
-        habbit:radarData,
-        challengeState:{
-          attend:unfinished.length,
-          finish:finished.length,
-          create:created.length,
+        habbit: radarData,
+        challengeState: {
+          attend: unfinished.length,
+          finish: finished.length,
+          create: created.length,
         }
       }
       //console.log(user);

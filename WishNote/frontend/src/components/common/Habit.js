@@ -31,7 +31,7 @@ import { Radar, ChartCard } from 'ant-design-pro/lib/Charts';
 //   });
 // });
 
-const Habbit = ({data}) => {
+const Habit = ({data}) => {
   console.log('여긴 안쪽',data)
     // const radarTitleMap = {
     //   hobby: 'hobby',

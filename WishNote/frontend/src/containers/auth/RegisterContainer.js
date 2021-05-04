@@ -6,12 +6,12 @@ import RegisterComponent from "../../components/auth/RegisterComponent";
 
 const RegisterContainer = (props) => {
     const dispatch = useDispatch();
-    const onSubmitHandler= (values) => {
+    const onSubmitHandler = (values) => {
         let body = {
             nickname: values.Nickname,
             password: values.Password,
-            name:values.Name,
-            id:values.Id,
+            name: values.Name,
+            id: values.Id,
         };
         dispatch(registerUser(body)).then((response) => {
             if (response.payload.success) {
@@ -22,16 +22,8 @@ const RegisterContainer = (props) => {
             }
         });
     };
-    console.log("여기 들어왔나?");
-    dispatch(registerUser(body)).then((response) => {
-      if (response.payload.success) {
-        props.history.push("/login");
-      } else {
-        alert("failed to sign up");
-      }
-    });
-  };
-  return <RegisterComponent onSubmitHandler={onSubmitHandler} />;
+    return <RegisterComponent onSubmitHandler={onSubmitHandler} />;
 };
+
 
 export default withRouter(RegisterContainer);
