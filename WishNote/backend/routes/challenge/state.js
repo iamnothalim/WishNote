@@ -102,6 +102,9 @@ router.post("/", async function (req, res) {
     };
     //{ hobby: 2, relationship: 1, performance: 1, asset: 0, health: 0 }
 
+   
+
+
     //console.log('개설: ',created.length);
     participated.forEach((el) => {
       if (el.challenge_state == 1) {

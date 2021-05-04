@@ -1,9 +1,8 @@
-import React from 'react';
-import {useDispatch} from 'react-redux';
-import {registerUser} from '../../_actions/user_action';
-import { withRouter} from 'react-router-dom';
-import RegisterComponent from '../../components/auth/RegisterComponent';
-
+import React from "react";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../../_actions/user_action";
+import { withRouter } from "react-router-dom";
+import RegisterComponent from "../../components/auth/RegisterComponent";
 
 const RegisterContainer = (props) => {
     const dispatch = useDispatch();
@@ -23,12 +22,16 @@ const RegisterContainer = (props) => {
             }
         });
     };
-    return (
-        <RegisterComponent
-            onSubmitHandler={onSubmitHandler}
-        />
-    )
+    console.log("여기 들어왔나?");
+    dispatch(registerUser(body)).then((response) => {
+      if (response.payload.success) {
+        props.history.push("/login");
+      } else {
+        alert("failed to sign up");
+      }
+    });
+  };
+  return <RegisterComponent onSubmitHandler={onSubmitHandler} />;
 };
 
 export default withRouter(RegisterContainer);
-

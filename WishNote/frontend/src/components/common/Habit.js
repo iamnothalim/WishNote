@@ -68,4 +68,4 @@ const Habbit = ({data}) => {
   );
 };
 
-export default Habbit;
+export default Habit;
