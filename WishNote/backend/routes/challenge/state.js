@@ -62,11 +62,11 @@ router.post("/", async function (req, res) {
     const asset_count = dupCount[Object.keys(dupCount)[asset]];
     const health_count = dupCount[Object.keys(dupCount)[health]];
     //console.log(a_count,b_count,c_count,d_count,e_count);
-
     //객체 반환
     let data_hobby = {};
     if (hobby !== "0") {
       data_hobby.habbit = "hobby";
+      if(hobby_count==0)data_hobby.count=0;
       data_hobby.count = hobby_count;
     }
     let data_relationship = {};
@@ -82,6 +82,10 @@ router.post("/", async function (req, res) {
     let data_asset = {};
     if (asset !== "0") {
       data_asset.habbit = "asset";
+      if(asset_count==undefined){
+        console.log('제발 좀 찍혀라 ㅅㅂ')
+        data_asset.count=0;
+      }
       data_asset.count = asset_count;
     }
     let data_health = {};

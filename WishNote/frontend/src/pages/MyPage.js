@@ -1,5 +1,5 @@
 import React from "react";
-import MonthContainer from "../containers/common/MonthContainer";
+//import MonthContainer from "../containers/common/MonthContainer";
 import HabbitContainer from "../containers/common/HabbitContainer";
 //챌린지 현황
 //import CurrentContainer from "../containers/common/CurrentContainer";
@@ -9,7 +9,7 @@ import HabbitContainer from "../containers/common/HabbitContainer";
 const MyPage = () => {
   return (
     <div>
-      <MonthContainer />
+      {/* <MonthContainer /> */}
       <HabbitContainer />
     </div>
   );
