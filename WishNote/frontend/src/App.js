@@ -8,7 +8,8 @@ import PointPage from "./pages/PointPage";
 import ChallengePage from "./pages/ChallengePage";
 import Auth from "./hoc/auth";
 import FeedUploadPage from './components/feed/FeedUploadPage';
-import DetailFeedPage from './components/feed/DetailFeedPage';
+// import DetailFeedPage from './components/feed/DetailFeedPage';
+import DetailFeedPage from  './components/feed/DetailFeedPage';
 import FeedListViewPage from './pages/FeedListViewPage';
 
 
@@ -24,7 +25,7 @@ function App() {
           <Route exact path="/point" component={Auth(PointPage, true)} />
           <Route exact path="/feedListView" component={Auth(FeedListViewPage, null)} />
           <Route exact path="/feed/upload" component={Auth(FeedUploadPage, true)} />
-          <Route exact path="/feed/:feedId" component={Auth(DetailFeedPage, null)} />
+          <Route exact path="/feed/:_id" component={Auth(DetailFeedPage, null)} />
         
         
           <Route exact path="/createChallenge" component={Auth(ChallengePage, true)} />

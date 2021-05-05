@@ -10,18 +10,21 @@ const { Meta } = Card;
 function FeedList() {
   const [feeds, setFeeds] = useState([
     {
+      _id:'',
       userId: "",
       title: "",
       description: "",
       category: "",
       views: "",
-      image:""
+      image:""  
     },
   ]);
 
   useEffect(async () => {
     const res = await axios.get("/api/feed/feed/getFeeds");
+    // console.log("res ==> ",res)
     const data = res.data.data.map((data) => ({
+      _id:data._id,
       userId: data.userId,
       title: data.title,
       description: data.description,
@@ -29,9 +32,10 @@ function FeedList() {
       views: data.views,
       image: data.image,
     }));
+    // console.log("data ==> ",data)
     setFeeds(feeds.concat(data));
   }, []);
-  console.log("feeds", feeds);
+  // console.log("feeds ==>", feeds);
   return (
     <div style={{ width: "85%", margin: "3rem auto" }}>
       <Title level={2} style={{ marginTop: "5%" }}>
@@ -42,7 +46,7 @@ function FeedList() {
       <hr />
       {feeds.map((feed) => (
 
-       <Link to="/api/feed/:feedId">
+       <Link to={`/feed/${feed._id}`} key={feed._id}>
 
        <div style={{display:"inline-block", marginLeft:"20px"}}>
           <div ><img src={feed.image} style={{maxHeight:"250px" ,maxWidth:"250px", minHeight:"250px" }}/></div>
@@ -56,7 +60,7 @@ function FeedList() {
        </Link>
       ))}
 
-      {/* <Row gutter={16}>{renderCards}</Row> */}
+      {/* <Row gutter={16}>{renderCards}</Row> */}1
     </div>
   );
 }

@@ -19,7 +19,7 @@ function FeedComments(props) {
 
         const variables = {
             content: FeedComment,
-            writer: user.userData._id,
+            userId: user.userData._id,
             postId: props.postId
         }
 
