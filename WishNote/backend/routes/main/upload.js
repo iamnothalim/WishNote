@@ -36,6 +36,7 @@ const upload = multer({ storage: storage })
 // } );
 router.post('/',upload.single('img'),(req,res)=>{
     console.log('/api/upload 라우팅 호출');
+    console.log(req.file);
     try {
         res.json({
             "status": "done",

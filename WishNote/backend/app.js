@@ -42,7 +42,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(jwtMiddleware);
-app.use(express.static(path.join(__dirname, "public")));
+app.use("/api",express.static(path.join(__dirname, "uploads")));
+//app.use("/api",express.static(path.join(__dirname, "uploads")));
+//app.use(express.static('/api/uploads'));
 
 //라우터 설정
 app.use("/api", mainRouter);

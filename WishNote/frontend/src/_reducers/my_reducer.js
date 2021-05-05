@@ -1,5 +1,5 @@
 import { CHALLENGE_MY } from "../_actions/types";
-
+import {CREATE_CHALLENGE} from "../_actions/types";
 const initialState = {
   challengeData: {},
 };
@@ -11,7 +11,9 @@ export default function (state = initialState, action) {
       console.log("state", state);
       console.log("payload", action.payload);
       return { ...state, challengeData: action.payload };
-    default:
+    case CREATE_CHALLENGE:
+      return {...state,challengeData: action.payload};
+      default:
       return state;
   }
 }

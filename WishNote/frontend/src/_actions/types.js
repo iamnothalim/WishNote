@@ -7,6 +7,7 @@ export const CHARGE_USER = "charge_user";
 
 //challenge
 export const CHALLENGE_MY = "challenge_my";
+export const CREATE_CHALLENGE = "create_challenge"
 
 //calendar
 export const SELECTED_DAY = "date/SELECTED_DAY";

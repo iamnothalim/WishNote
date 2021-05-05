@@ -13,6 +13,7 @@ import {
 } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 
+const { TextArea } = Input;
 const { RangePicker } = DatePicker;
 
 function onChange(dates, dateStrings) {
@@ -21,16 +22,16 @@ function onChange(dates, dateStrings) {
 }
 const normFile = (e) => {
     console.log('Upload event:', e);
-    
     if (Array.isArray(e)) {
       return e;
     }
   
     return e && e.fileList;
   };
-const CreateChallengeComponent = () => {
+
+const CreateChallengeComponent = ({onSubmitHandler}) => {
     const onFinish = (values) => {
-        console.log('Received values of form: ', values);
+        console.log('Received values of form: ', normFile);
     };
     // const [imgBase64, setImgBase64] = useState(""); // 파일 base64
     // const [imgFile, setImgFile] = useState(null);	//파일	
@@ -63,7 +64,7 @@ const CreateChallengeComponent = () => {
                 initialValues={{
                     size: 'default',
                 }}
-                onFinish={onFinish}
+                onFinish={onSubmitHandler}
             >
                 <Form.Item name="Challengename" label="Challengename">
                     <Input />
@@ -126,10 +127,10 @@ const CreateChallengeComponent = () => {
                         onChange={onChange}
                     />
                 </Form.Item>
-                <Form.Item label="Cost" name="deposit">
+                <Form.Item label="Cost (단위:  원)" name="deposit">
                     <InputNumber />
                 </Form.Item>
-                <Form.Item label="Image" name="challengeImg" >
+                <Form.Item label="Image" >
                     {/* <div>
                         <img src={imgBase64} />
                     </div>
@@ -143,6 +144,9 @@ const CreateChallengeComponent = () => {
                             <p className="ant-upload-hint">Support for a single or bulk upload.</p>
                         </Upload.Dragger>
                     </Form.Item>
+                </Form.Item>
+                <Form.Item name="description" label="Description">
+                    <TextArea showCount maxLength={100} />
                 </Form.Item>
                 <Form.Item label="Button">
                     <Button type="primary" htmlType="submit">

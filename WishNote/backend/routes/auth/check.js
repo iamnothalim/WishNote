@@ -2,13 +2,34 @@ const express = require("express");
 const router = express.Router();
 const User = require("../../models/user");
 const ChallengeStatus = require("../../models/challengeStatus");
+const Challenge = require("../../models/challenge");
 
 router.get("/", async function (req, res, next) {
   console.log("여긴 check");
   //console.log('asdas', req.user)
   if (!req.user) {
-    res.json({ id: null });
-    return;
+    try {
+      //challenge 데이터들 불러오기
+      const challengeInfo = await Challenge.find();
+      //console.log(challengeInfo);
+      const listData = [];
+      for (let i=0; i<challengeInfo.length; i++){
+        listData.push({
+          herf:'/',
+          challengeName:challengeInfo[i].challengeName,
+          creator:challengeInfo[i].registerId,
+          description:challengeInfo[i].description,
+          challengeImg:challengeInfo[i].challengeImg,
+        })
+      }
+      console.log(listData);
+
+
+      res.json({ id: null ,listData:listData});
+    } catch (e) {
+      console.log(e.message);
+      res.status(500).send("Server Error");
+    }
   } else {
     try {
       const getInfo = await ChallengeStatus.findByUser(req.user.id);
@@ -128,6 +149,7 @@ router.get("/", async function (req, res, next) {
           finish: finished.length,
           create: created.length,
         }
+        //month:askdhk
       }
       //console.log(user);
       res.json(user);

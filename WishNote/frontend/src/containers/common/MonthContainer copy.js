@@ -27,25 +27,43 @@ import moment from "moment";
 //   setFeeds(feeds.concat(data));
 // }
 
-function getListData(value) {
+async function getListData(value) {
   let listData;
-  console.log(value.format('YYYY-MM-DD'));
   let today = moment();
+  // console.log(today);
+  // console.log(value);
+
+  // const when = async () => {
+  //   const res = await axios.get("/api/feed/feed");
+  //   const data = res.data.data.map((data) => ({
+  //     category: data.category,
+  //     title: data.title,
+  //   }));
+  //   console.log("res", res);
+  //   console.log("data", data);
+  // };
+
+  // const when = await axios.get("/api/feed/feed").then((response) => {
+  //   console.log("response.data.data", response.data.data);
+  //   return response.data.data;
+  // });
+  // const category = when[0].category;
+  // console.log("category", category);
   switch (value.date()) {
-    case 8://2021-04-05
+    case 1:
       listData = [
         { type: "warning", content: "This is warning event." },
         { type: "success", content: "This is usual event." },
       ];
       break;
-    case 12:
+    case 2:
       listData = [
         { type: "warning", content: "This is warning event." },
         { type: "success", content: "This is usual event." },
         { type: "error", content: "This is error event." },
       ];
       break;
-    case 13:
+    case 3:
       listData = [
         { type: "warning", content: "This is warning event" },
         { type: "success", content: "This is very long usual event." },
@@ -100,7 +118,7 @@ const MonthContainer = (props) => {
 
   return (
     <div>
-      {/* <Month user={user} /> */}
+      <Month user={user} />
       <Calendar
         dateCellRender={dateCellRender}
         // monthCellRender={monthCellRender}
@@ -110,3 +128,12 @@ const MonthContainer = (props) => {
 };
 
 export default withRouter(MonthContainer);
+
+/*
+  const profile = (category) => {
+    axios.get(`/api/myPage/${category}`).then((response) => {
+      console.log("props 가 뭔지 궁금", props);
+      console.log("response", response);
+    });
+  };
+*/
