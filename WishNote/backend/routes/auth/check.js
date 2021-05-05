@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../../models/user");
 const ChallengeStatus = require("../../models/challengeStatus");
 const Challenge = require("../../models/challenge");
+const Feed = require("../../models/Feed");
 
 router.get("/", async function (req, res, next) {
   console.log("여긴 check");
@@ -33,13 +34,13 @@ router.get("/", async function (req, res, next) {
   } else {
     try {
       const getInfo = await ChallengeStatus.findByUser(req.user.id);
-      //console.log("getInfo", getInfo);
+      console.log("getInfo", getInfo);
       let created = [];
       let participated = [];
       let finished = [];
       let unfinished = [];
       let categoryArr = [];
-
+      let challengeArr = [];
 
       console.log("여긴 챌린지 현황 상태 조회");
       await getInfo.forEach((el) => {
@@ -52,6 +53,9 @@ router.get("/", async function (req, res, next) {
 
       await getInfo.forEach((el) => {
         categoryArr.push(el.category);
+      });
+      await getInfo.forEach((el) => {
+        challengeArr.push(el.challenge_name);
       });
       //console.log("categoryArr", categoryArr);
 
@@ -137,6 +141,12 @@ router.get("/", async function (req, res, next) {
       //console.log('완료: ',finished.length);
       /////////////////////////////////////////////
       const userdata = await User.findByUserId(req.user.id);
+      const feedData = await Feed.find({ userId: req.user.id });
+      //console.log(feedData);
+      //console.log("feedData.category", feedData.category);
+      let feedCategory = await feedData[0].category;
+      let createdAt = await feedData[0].createdAt.toISOString();
+      let feedCreatedAt = await createdAt.substring(0, 10);
 
       const user = {
         nickname: userdata.nickname,
@@ -148,7 +158,13 @@ router.get("/", async function (req, res, next) {
           attend: unfinished.length,
           finish: finished.length,
           create: created.length,
-        }
+        },
+        challengeName: challengeArr,
+        feedData: {
+          feedCategory: feedCategory,
+          feedCreatedAt: feedCreatedAt,
+        },
+
         //month:askdhk
       }
       //console.log(user);

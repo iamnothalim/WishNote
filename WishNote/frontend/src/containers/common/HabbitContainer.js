@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import Habbit from "../../components/common/Habbit";
+import Habbit from "../../components/common/Habit";
 
 const HabbitContainer = (props) => {
 
