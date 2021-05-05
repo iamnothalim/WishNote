@@ -13,14 +13,14 @@ const RegisterContainer = (props) => {
       name: values.Name,
       id: values.Id,
     };
-    dispatch(registerUser(body)).then((response) => {
-      if (response.payload.success) {
-        alert(response.payload.msg);
-        props.history.push("/login");
-      } else {
-        alert(response.payload.msg);
-      }
-    });
+    // dispatch(registerUser(body)).then((response) => {
+    //   if (response.payload.success) {
+    //     alert(response.payload.msg);
+    //     props.history.push("/login");
+    //   } else {
+    //     alert(response.payload.msg);
+    //   }
+    // });
   };
   return <RegisterComponent onSubmitHandler={onSubmitHandler} />;
 };

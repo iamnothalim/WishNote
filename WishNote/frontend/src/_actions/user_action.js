@@ -12,7 +12,7 @@ export function loginUser(dataToSubmit) {
   };
 }
 
-export function logoutUser(){
+export function logoutUser() {
   const request = axios
     .get("/api/auth/logout")
     .then((response) => response.data);

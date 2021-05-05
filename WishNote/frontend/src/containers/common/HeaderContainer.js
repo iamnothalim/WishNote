@@ -40,13 +40,13 @@ const HeaderContainer = (props) => {
   const dispatch = useDispatch();
 
   const onLogout = () => {
-    dispatch(logoutUser()).then((response)=>{
+    dispatch(logoutUser()).then((response) => {
       if (!response.payload.loginSuccess) {
         props.history.push("/login");
       } else {
         alert("로그아웃 하는데 실패 했습니다.");
       }
-    })
+    });
   };
   return <Header user={user} onLogout={onLogout} />;
 };

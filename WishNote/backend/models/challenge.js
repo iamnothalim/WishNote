@@ -57,6 +57,9 @@ const ChallengeSchema = new mongoose.Schema({
   partNum: {
     type: Number,
   },
+  challengeImg: {
+    type: String,
+  },
 });
 
 //인덱스 auto increment 설정

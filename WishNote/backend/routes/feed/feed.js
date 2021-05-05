@@ -43,11 +43,6 @@ router.post("/", async (req, res) => {
         message: e,
       });
     });
-  //   res.send("첼린지 인증 피드 등록 성공");
-  //      catch (e) {
-  //       console.log(e.message);
-  //       res.status(500).send("error on");
-  //     }
 });
 
 ///// 피드 리스트 전체 보기

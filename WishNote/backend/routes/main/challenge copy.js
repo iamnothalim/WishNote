@@ -2,8 +2,7 @@ const Challenge = require("../../models/challenge");
 const ChallengeStatus = require("../../models/challengeStatus");
 const express = require("express");
 const router = express.Router();
-const multer = require('multer');
-const path = require('path');
+
 router.get("/", (req, res) => {
   console.log("챌린지 등록에 들어왔습니다.");
 });
@@ -21,23 +20,9 @@ postman : post =>http://localhost:8001/challenge
     "deposit" : 6000
 }
 */
-//multer setting
-const upload = multer({
-    storage: multer.diskStorage({
-        // set a localstorage destination
-        destination: (req, file, cb) => {
-            cb(null, 'uploads/');
-        },
-        // convert a file name
-        filename: (req, file, cb) => {
-            cb(null, new Date().valueOf() + path.extname(file.originalname));
-        },
-    }),
-});
-
 
 //21.04.25 JE 챌린지 DB 등록
-router.post("/", upload.single('img'),async (req, res) => {
+router.post("/", async (req, res) => {
   console.log("여긴 챌린지 등록");
   const {
     registerId,

@@ -30,6 +30,9 @@ class TopMenu extends React.Component {
         <Menu.Item key="myPage" icon={<UserOutlined />}>
           <Link to="/myPage">마이 페이지</Link>
         </Menu.Item>
+        <Menu.Item key="point" icon={<UserOutlined />}>
+          <Link to="/point">포인트 충전</Link>
+        </Menu.Item>
       </Menu>
     );
   }

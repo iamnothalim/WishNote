@@ -9,7 +9,7 @@ router.post("/", async function (req, res) {
   console.log("이게 차지", charge);
   console.log("이게 id", id);
   try {
-    const user = await User.findByUsername(id);
+    const user = await User.findByUserId(id);
     const userPoint = user.point;
     console.log(userPoint);
 
