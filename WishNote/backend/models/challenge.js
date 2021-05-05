@@ -24,11 +24,6 @@ const ChallengeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  //인증 방법(text)
-  howTo: {
-    type: String,
-    required: true,
-  },
   //인증 횟수
   howMany: {
     type: Number,
@@ -58,6 +53,9 @@ const ChallengeSchema = new mongoose.Schema({
     type: Number,
   },
   challengeImg: {
+    type: String,
+  },
+  description: {
     type: String,
   },
 });

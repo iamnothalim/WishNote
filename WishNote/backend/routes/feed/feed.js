@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Feed = require("../../models/Feed");
-const FeedComment = require("../../models/feedComment");
+const FeedComment = require("../../models/FeedComment");
 
 //21.04.25 피드 DB등록
 
@@ -109,6 +109,7 @@ router.put("/:post_id", async function (req, res, next) {
 // 피드 상세보기
 router.get("/:post_id", function (req, res, next) {
   const postId = req.params.post_id;
+  console.log('tlqkf',postId)
 
   Feed.findOne({ _id: postId })
     .then((feed) => {

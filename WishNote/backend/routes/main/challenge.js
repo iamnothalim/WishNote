@@ -37,50 +37,56 @@ const upload = multer({
 
 
 //21.04.25 JE 챌린지 DB 등록
-router.post("/", upload.single('img'),async (req, res) => {
+router.post("/", upload.single('challengeImg'),async (req, res) => {
   console.log("여긴 챌린지 등록");
   const {
-    registerId,
+    //registerId,
     category,
     challengeName,
-    howTo,
+    //howTo,
     howMany,
     startDate,
     finishDate,
     deposit,
+    description,
   } = req.body;
+  console.log(deposit);
+  console.log(parseInt(howMany));
+  console.log(req.body);
+  console.log(req.user.id);
+  console.log(req.file.filename);
   try {
     //등록된 챌린지인지 확인
     const exists = await Challenge.findByChallengeName(challengeName);
     if (exists) {
       return res
-        .status(400)
-        .json({ error: [{ msg: "That challenge already exists" }] });
+        .json({ success:false , msg: "That challenge already exists"});
     }
     console.log("챌린지 디비 등록 들어옴");
     const challenge = new Challenge({
-      registerId,
+      registerId:req.user.id,
       category,
       challengeName,
-      howTo,
-      howMany,
+      howMany:parseInt(howMany),
       startDate,
       finishDate,
-      deposit,
+      deposit:parseInt(deposit),
+      challengeImg:req.file.filename,
+      description,
     });
     await challenge.save();
 
     //챌린지 현황 업데이트
     const updateChallengeState = new ChallengeStatus({
-      userid: registerId,
+      userid: req.user.id,
       challenge_name: challengeName,
-      creator: registerId,
+      creator: req.user.id,
       challenge_state: 0,
       category: category,
     });
     await updateChallengeState.save();
 
-    res.send("챌린지 등록 성공");
+    res.json({success:true , msg:"챌린지 등록에 성공하셨습니다."});
   } catch (e) {
     console.log(e.message);
     res.status(500).send("server error");

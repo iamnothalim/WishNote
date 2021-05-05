@@ -3,6 +3,7 @@ import React from "react";
 import { withRouter } from "react-router";
 //import { useSelector } from "react-redux";
 import HeaderContainer from "../containers/common/HeaderContainer";
+import MainContainer from "../containers/common/MainContainer";
 import PointContainer from "../containers/point/PointContainer";
 
 function LandingPage() {
@@ -32,8 +33,8 @@ function LandingPage() {
           height: "100vh",
         }}
       >
-        <h2>시작 페이지</h2>
-        {/* <button>로그아웃</button> */}
+        <MainContainer/>
+        {/* <h2>시작 페이지</h2> */}
       </div>
     </>
   );

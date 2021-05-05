@@ -4,15 +4,15 @@ const autoIncrement = require("mongoose-auto-increment");
 autoIncrement.initialize(mongoose.connection);
 
 const feedCommentSchema = new mongoose.Schema({
-  writer :{
+  userId :{
     type:String,
   },
   postId:{
     type:String,
   },
-  // responseTo:{
-  //   type:String,
-  // },
+  responseTo:{
+    type:String,
+  },
   content:{
     type:String,
     required:true,
@@ -24,13 +24,13 @@ const feedCommentSchema = new mongoose.Schema({
 });
 
 feedCommentSchema.plugin(autoIncrement.plugin, {
-  model: "feedComment", //모델명
+  model: "FeedComment", //모델명
   field: "feedIndex", //자동증가할 db컬럼명
   startAt: 1, //시작
   increment: 1, // 증가
 });
 
-const feedComment = mongoose.model("feedComment", feedCommentSchema);
-module.exports = feedComment;
+const FeedComment = mongoose.model("FeedComment", feedCommentSchema);
+module.exports = FeedComment;
 
 

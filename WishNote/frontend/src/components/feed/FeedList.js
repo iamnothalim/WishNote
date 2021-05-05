@@ -9,6 +9,7 @@ const { Meta } = Card;
 function FeedList() {
   const [feeds, setFeeds] = useState([
     {
+      _id: "",
       userId: "",
       title: "",
       description: "",
@@ -20,7 +21,9 @@ function FeedList() {
 
   useEffect(async () => {
     const res = await axios.get("/api/feed/feed/getFeeds");
+    // console.log("res ==> ",res)
     const data = res.data.data.map((data) => ({
+      _id: data._id,
       userId: data.userId,
       title: data.title,
       description: data.description,
@@ -28,6 +31,7 @@ function FeedList() {
       views: data.views,
       image: data.image,
     }));
+    // console.log("data ==> ",data)
     setFeeds(feeds.concat(data));
   }, []);
 
@@ -38,7 +42,6 @@ function FeedList() {
         {" "}
         챌린지 인증
       </Title>
-
       <hr />
       {feeds.map((feed) => (
         <Link to="/api/feed/:feedId">
@@ -63,8 +66,7 @@ function FeedList() {
           </div>
         </Link>
       ))}
-
-      {/* <Row gutter={16}>{renderCards}</Row> */}
+      {/* <Row gutter={16}>{renderCards}</Row> */}1
     </div>
   );
 }
