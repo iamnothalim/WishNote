@@ -5,6 +5,7 @@ import { withRouter } from "react-router";
  const FeedDetailPage = () => {
     return (
         <div>
+            <HeaderContainer/>
             <DetailFeedPage/>
         </div>
     )

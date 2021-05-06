@@ -10,16 +10,28 @@ const  FeedComment  = require("../../models/FeedComment");
 
 
 router.post("/saveFeedComment", (req, res) => {
-
-    const feedComment = new FeedComment(req.body)
+    // console.log(req.body);
+    const {content,userId,postId,createdAt}=req.body;
+    const feedComment = new FeedComment({
+        content,
+        userId,
+        postId,
+        createdAt,
+    })
 
     feedComment.save((err, feedComment) => {
-        if (err) return res.json({ success: false, err })
-
+        if (err){
+            console.log('이건 이거다잉ㅇ')
+            return res.json({ success: false, err })
+        } 
+        // console.log('요건 뭘까용',feedComment._id.toString())
         FeedComment.find({ '_id': feedComment._id })
-            .populate('userId')
+            .populate('postId')
             .exec((err, result) => {
-                if (err) return res.json({ success: false, err })
+                if (err){
+                    // console.log(err)
+                    return res.json({ success: false, err })
+                } 
                 return res.status(200).json({ success: true, result })
             })
     })

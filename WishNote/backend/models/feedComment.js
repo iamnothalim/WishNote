@@ -1,5 +1,6 @@
 //21.04.26  챌린지 인증 피드 데이터 베이스 스키마 작성
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 const autoIncrement = require("mongoose-auto-increment");
 autoIncrement.initialize(mongoose.connection);
 
@@ -16,12 +17,8 @@ const feedCommentSchema = new mongoose.Schema({
   content:{
     type:String,
     required:true,
-  },
-  commentTime:{
-    type:Date,
-    default: Date.now(),
   }
-});
+}, { timestamps: true });
 
 feedCommentSchema.plugin(autoIncrement.plugin, {
   model: "FeedComment", //모델명

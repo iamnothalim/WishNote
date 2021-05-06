@@ -53,37 +53,38 @@ router.post("/uploadFeed",upload.single('image'), async (req, res) => {
   //   challengeName,s
   // });
 
-  // const feed = new Feed();
-  // console.log("feeasdasdd");
+  const feed = new Feed();
 
-  // feed.userId = userId;
-  // feed.description = description;
-  // feed.title = title;
-  // feed.category = category;
-  // feed.image = image;
+  feed.userId = userId;
+  feed.description = description;
+  feed.title = title;
+  feed.category = category;
+  feed.image = image;
 
-  // console.log(feed);
+  console.log(feed);
 
-  // await feed
-  //   .save()
-  //   .then((feed) => {
-  //     console.log("d");
-  //     res.status(200).json({
-  //       data: feed,
-  //     });
-  //   })
-  //   .catch((e) => {
-  //     console.log(e);
-  //     res.status(500).json({
-  //       message: e,
-  //     });
-  //   });
+  await feed
+    .save()
+    .then((feed) => {
+      console.log("d");
+      res.status(200).json({
+        data: feed,
+      });
+    })
+    .catch((e) => {
+      console.log(e);
+      res.status(500).json({
+        message: e,
+      });
+    });
 });
 
 ///// 피드 리스트 전체 보기
 router.get("/getFeeds", function (req, res, next) {
   Feed.find()
+    .sort({ createdAt: "-1" })
     .then((feed) => {
+      // console.log("feed", feed);
       // console.log('read all 완료');
       res.status(200).json({
         data: feed,
@@ -142,17 +143,23 @@ router.put("/:post_id", async function (req, res, next) {
 });
 
 // 피드 상세보기
-router.get("/:post_id", function (req, res, next) {
-  const postId = req.params.post_id;
-  console.log('tlqkf',postId)
+router.get("/:_id", function (req, res, next) {
+  console.log("디테일 backend");
+  const postId = req.params._id;
+  console.log("tlqkf", postId);
 
   Feed.findOne({ _id: postId })
     .then((feed) => {
       if (!feed) return res.status(404).json({ message: "feed not found" });
+
       // console.log('read detail 완료');
-      res.status(200).json({
-        message: "read detail success",
-        data: feed,
+      FeedComment.find({ postId: postId }).sort({ updatedAt: "-1" }).then((comment) => {
+
+        res.status(200).json({
+          message: "read detail success",
+          data: feed,
+          comment:comment
+        });
       });
     })
     .catch((err) => {
@@ -188,13 +195,13 @@ router.delete("/:post_id", function (req, res, next) {
 router.post("/feedComment/:postId", async (req, res) => {
   console.log("req", req.body);
   // console.log("댓글 등록 On");
-  const { writer, content } = req.body;
+  const { userId, content } = req.body;
   // console.log("피드 디비 댓글 등록 on");
   const postId = req.params.postId;
 
   const feedComment = new FeedComment();
 
-  feedComment.writer = writer;
+  feedComment.userId = userId;
   feedComment.postId = postId;
   feedComment.content = content;
 

@@ -26,13 +26,15 @@ const MonthContainer = () => {
     const title = useSelector((state) => ({
       data: state.user.userData.feedData.feedTitle,
     }));
-    const feedCategory = category.data;
-    const feedCreatedAt = createdAt.data;
+    const feedCategory = category;
+    const feedCreatedAt = createdAt;
     const feedTitle = title.data;
 
     let listData;
+    console.log("feedCreatedAt", feedCreatedAt);
 
     feedCreatedAt.forEach((el, index) => {
+      console.log("el", el);
       switch (value.format("YYYY-MM-DD")) {
         case el:
           listData = [

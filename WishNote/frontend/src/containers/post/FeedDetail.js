@@ -1,10 +1,11 @@
 import React from 'react'
 import HeaderContainer from "../../containers/common/HeaderContainer";
 import { withRouter } from "react-router";
+import TopMenu from '../../components/antd/TopMenu';
 const FeedDetail = () => {
     return (
         <div>
-            <HeaderContainer/>
+            <TopMenu/>
             <FeedDetail/>
         </div>
     )
