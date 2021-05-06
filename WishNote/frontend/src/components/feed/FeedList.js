@@ -47,14 +47,7 @@ function FeedList() {
         <Link to={`/feed/${feed._id}`}>
           <div style={{ display: "inline-block", marginLeft: "20px" }}>
             <div>
-              <img
-                src={feed.image}
-                style={{
-                  maxHeight: "250px",
-                  maxWidth: "250px",
-                  minHeight: "250px",
-                }}
-              />
+              <img width={272} alt="logo" src={`/api/${item.challengeImg}`} />
             </div>
             <div style={{ fontSize: "20px", fontWeight: "bold" }}>
               {feed.title}
