@@ -22,9 +22,10 @@ router.get("/", async function (req, res, next) {
           creator: challengeInfo[i].registerId,
           description: challengeInfo[i].description,
           challengeImg: challengeInfo[i].challengeImg,
+          deposit:challengeInfo[i].deposit,
         });
       }
-      console.log(listData);
+      //console.log(listData);
 
       res.json({ id: null, listData: listData });
     } catch (e) {
@@ -147,6 +148,21 @@ router.get("/", async function (req, res, next) {
       let createdAt = await feedData[0].createdAt.toISOString();
       let feedCreatedAt = await createdAt.substring(0, 10);
 
+      //challenge 데이터들 불러오기
+      const challengeInfo = await Challenge.find();
+      //console.log(challengeInfo);
+      const listData = [];
+      for (let i = 0; i < challengeInfo.length; i++) {
+        listData.push({
+          herf: "/",
+          challengeName: challengeInfo[i].challengeName,
+          creator: challengeInfo[i].registerId,
+          description: challengeInfo[i].description,
+          challengeImg: challengeInfo[i].challengeImg,
+          deposit:challengeInfo[i].deposit,
+        });
+      }
+
       const user = {
         nickname: userdata.nickname,
         name: userdata.name,
@@ -163,7 +179,7 @@ router.get("/", async function (req, res, next) {
           feedCategory: feedCategory,
           feedCreatedAt: feedCreatedAt,
         },
-
+        listData: listData
         //month:askdhk
       };
       //console.log(user);

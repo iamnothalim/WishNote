@@ -1,4 +1,5 @@
 const express = require("express");
+const Challenge = require("../../models/challenge");
 const router = express.Router();
 const ChallengeStatus = require("../../models/challengeStatus");
 const User = require("../../models/user");
@@ -147,6 +148,7 @@ router.post("/participate", async function (req, res) {
         .status(400)
         .json({ error: [{ msg: "That challenge already participated" }] });
     }
+    const challengeInfo = await Challenge.findByChallengeName()
     const createChallengeState = new ChallengeStatus({
       userid: userid,
       // challenge_name: challengename,

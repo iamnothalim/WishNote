@@ -1,6 +1,7 @@
 import React from 'react';
-import { List, Space } from 'antd';
+import { Button, List, Space,Form ,Input} from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
 
 // const listData = [];
@@ -23,8 +24,9 @@ const IconText = ({ icon, text }) => (
         {text}
     </Space>
 );
-const ChallengeComponent = ({listData}) => {
+const ChallengeComponent = ({listData,onClickHandler}) => {
     return (
+        <Form onFinish={onClickHandler}>
         <List
             itemLayout="vertical"
             size="large"
@@ -32,17 +34,17 @@ const ChallengeComponent = ({listData}) => {
                 onChange: page => {
                     console.log(page);
                 },
-                pageSize: 3,
+                pageSize: 2,
             }}
             dataSource={listData}
             renderItem={item => (
                 <List.Item
                     key={item.challengeName}
-                    actions={[
-                        <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />,
-                        <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
-                        <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
-                    ]}
+                    // actions={[
+                    //     <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />,
+                    //     <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
+                    //     <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
+                    // ]}
                     extra={
                         <img
                             width={272}
@@ -52,13 +54,17 @@ const ChallengeComponent = ({listData}) => {
                     }
                 >
                     <List.Item.Meta
-                        title={<a href={item.href}>{item.challengeName}</a>}
+                        // title={<a href={item.href}>{item.challengeName}</a>}
+                        title={<p>*{item.challengeName}*</p> }
                         description={item.creator}
                     />
-                    {item.description}
+                    <p>비용: {item.deposit}원</p>
+                    <p>설명: {item.description}</p>
+                    <Input name="와다다댕댕댕">참가하기</Input>
                 </List.Item>
             )}
         />
+        </Form>
     )
 };
 
