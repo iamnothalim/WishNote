@@ -142,17 +142,23 @@ router.put("/:post_id", async function (req, res, next) {
 });
 
 // 피드 상세보기
-router.get("/:post_id", function (req, res, next) {
-  const postId = req.params.post_id;
-  console.log('tlqkf',postId)
+router.get("/:_id", function (req, res, next) {
+  console.log("디테일 backend");
+  const postId = req.params._id;
+  console.log("tlqkf", postId);
 
   Feed.findOne({ _id: postId })
     .then((feed) => {
       if (!feed) return res.status(404).json({ message: "feed not found" });
+
       // console.log('read detail 완료');
-      res.status(200).json({
-        message: "read detail success",
-        data: feed,
+      FeedComment.find({ postId: postId }).sort({ updatedAt: "-1" }).then((comment) => {
+
+        res.status(200).json({
+          message: "read detail success",
+          data: feed,
+          comment:comment
+        });
       });
     })
     .catch((err) => {
@@ -161,6 +167,25 @@ router.get("/:post_id", function (req, res, next) {
       });
     });
 });
+// router.get("/:post_id", function (req, res, next) {
+//   const postId = req.params.post_id;
+//   console.log('tlqkf',postId)
+
+//   Feed.findOne({ _id: postId })
+//     .then((feed) => {
+//       if (!feed) return res.status(404).json({ message: "feed not found" });
+//       // console.log('read detail 완료');
+//       res.status(200).json({
+//         message: "read detail success",
+//         data: feed,
+//       });
+//     })
+//     .catch((err) => {
+//       res.status(500).json({
+//         message: err,
+//       });
+//     });
+// });
 
 // 피드 삭제
 
