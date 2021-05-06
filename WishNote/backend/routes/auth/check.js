@@ -145,10 +145,12 @@ router.get("/", async function (req, res, next) {
 
       let feedCategory = [];
       let feedCreatedAt = [];
+      let feedTitle = [];
       // let createdAt;
       await feedData.forEach((el) => {
         feedCategory.push(el.category);
         feedCreatedAt.push(el.createdAt.toISOString().substring(0, 10));
+        feedTitle.push(el.title);
       });
 
       // let feedCategory = await feedData[0].category;
@@ -170,13 +172,10 @@ router.get("/", async function (req, res, next) {
         feedData: {
           feedCategory: feedCategory,
           feedCreatedAt: feedCreatedAt,
+          feedTitle: feedTitle,
         },
-
         //month:askdhk
       };
-      // console.log("server - feedCategory", feedCategory);
-      // console.log("server - feedCreatedAt", feedCreatedAt);
-      //console.log(user);
       res.json(user);
     } catch (e) {
       console.log(e.message);
@@ -184,5 +183,4 @@ router.get("/", async function (req, res, next) {
     }
   }
 });
-//const user = req.user;
 module.exports = router;

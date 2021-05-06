@@ -23,15 +23,22 @@ const MonthContainer = () => {
     const createdAt = useSelector((state) => ({
       data: state.user.userData.feedData.feedCreatedAt,
     }));
+    const title = useSelector((state) => ({
+      data: state.user.userData.feedData.feedTitle,
+    }));
     const feedCategory = category.data;
     const feedCreatedAt = createdAt.data;
+    const feedTitle = title.data;
 
     let listData;
 
     feedCreatedAt.forEach((el, index) => {
       switch (value.format("YYYY-MM-DD")) {
         case el:
-          listData = [{ type: "warning", content: feedCategory[index] }];
+          listData = [
+            { type: "warning", content: feedCategory[index] },
+            { type: "success", content: feedTitle[index] },
+          ];
           break;
         default:
       }
@@ -44,9 +51,10 @@ const MonthContainer = () => {
     return (
       <ul className="events">
         {listData.map((item) => (
-          <li key={item.content}>
-            <Badge status={item.type} text={item.content} />
-          </li>
+          // <li key={item.content}>
+
+          // </li>
+          <Badge status={item.type} text={item.content} />
         ))}
       </ul>
     );
