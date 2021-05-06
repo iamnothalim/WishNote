@@ -3,50 +3,50 @@ const router = express.Router();
 const Feed = require("../../models/Feed");
 const FeedComment = require("../../models/FeedComment");
 const Challenge = require("../../models/challenge");
-const multer = require('multer');
-const path = require('path');
+const multer = require("multer");
+const path = require("path");
 
 //multer setting
 const upload = multer({
   storage: multer.diskStorage({
-      // set a localstorage destination
-      destination: (req, file, cb) => {
-          cb(null, 'uploads/feed');
-      },
-      // convert a file name
-      filename: (req, file, cb) => {
-          cb(null, new Date().valueOf() + path.extname(file.originalname));
-      },
+    // set a localstorage destination
+    destination: (req, file, cb) => {
+      cb(null, "uploads/feed");
+    },
+    // convert a file name
+    filename: (req, file, cb) => {
+      cb(null, new Date().valueOf() + path.extname(file.originalname));
+    },
   }),
 });
 //21.04.25 피드 DB등록
 
 ///// 인증 피드 작성
-router.post("/uploadFeed",upload.single('image'), async (req, res) => {
+router.post("/uploadFeed", upload.single("image"), async (req, res) => {
   console.log("req", req.body);
-  console.log('id는',req.user.id);
-  console.log('파일은!',req.file.filename);
+  console.log("id는", req.user.id);
+  console.log("파일은!", req.file.filename);
   console.log("피드 등록 On");
   const { userId, description, title } = req.body;
-  console.log(userId, description, title );
+  console.log(userId, description, title);
   try {
-    const challengeInfo =await Challenge.findByChallengeName(title);
-    console.log('요게 카테고리',challengeInfo.category);
+    const challengeInfo = await Challenge.findByChallengeName(title);
+    console.log("요게 카테고리", challengeInfo.category);
     const feed = new Feed({
       userId,
       description,
       title,
-      image:req.file.filename,
-      category:challengeInfo.category,
-    })
+      image: req.file.filename,
+      category: challengeInfo.category,
+    });
     await feed.save();
-    res.json({success:true , msg:"피드 등록에 성공하셨습니다."});
+    res.json({ success: true, msg: "피드 등록에 성공하셨습니다." });
   } catch (e) {
     console.log(e.message);
     res.status(500).send("server error");
   }
   //   try {
-  
+
   // const feed = new Feed({
   //   registerId,
   //   challengeText,
@@ -153,14 +153,15 @@ router.get("/:_id", function (req, res, next) {
       if (!feed) return res.status(404).json({ message: "feed not found" });
 
       // console.log('read detail 완료');
-      FeedComment.find({ postId: postId }).sort({ updatedAt: "-1" }).then((comment) => {
-
-        res.status(200).json({
-          message: "read detail success",
-          data: feed,
-          comment:comment
+      FeedComment.find({ postId: postId })
+        .sort({ updatedAt: "-1" })
+        .then((comment) => {
+          res.status(200).json({
+            message: "read detail success",
+            data: feed,
+            comment: comment,
+          });
         });
-      });
     })
     .catch((err) => {
       res.status(500).json({
@@ -168,6 +169,25 @@ router.get("/:_id", function (req, res, next) {
       });
     });
 });
+// router.get("/:post_id", function (req, res, next) {
+//   const postId = req.params.post_id;
+//   console.log('tlqkf',postId)
+
+//   Feed.findOne({ _id: postId })
+//     .then((feed) => {
+//       if (!feed) return res.status(404).json({ message: "feed not found" });
+//       // console.log('read detail 완료');
+//       res.status(200).json({
+//         message: "read detail success",
+//         data: feed,
+//       });
+//     })
+//     .catch((err) => {
+//       res.status(500).json({
+//         message: err,
+//       });
+//     });
+// });
 
 // 피드 삭제
 

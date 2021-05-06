@@ -8,20 +8,22 @@ const { Title } = Typography;
 const { Meta } = Card;
 
 function FeedList() {
-  const [feeds, setFeeds] = useState([
-    {
-      _id: "",
-      userId: "",
-      title: "",
-      description: "",
-      category: "",
-      views: "",
-      image: "",
-    },
-  ]);
+  // const [feeds, setFeeds] = useState([
+  //   {
+  //     _id: "",
+  //     userId: "",
+  //     title: "",
+  //     description: "",
+  //     category: "",
+  //     views: "",
+  //     image: "",
+  //   },
+  // ]);
+  const [feeds, setFeeds] = useState([]);
+
   useEffect(async () => {
     const res = await axios.get("/api/feed/getFeeds");
-    // console.log("res ==> ",res)
+    console.log("res ==> ", res);
     const data = res.data.data.map((data) => ({
       _id: data._id,
       userId: data.userId,
@@ -43,11 +45,18 @@ function FeedList() {
         챌린지 인증
       </Title>
       <hr />
-      {feeds.map((feed) => {
+      {feeds.map((feed) => (
         <Link to={`/feed/${feed._id}`}>
           <div style={{ display: "inline-block", marginLeft: "20px" }}>
             <div>
-              <img width={272} alt="logo" src={`/api/${item.challengeImg}`} />
+              <img
+                src={`/api/feed/${feed.image}`}
+                style={{
+                  maxHeight: "250px",
+                  maxWidth: "250px",
+                  minHeight: "250px",
+                }}
+              />
             </div>
             <div style={{ fontSize: "20px", fontWeight: "bold" }}>
               {feed.title}
@@ -57,9 +66,8 @@ function FeedList() {
             {/* <div>{feed.category} </div> */}
             {/* <div>{feed.views}</div> */}
           </div>
-        </Link>;
-      })}
-      {/* <Row gutter={16}>{renderCards}</Row> */}
+        </Link>
+      ))}
     </div>
   );
 }
