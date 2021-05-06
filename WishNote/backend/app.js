@@ -42,7 +42,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(jwtMiddleware);
-app.use("/api",express.static(path.join(__dirname, "uploads")));
+app.use("/api", express.static(path.join(__dirname, "uploads")));
 //app.use("/api",express.static(path.join(__dirname, "uploads")));
 //app.use(express.static('/api/uploads'));
 
@@ -51,7 +51,7 @@ app.use("/api", mainRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/feed", feedRouter);
 app.use("/api/challenge", challengeRouter);
-app.use("/api/feedComment", require('./routes/feed/feedComment'))
+app.use("/api/feedComment", require("./routes/feed/feedComment"));
 //proxyTest
 //app.get('/api/hello',(req,res)=>{res.send("안녕 이건 프록시 테스트")});
 

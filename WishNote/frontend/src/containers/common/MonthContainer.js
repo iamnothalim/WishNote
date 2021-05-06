@@ -15,44 +15,32 @@ import { Calendar, Badge } from "antd";
 */
 /////////////////////////
 
-const MonthContainer = (props) => {
-  const feedCategory = useSelector((state) => ({
-    feedCategory: state.user.userData.feedData.feedCategory,
-  }));
-
-  const feedCreatedAt = useSelector((state) => ({
-    data: state.user.userData.feedData.feedCreatedAt,
-  }));
-  console.log("와다닫댕", feedCreatedAt);
-
+const MonthContainer = () => {
   function GetListData(value) {
-    // const dispatch = useDispatch();
-    // const [feedCategory, setFeedCategory] = useState("");
-    // const [feedCreatedAt, setFeedCreatedAt] = useState("");
+    const category = useSelector((state) => ({
+      data: state.user.userData.feedData.feedCategory,
+    }));
+    const createdAt = useSelector((state) => ({
+      data: state.user.userData.feedData.feedCreatedAt,
+    }));
+    const feedCategory = category.data;
+    const feedCreatedAt = createdAt.data;
 
-    // useEffect(() => {
-    //   dispatch(auth()).then((response) => {
-    //     setFeedCategory(response.payload.feedData.feedCategory);
-    //     setFeedCreatedAt(response.payload.feedData.feedCreatedAt);
-    //   });
-    // }, []);
-    ///////////
     let listData;
-    // console.log("feedCategory", feedCategory);
-    // console.log("feedCreatedAt", feedCreatedAt);
-    switch (value.format("YYYY-MM-DD")) {
-      case feedCreatedAt:
-        listData = [{ type: "warning", content: feedCategory }];
-        break;
-      default:
-        console.log("아무데도 들어가지 않는당");
-    }
+
+    feedCreatedAt.forEach((el, index) => {
+      switch (value.format("YYYY-MM-DD")) {
+        case el:
+          listData = [{ type: "warning", content: feedCategory[index] }];
+          break;
+        default:
+      }
+    });
     return listData || [];
   }
-
+  //////
   function dateCellRender(value) {
-    const listData = GetListData(value);
-    console.log(listData);
+    let listData = GetListData(value);
     return (
       <ul className="events">
         {listData.map((item) => (
@@ -63,29 +51,7 @@ const MonthContainer = (props) => {
       </ul>
     );
   }
-
-  function getMonthData(value) {
-    if (value.month() === 8) {
-      return 1394;
-    }
-  }
-
-  function monthCellRender(value) {
-    const num = getMonthData(value);
-    return num ? (
-      <div className="notes-month">
-        <section>{num}</section>
-        <span>Backlog number</span>
-      </div>
-    ) : null;
-  }
-
-  return (
-    <Calendar
-      dateCellRender={dateCellRender}
-      monthCellRender={monthCellRender}
-    />
-  );
+  return <Calendar dateCellRender={dateCellRender} />;
 };
 
-export default withRouter(MonthContainer);
+export default MonthContainer;

@@ -34,7 +34,7 @@ router.get("/", async function (req, res, next) {
   } else {
     try {
       const getInfo = await ChallengeStatus.findByUser(req.user.id);
-      console.log("getInfo", getInfo);
+      // console.log("getInfo", getInfo);
       let created = [];
       let participated = [];
       let finished = [];
@@ -124,7 +124,7 @@ router.get("/", async function (req, res, next) {
           }
         });
       });
-      console.log("여긴 바깥", radarData);
+      // console.log("여긴 바깥", radarData);
 
       //{ hobby: 2, relationship: 1, performance: 1, asset: 0, health: 0 }
 
@@ -142,10 +142,18 @@ router.get("/", async function (req, res, next) {
       const userdata = await User.findByUserId(req.user.id);
       const feedData = await Feed.find({ userId: req.user.id });
       //console.log(feedData);
-      //console.log("feedData.category", feedData.category);
-      let feedCategory = await feedData[0].category;
-      let createdAt = await feedData[0].createdAt.toISOString();
-      let feedCreatedAt = await createdAt.substring(0, 10);
+
+      let feedCategory = [];
+      let feedCreatedAt = [];
+      // let createdAt;
+      await feedData.forEach((el) => {
+        feedCategory.push(el.category);
+        feedCreatedAt.push(el.createdAt.toISOString().substring(0, 10));
+      });
+
+      // let feedCategory = await feedData[0].category;
+      // let createdAt = await feedData[0].createdAt.toISOString();
+      //let feedCreatedAt = await createdAt.substring(0, 10);
 
       const user = {
         nickname: userdata.nickname,
@@ -166,6 +174,8 @@ router.get("/", async function (req, res, next) {
 
         //month:askdhk
       };
+      // console.log("server - feedCategory", feedCategory);
+      // console.log("server - feedCreatedAt", feedCreatedAt);
       //console.log(user);
       res.json(user);
     } catch (e) {
