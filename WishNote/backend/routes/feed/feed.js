@@ -19,7 +19,6 @@ router.post("/", async (req, res) => {
   // });
 
   const feed = new Feed();
-  console.log("feeasdasdd");
 
   feed.userId = userId;
   feed.description = description;
@@ -50,7 +49,7 @@ router.get("/getFeeds", function (req, res, next) {
   Feed.find()
     .sort({ createdAt: "-1" })
     .then((feed) => {
-      console.log('feed',feed);
+      // console.log("feed", feed);
       // console.log('read all 완료');
       res.status(200).json({
         data: feed,
@@ -117,10 +116,15 @@ router.get("/:_id", function (req, res, next) {
   Feed.findOne({ _id: postId })
     .then((feed) => {
       if (!feed) return res.status(404).json({ message: "feed not found" });
+
       // console.log('read detail 완료');
-      res.status(200).json({
-        message: "read detail success",
-        data: feed,
+      FeedComment.find({ postId: postId }).sort({ updatedAt: "-1" }).then((comment) => {
+
+        res.status(200).json({
+          message: "read detail success",
+          data: feed,
+          comment:comment
+        });
       });
     })
     .catch((err) => {
@@ -156,13 +160,13 @@ router.delete("/:post_id", function (req, res, next) {
 router.post("/feedComment/:postId", async (req, res) => {
   console.log("req", req.body);
   // console.log("댓글 등록 On");
-  const { writer, content } = req.body;
+  const { userId, content } = req.body;
   // console.log("피드 디비 댓글 등록 on");
   const postId = req.params.postId;
 
   const feedComment = new FeedComment();
 
-  feedComment.writer = writer;
+  feedComment.userId = userId;
   feedComment.postId = postId;
   feedComment.content = content;
 
