@@ -2,16 +2,51 @@ const express = require("express");
 const router = express.Router();
 const Feed = require("../../models/Feed");
 const FeedComment = require("../../models/FeedComment");
+const Challenge = require("../../models/challenge");
+const multer = require('multer');
+const path = require('path');
 
+//multer setting
+const upload = multer({
+  storage: multer.diskStorage({
+      // set a localstorage destination
+      destination: (req, file, cb) => {
+          cb(null, 'uploads/feed');
+      },
+      // convert a file name
+      filename: (req, file, cb) => {
+          cb(null, new Date().valueOf() + path.extname(file.originalname));
+      },
+  }),
+});
 //21.04.25 피드 DB등록
 
 ///// 인증 피드 작성
-router.post("/", async (req, res) => {
+router.post("/uploadFeed",upload.single('image'), async (req, res) => {
   console.log("req", req.body);
+  console.log('id는',req.user.id);
+  console.log('파일은!',req.file.filename);
   console.log("피드 등록 On");
-  const { userId, description, title, image, category } = req.body;
+  const { userId, description, title } = req.body;
+  console.log(userId, description, title );
+  try {
+    const challengeInfo =await Challenge.findByChallengeName(title);
+    console.log('요게 카테고리',challengeInfo.category);
+    const feed = new Feed({
+      userId,
+      description,
+      title,
+      image:req.file.filename,
+      category:challengeInfo.category,
+    })
+    await feed.save();
+    res.json({success:true , msg:"피드 등록에 성공하셨습니다."});
+  } catch (e) {
+    console.log(e.message);
+    res.status(500).send("server error");
+  }
   //   try {
-  console.log("피드 디비 등록 on");
+  
   // const feed = new Feed({
   //   registerId,
   //   challengeText,
