@@ -16,7 +16,7 @@ function FeedUploadPage(props) {
   }));
   const [FeedTitle, setFeedTitle] = useState("");
   const [Description, setDescription] = useState("");
-  const [Categories, setCategories] = useState("health ");
+  const [Categories, setCategories] = useState(user.challengename[0]);
   const [FilePath, setFilePath] = useState("");
   // const [Duration, setDuration] = useState("")
   // const [Thumbnail, setThumbnail] = useState("")

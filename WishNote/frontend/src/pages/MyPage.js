@@ -20,7 +20,7 @@ const MyPage = () => {
       <locationBlock>
         <HeaderContainer />
         <HabitContainer />
-        {/* <MonthContainer /> */}
+        <MonthContainer />
       </locationBlock>
     </div>
   );

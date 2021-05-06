@@ -159,10 +159,17 @@ router.get("/", async function (req, res, next) {
       const feedData = await Feed.find({ userId: req.user.id });
       console.log("이게 피드", feedData);
       if (!feedData.length == 0) {
+        let feedCategory = [];
+        let feedTitle = [];
+        let feedCreatedAt = [];
         //console.log("feedData.category", feedData.category);
-        let feedCategory = await feedData[0].category;
-        let createdAt = await feedData[0].createdAt.toISOString();
-        let feedCreatedAt = await createdAt.substring(0, 10);
+        feedData.forEach((el) => {
+          feedCategory.push(el.category);
+          feedTitle.push(el.title);
+          feedCreatedAt.push(el.createdAt.toISOString().substring(0, 10));
+        });
+        console.log("feedCategory", feedCategory);
+        console.log("feedCreatedAt", feedCreatedAt);
         const user = {
           nickname: userdata.nickname,
           name: userdata.name,
@@ -178,6 +185,7 @@ router.get("/", async function (req, res, next) {
           feedData: {
             feedCategory: feedCategory,
             feedCreatedAt: feedCreatedAt,
+            feedTitle: feedTitle,
           },
           listData: listData,
           //month:askdhk
