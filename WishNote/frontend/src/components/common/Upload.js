@@ -71,6 +71,7 @@
 import React from "react";
 import { Upload, message, Button } from "antd";
 import Icon from "@ant-design/icons";
+import CenterBlock from "../../components/common/Center";
 const props = {
   name: "img",
   action: "/api/upload",
@@ -91,11 +92,13 @@ const props = {
 
 const Uploadfile = () => {
   return (
-    <Upload {...props}>
-      <Button>
-        <Icon type="upload" /> Click to Upload
-      </Button>
-    </Upload>
+    <CenterBlock>
+      <Upload {...props}>
+        <Button>
+          <Icon type="upload" /> Click to Upload
+        </Button>
+      </Upload>
+    </CenterBlock>
   );
 };
 

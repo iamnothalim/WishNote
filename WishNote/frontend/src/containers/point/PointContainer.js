@@ -2,6 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ChargePoint from "../../components/point/ChargePoint";
 import Upload from "../../components/common/Upload";
+import HeaderContainer from "../../containers/common/HeaderContainer";
+import CenterBlock from "../../components/common/Center";
 import { charge } from "../../_actions/user_action";
 
 const PointContainer = (props) => {
@@ -20,6 +22,7 @@ const PointContainer = (props) => {
 
   return (
     <div>
+      <HeaderContainer />
       <ChargePoint onSubmitHandler={onSubmitHandler} userdata={userdata} />
       <Upload />
     </div>

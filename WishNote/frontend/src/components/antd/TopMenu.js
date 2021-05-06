@@ -1,6 +1,12 @@
 import React from "react";
 import { Menu } from "antd";
-import { CameraOutlined, UserOutlined, FormOutlined , PlusSquareOutlined } from "@ant-design/icons";
+import {
+  CameraOutlined,
+  UserOutlined,
+  FormOutlined,
+  PlusSquareOutlined,
+  DollarCircleOutlined,
+} from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
 class TopMenu extends React.Component {
@@ -22,18 +28,18 @@ class TopMenu extends React.Component {
         mode="horizontal"
       >
         <Menu.Item key="feed" icon={<CameraOutlined />}>
-         <Link to="/feedListView">인증 게시판 </Link>
+          <Link to="/feedListView">인증 게시판 </Link>
         </Menu.Item>
-        <Menu.Item key="feedList" icon={<PlusSquareOutlined/>}>
+        <Menu.Item key="feedList" icon={<PlusSquareOutlined />}>
           <Link to="/feed/upload">인증 등록</Link>
         </Menu.Item>
         <Menu.Item key="challenge" icon={<FormOutlined />}>
-          <Link to="/createChallenge">챌린지 등록</Link> 
+          <Link to="/createChallenge">챌린지 등록</Link>
         </Menu.Item>
         <Menu.Item key="myPage" icon={<UserOutlined />}>
           <Link to="/myPage">마이 페이지</Link>
         </Menu.Item>
-        <Menu.Item key="point" icon={<UserOutlined />}>
+        <Menu.Item key="point" icon={<DollarCircleOutlined />}>
           <Link to="/point">포인트 충전</Link>
         </Menu.Item>
       </Menu>
