@@ -22,9 +22,10 @@ router.get("/", async function (req, res, next) {
           creator: challengeInfo[i].registerId,
           description: challengeInfo[i].description,
           challengeImg: challengeInfo[i].challengeImg,
+          deposit: challengeInfo[i].deposit,
         });
       }
-      console.log(listData);
+      //console.log(listData);
 
       res.json({ id: null, listData: listData });
     } catch (e) {
@@ -140,43 +141,71 @@ router.get("/", async function (req, res, next) {
       //console.log('완료: ',finished.length);
       /////////////////////////////////////////////
       const userdata = await User.findByUserId(req.user.id);
+      //console.log(userdata);
+      //challenge 데이터들 불러오기
+      const challengeInfo = await Challenge.find();
+      //console.log(challengeInfo);
+      const listData = [];
+      for (let i = 0; i < challengeInfo.length; i++) {
+        listData.push({
+          herf: "/",
+          challengeName: challengeInfo[i].challengeName,
+          creator: challengeInfo[i].registerId,
+          description: challengeInfo[i].description,
+          challengeImg: challengeInfo[i].challengeImg,
+          deposit: challengeInfo[i].deposit,
+        });
+      }
       const feedData = await Feed.find({ userId: req.user.id });
-      //console.log(feedData);
-
-      let feedCategory = [];
-      let feedCreatedAt = [];
-      let feedTitle = [];
-      // let createdAt;
-      await feedData.forEach((el) => {
-        feedCategory.push(el.category);
-        feedCreatedAt.push(el.createdAt.toISOString().substring(0, 10));
-        feedTitle.push(el.title);
-      });
-
-      // let feedCategory = await feedData[0].category;
-      // let createdAt = await feedData[0].createdAt.toISOString();
-      //let feedCreatedAt = await createdAt.substring(0, 10);
-
-      const user = {
-        nickname: userdata.nickname,
-        name: userdata.name,
-        id: userdata.id,
-        point: userdata.point,
-        habbit: radarData,
-        challengeState: {
-          attend: unfinished.length,
-          finish: finished.length,
-          create: created.length,
-        },
-        challengeName: challengeArr,
-        feedData: {
-          feedCategory: feedCategory,
-          feedCreatedAt: feedCreatedAt,
-          feedTitle: feedTitle,
-        },
-        //month:askdhk
-      };
-      res.json(user);
+      console.log("이게 피드", feedData);
+      if (!feedData.length == 0) {
+        //console.log("feedData.category", feedData.category);
+        let feedCategory = await feedData[0].category;
+        let createdAt = await feedData[0].createdAt.toISOString();
+        let feedCreatedAt = await createdAt.substring(0, 10);
+        const user = {
+          nickname: userdata.nickname,
+          name: userdata.name,
+          id: userdata.id,
+          point: userdata.point,
+          habbit: radarData,
+          challengeState: {
+            attend: unfinished.length,
+            finish: finished.length,
+            create: created.length,
+          },
+          challengeName: challengeArr,
+          feedData: {
+            feedCategory: feedCategory,
+            feedCreatedAt: feedCreatedAt,
+          },
+          listData: listData,
+          //month:askdhk
+        };
+        res.json(user);
+      } else {
+        const user = {
+          nickname: userdata.nickname,
+          name: userdata.name,
+          id: userdata.id,
+          point: userdata.point,
+          habbit: radarData,
+          challengeState: {
+            attend: unfinished.length,
+            finish: finished.length,
+            create: created.length,
+          },
+          challengeName: challengeArr,
+          // feedData: {
+          //   feedCategory: feedCategory,
+          //   feedCreatedAt: feedCreatedAt,
+          // },
+          listData: listData,
+          //month:askdhk
+        };
+        res.json(user);
+      }
+      //console.log(user);
     } catch (e) {
       console.log(e.message);
       res.status(500).send("Server Error");

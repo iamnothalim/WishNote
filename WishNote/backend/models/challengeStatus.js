@@ -10,7 +10,7 @@ const ChallengeStatusSchema = new mongoose.Schema({
 
 //스태틱 메서드 함수 추가
 ChallengeStatusSchema.statics.findByChallengeName = function (challenge_name) {
-  return this.findOne({ challenge_name });
+  return this.find({ challenge_name });
 };
 ChallengeStatusSchema.statics.findByUser = function (userid) {
   return this.find({ userid });
