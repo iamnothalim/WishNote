@@ -46,6 +46,7 @@ const ChallengeComponent = ({listData,onClickHandler}) => {
                     //     <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
                     // ]}
                     extra={
+                        
                         <img
                             width={272}
                             alt="logo"
@@ -55,12 +56,12 @@ const ChallengeComponent = ({listData,onClickHandler}) => {
                 >
                     <List.Item.Meta
                         // title={<a href={item.href}>{item.challengeName}</a>}
-                        title={<p>*{item.challengeName}*</p> }
+                        title={<a onClick={onClickHandler}>*{item.challengeName}*</a> }
                         description={item.creator}
                     />
                     <p>비용: {item.deposit}원</p>
                     <p>설명: {item.description}</p>
-                    <Input name="와다다댕댕댕">참가하기</Input>
+                    {/* <Input name="와다다댕댕댕">참가하기</Input> */}
                 </List.Item>
             )}
         />

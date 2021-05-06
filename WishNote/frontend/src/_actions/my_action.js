@@ -25,9 +25,9 @@ export function createChallenge(dataToSubmit){
   };
 }
 
-export function participateChallenge(){
+export function participateChallenge(challengeName){
   const request = axios
-    .post("/api/challenge/participate")
+    .post("/api/challenge/state/participate",challengeName)
     .then((response) => response.data);
 
   return {

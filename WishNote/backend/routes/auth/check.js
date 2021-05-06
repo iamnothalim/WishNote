@@ -141,13 +141,7 @@ router.get("/", async function (req, res, next) {
       //console.log('완료: ',finished.length);
       /////////////////////////////////////////////
       const userdata = await User.findByUserId(req.user.id);
-      const feedData = await Feed.find({ userId: req.user.id });
-      //console.log(feedData);
-      //console.log("feedData.category", feedData.category);
-      let feedCategory = await feedData[0].category;
-      let createdAt = await feedData[0].createdAt.toISOString();
-      let feedCreatedAt = await createdAt.substring(0, 10);
-
+      //console.log(userdata);
       //challenge 데이터들 불러오기
       const challengeInfo = await Challenge.find();
       //console.log(challengeInfo);
@@ -162,28 +156,57 @@ router.get("/", async function (req, res, next) {
           deposit:challengeInfo[i].deposit,
         });
       }
-
-      const user = {
-        nickname: userdata.nickname,
-        name: userdata.name,
-        id: userdata.id,
-        point: userdata.point,
-        habbit: radarData,
-        challengeState: {
-          attend: unfinished.length,
-          finish: finished.length,
-          create: created.length,
-        },
-        challengeName: challengeArr,
-        feedData: {
-          feedCategory: feedCategory,
-          feedCreatedAt: feedCreatedAt,
-        },
-        listData: listData
-        //month:askdhk
-      };
+      const feedData = await Feed.find({ userId: req.user.id });
+      console.log('이게 피드',feedData);
+      if(!feedData.length==0){
+        //console.log("feedData.category", feedData.category);
+        let feedCategory = await feedData[0].category;
+        let createdAt = await feedData[0].createdAt.toISOString();
+        let feedCreatedAt = await createdAt.substring(0, 10);
+        const user = {
+          nickname: userdata.nickname,
+          name: userdata.name,
+          id: userdata.id,
+          point: userdata.point,
+          habbit: radarData,
+          challengeState: {
+            attend: unfinished.length,
+            finish: finished.length,
+            create: created.length,
+          },
+          challengeName: challengeArr,
+          feedData: {
+            feedCategory: feedCategory,
+            feedCreatedAt: feedCreatedAt,
+          },
+          listData: listData
+          //month:askdhk
+        };
+        res.json(user);
+      }else{
+        const user = {
+          nickname: userdata.nickname,
+          name: userdata.name,
+          id: userdata.id,
+          point: userdata.point,
+          habbit: radarData,
+          challengeState: {
+            attend: unfinished.length,
+            finish: finished.length,
+            create: created.length,
+          },
+          challengeName: challengeArr,
+          // feedData: {
+          //   feedCategory: feedCategory,
+          //   feedCreatedAt: feedCreatedAt,
+          // },
+          listData: listData
+          //month:askdhk
+        };
+        res.json(user);
+      }
       //console.log(user);
-      res.json(user);
+      
     } catch (e) {
       console.log(e.message);
       res.status(500).send("Server Error");

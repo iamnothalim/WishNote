@@ -12,15 +12,20 @@ const MainContainer = (props) => {
         listData: state.user.userData.listData,
     }))
     const onClickHandler = (e)=>{
-        console.log('이게 밸류',e);
-        // dispatch(participateChallenge()).then((response) => {
-        //     if (response.payload.success) {
-        //         alert(response.payload.msg);
-        //         props.history.push("/");
-        //     } else {
-        //         alert(response.payload.msg);
-        //     }
-        // })
+        alert("이 챌린지에 참가하시겠습니까?")
+        const challengeName = e.target.innerHTML.split('*')[1];
+        console.log(challengeName);
+        const body = {
+            challengeName:challengeName,
+        }
+        dispatch(participateChallenge(body)).then((response) => {
+            if (response.payload.success) {
+                alert(response.payload.msg);
+                props.history.push("/");
+            } else {
+                alert(response.payload.msg);
+            }
+        })
     }
     return (
         <ChallengeComponent listData={listData.listData} onClickHandler={onClickHandler}/>

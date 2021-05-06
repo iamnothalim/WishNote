@@ -139,27 +139,41 @@ router.post("/", async function (req, res) {
 
 // /api/challenge/state/participate
 router.post("/participate", async function (req, res) {
-  console.log("여기여기여기여기여기", req.body);
-  const { userid, category } = req.body;
+  const { challengeName } = req.body;
+  const userid = req.user.id;
   try {
-    const exists = await ChallengeStatus.findByChallengeName(challengename);
-    if (exists.userid == userid) {
-      return res
-        .status(400)
-        .json({ error: [{ msg: "That challenge already participated" }] });
+    const exists = await ChallengeStatus.findByChallengeName(challengeName);
+    console.log(exists);
+    const ifAttend = exists.filter(function(el){
+      return el.userid == userid
+    })
+    console.log(!ifAttend.length==0);
+    if (!ifAttend.length==0) {
+      res.json({success:false ,msg: "That challenge already participated" });
+    }else{
+      const challengeInfo = await Challenge.findByChallengeName(challengeName);
+      const category = challengeInfo.category;
+      //비용 차감 코드
+      const cost = challengeInfo.deposit;
+      const userInfo = await User.findByUserId(userid);
+      const point = userInfo.point;
+      if(point>=cost){
+        await User.updateOne({ id: userid }, { $set: { point: point - cost } });
+        const createChallengeState = new ChallengeStatus({
+          userid: userid,
+          challenge_name: challengeName,
+          creator: exists.creator,
+          challenge_state: 0,
+          category: category,
+        });
+        await createChallengeState.save();
+        res.json({success:true ,msg: "챌린지에 참가 하셨습니다!!" });
+      }else{
+        res.json({success:false ,msg: "포인트가 부족합니다!!" });
+      }
     }
-    const challengeInfo = await Challenge.findByChallengeName()
-    const createChallengeState = new ChallengeStatus({
-      userid: userid,
-      // challenge_name: challengename,
-      creator: exists.creator,
-      challenge_state: 0,
-      category: category,
-    });
-    await createChallengeState.save();
-    res.send("챌린지 참가 신청 완료");
   } catch (e) {
-    console.log(e.message);
+    console.log(e);
     res.status(500).send("server error");
   }
 });
