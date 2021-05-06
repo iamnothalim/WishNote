@@ -16,26 +16,26 @@ import { Calendar, Badge } from "antd";
 /////////////////////////
 
 const MonthContainer = (props) => {
-  // const feedCategory = useSelector((state) => ({
-  //   feedCategory: state.user.userData.user.feedData.feedCategory,
-  // }));
+  const feedCategory = useSelector((state) => ({
+    feedCategory: state.user.userData.feedData.feedCategory,
+  }));
 
-  // const feedCreatedAt = useSelector((state) => ({
-  //   data: state.user.userData.user.feedData.feedCreatedAt,
-  // }));
-  // console.log("와다닫댕", feedCreatedAt);
+  const feedCreatedAt = useSelector((state) => ({
+    data: state.user.userData.feedData.feedCreatedAt,
+  }));
+  console.log("와다닫댕", feedCreatedAt);
 
   function GetListData(value) {
-    const dispatch = useDispatch();
-    const [feedCategory, setFeedCategory] = useState("");
-    const [feedCreatedAt, setFeedCreatedAt] = useState("");
+    // const dispatch = useDispatch();
+    // const [feedCategory, setFeedCategory] = useState("");
+    // const [feedCreatedAt, setFeedCreatedAt] = useState("");
 
-    useEffect(() => {
-      dispatch(auth()).then((response) => {
-        setFeedCategory(response.payload.feedData.feedCategory);
-        setFeedCreatedAt(response.payload.feedData.feedCreatedAt);
-      });
-    }, []);
+    // useEffect(() => {
+    //   dispatch(auth()).then((response) => {
+    //     setFeedCategory(response.payload.feedData.feedCategory);
+    //     setFeedCreatedAt(response.payload.feedData.feedCreatedAt);
+    //   });
+    // }, []);
     ///////////
     let listData;
     // console.log("feedCategory", feedCategory);
