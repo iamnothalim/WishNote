@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react'
 import FeedComments from './Sections/FeedCommnets';
 import axios from 'axios';
 import { Link,withRouter } from "react-router-dom";
-import { Card, Avatar, Col, Typography, Row , List} from "antd";
-import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
+import Moment from 'react-moment'
+import { Button, Input } from 'antd';
+
 
 
 function DetailFeedPage(props) {
+    console.log('디테일 페이지')
    
     const postId = props.match.params._id
     const [Feed, setFeed] = useState([])
@@ -19,6 +21,7 @@ function DetailFeedPage(props) {
     }
     
     useEffect(async() => {
+        console.log('디테일에유')
         // const res = await axios.get("/api/feed/feed/getFeeds");
         // // const inputdata = res.data.data.feed.map((data) => ({
         // //     // userId: data.userId,
@@ -31,6 +34,7 @@ function DetailFeedPage(props) {
 
         // setFeeds[inputdata[0]];
         // console.log('data',data)
+        // DB
         const res =await axios.get(`/api/feed/feed/${postId}`)
         // console.log("res",res)
         // .then(response => {
@@ -63,21 +67,29 @@ function DetailFeedPage(props) {
 
 
     return (
-      
-      <div style={{display:"flex" ,position:"absolute", left:"50%",transform:"translateX(-50%)" ,paddingTop:"30px"}}>
-          <div style={{flexDirection:"column", paddingBottom:"0px", paddingTop:"0px" ,display:"grid", gridAutoColumns:"2",backgroundColor:"#fafafa" }}>
+       
 
 
-            <div style={{height:"60px",padding:"16px", border:"0.5px solid #000",backgroundColor:"rgba(255,255,255),1)" }}>{FeedCommentLists.userId}</div>
-            <div><img src={FeedCommentLists.image}  style={{maxHeight:"614px" ,maxWidth:"614px", minHeight:"614px" }}/></div>
-            {FeedCommentLists.title}
-            {FeedCommentLists.category}
-            {FeedCommentLists.description}
-            {FeedCommentLists.date}
         
-            <Link to={"/feedlistView"}>목록</Link>
+        <div style={{display:"flex" ,position:"absolute", left:"50%",transform:"translateX(-50%)" ,paddingTop:"30px"}}>
+          <div style={{flexDirection:"column", paddingBottom:"0px", paddingTop:"0px" ,display:"grid", gridAutoColumns:"2" ,backgroundColor:"#fafafa"}}>
+
+
+            <div style={{fontWeight:    "bold", height:"60px",padding:"16px", border:"0.5px solid #000",backgroundColor:"rgba(255,255,255),1)" }}>{FeedCommentLists.userId}</div>
+            <div><img src={FeedCommentLists.image}  style={{maxHeight:"614px" ,maxWidth:"614px", minHeight:"614px" }}/></div>
+            
+                <div style={{border:"0.5px solid #000"}}>
+                    <div style={{fontSize:"20px", fontWeight:"bold"}}>{FeedCommentLists.title} </div>
+                    <div> #{FeedCommentLists.category}</div>
+                    <div>{FeedCommentLists.description}</div>
+                    <div style={{fontSize:"10px"}} ><Moment format="YYYY/MM/DD"> {FeedCommentLists.createdAt}</Moment></div>
+                </div>
+            <div style={{fontSize:"15px",textAlign:"right",textDecoration:"none", color:"#fafafa"}}><Link to={"/feed/upload"}>인증하기</Link> | <Link to={"/feedlistView"}>목록</Link></div>
+        
+
           </div>
-      </div>
+        </div>
+      
       
 
     )
@@ -262,3 +274,4 @@ export default withRouter(DetailFeedPage);
 //     )
 // }
 // export default withRouter(DetailFeedPage);
+

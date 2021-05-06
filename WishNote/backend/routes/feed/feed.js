@@ -48,7 +48,9 @@ router.post("/", async (req, res) => {
 ///// 피드 리스트 전체 보기
 router.get("/getFeeds", function (req, res, next) {
   Feed.find()
+    .sort({ createdAt: "-1" })
     .then((feed) => {
+      console.log('feed',feed);
       // console.log('read all 완료');
       res.status(200).json({
         data: feed,
@@ -107,9 +109,10 @@ router.put("/:post_id", async function (req, res, next) {
 });
 
 // 피드 상세보기
-router.get("/:post_id", function (req, res, next) {
-  const postId = req.params.post_id;
-  console.log('tlqkf',postId)
+router.get("/:_id", function (req, res, next) {
+  console.log("디테일 backend");
+  const postId = req.params._id;
+  console.log("tlqkf", postId);
 
   Feed.findOne({ _id: postId })
     .then((feed) => {

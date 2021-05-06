@@ -44,7 +44,7 @@ function FeedList() {
       </Title>
       <hr />
       {feeds.map((feed) => (
-        <Link to="/api/feed/:feedId">
+        <Link to={`/feed/${feed._id}`}>
           <div style={{ display: "inline-block", marginLeft: "20px" }}>
             <div>
               <img
@@ -61,12 +61,12 @@ function FeedList() {
             </div>
             <div>{feed.userId}</div>
             {/* <div>{feed.description}</div> */}
-            <div>{feed.category} </div>
-            <div>{feed.views}</div>
+            {/* <div>{feed.category} </div> */}
+            {/* <div>{feed.views}</div> */}
           </div>
         </Link>
       ))}
-      {/* <Row gutter={16}>{renderCards}</Row> */}1
+      {/* <Row gutter={16}>{renderCards}</Row> */}
     </div>
   );
 }

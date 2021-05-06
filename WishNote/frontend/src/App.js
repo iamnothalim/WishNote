@@ -33,7 +33,7 @@ function App() {
           />
           <Route
             exact
-            path="/feed/:feedId"
+            path="/feed/:_id"
             component={Auth(DetailFeedPage, null)}
           />
           <Route

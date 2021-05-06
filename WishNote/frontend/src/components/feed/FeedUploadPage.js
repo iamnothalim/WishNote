@@ -226,7 +226,7 @@ function FeedUploadPage(props) {
                         <option key={index} value={item.label}>{item.label}</option>
                     ))}
                 </select> */}
-<Form.Item label="Image" >
+            <Form.Item label="Image" >
                     {/* <div>
                         <img src={imgBase64} />
                     </div>

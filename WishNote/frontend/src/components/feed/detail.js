@@ -193,6 +193,8 @@ const FreeBoardDetailPage = ({ match, props, history }) => {
             <th>작성자</th>
             <td>{lists.fUserid}</td>
           </tr>
+
+          
           <tr>
             <th>작성날짜</th>
             <td>
