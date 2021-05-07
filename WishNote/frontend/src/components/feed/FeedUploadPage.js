@@ -99,7 +99,7 @@ function FeedUploadPage(props) {
   return (
     <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
       <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-        <Title level={2}> 첼린지 인증 </Title>
+        <Title level={2}> 챌린지 인증 </Title>
       </div>
 
       {/* <Form onSubmit={onSubmit} onFinish={onSubmitHandler} > */}
@@ -109,7 +109,7 @@ function FeedUploadPage(props) {
         </div>
         <br />
         <br />
-        <label>첼린지명</label>
+        <label>챌린지명</label>
         {/* <Input
                     onChange={onTitleChange}
                     value={FeedTitle}

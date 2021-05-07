@@ -204,10 +204,11 @@ router.get("/", async function (req, res, next) {
             create: created.length,
           },
           challengeName: challengeArr,
-          // feedData: {
-          //   feedCategory: feedCategory,
-          //   feedCreatedAt: feedCreatedAt,
-          // },
+          feedData: {
+            feedCategory: [""],
+            feedCreatedAt: [""],
+            feedTitle: [""],
+          },
           listData: listData,
           //month:askdhk
         };

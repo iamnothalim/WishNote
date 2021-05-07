@@ -6,7 +6,9 @@ import {
 } from "../_actions/types";
 
 const initialState = {
-  userData: {},
+  userData: {
+    feedData: { feedCategory: ["a"], feedCreatedAt: ["a"], feedTitle: ["a"] },
+  },
 };
 
 export default function (state = initialState, action) {

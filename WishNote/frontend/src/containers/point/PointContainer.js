@@ -24,7 +24,7 @@ const PointContainer = (props) => {
     <div>
       <HeaderContainer />
       <ChargePoint onSubmitHandler={onSubmitHandler} userdata={userdata} />
-      <Upload />
+      {/* <Upload /> */}
     </div>
   );
 };

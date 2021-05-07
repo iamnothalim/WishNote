@@ -16,6 +16,10 @@ import { Calendar, Badge } from "antd";
 /////////////////////////
 
 const MonthContainer = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(auth());
+  }, []);
   function GetListData(value) {
     const category = useSelector((state) => ({
       data: state.user.userData.feedData.feedCategory,
@@ -34,19 +38,34 @@ const MonthContainer = () => {
     console.log("feedCreatedAt", feedCreatedAt);
     console.log("feedCategory", feedCategory);
     console.log("feedTitle", feedTitle);
-    feedCreatedAt.forEach((el, index) => {
-      console.log("el", el);
+    if (feedCreatedAt !== undefined) {
+      feedCreatedAt.forEach((el, index) => {
+        console.log("el", el);
+        switch (value.format("YYYY-MM-DD")) {
+          case el:
+            listData = [
+              { type: "warning", content: feedCategory[index] },
+              { type: "success", content: feedTitle[index] },
+            ];
+            break;
+          default:
+        }
+      });
+    } else {
       switch (value.format("YYYY-MM-DD")) {
-        case el:
+        case "21-05-07":
           listData = [
-            { type: "warning", content: feedCategory[index] },
-            { type: "success", content: feedTitle[index] },
+            { type: "success", content: "얼른 피드 인증을 시작해주세요~!" },
           ];
           break;
         default:
       }
-    });
-    return listData || [];
+    }
+    return feedCategory !== undefined
+      ? listData || []
+      : (listData = [
+          { type: "success", content: "얼른 피드 인증을 시작해주세요~!" },
+        ]);
   }
   //////
   function dateCellRender(value) {
