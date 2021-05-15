@@ -10,7 +10,7 @@ const MyPage = () => {
   console.log("마이페이지 들어왔습니다.");
   return (
     <div>
-      <MonthContainer />
+      {/* <MonthContainer /> */}
       <HabitContainer />
     </div>
   );
