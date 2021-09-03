@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { Form, Button, Select } from "antd";
 
-import GlobalFonts from "../../lib/styles/fonts/fonts";
-//import a from url('https://fonts.googleapis.com/css2?family=Itim&display=swap'
 
 const ChargeDivStyled = styled.div`
   margin: 10%;
@@ -33,31 +31,6 @@ const tailLayout = {
 const ChargePoint = ({ onSubmitHandler, userdata }) => {
   const [form] = Form.useForm();
 
-  // const onGenderChange = (value) => {
-  //     switch (value) {
-  //         case 'male':
-  //             form.setFieldsValue({
-  //                 note: 'Hi, man!',
-  //             });
-  //             return;
-
-  //         case 'female':
-  //             form.setFieldsValue({
-  //                 note: 'Hi, lady!',
-  //             });
-  //             return;
-
-  //         case 'other':
-  //             form.setFieldsValue({
-  //                 note: 'Hi there!',
-  //             });
-  //     }
-  // };
-
-  const onFinish = (values) => {
-    console.log(values);
-  };
-
   const onReset = () => {
     form.resetFields();
   };
@@ -84,7 +57,6 @@ const ChargePoint = ({ onSubmitHandler, userdata }) => {
         >
           <Select
             placeholder="충전할 금액을 선택해 주세요."
-            //onChange={onGenderChange}
             allowClear
           >
             <Option value="5000">+5000원</Option>
@@ -92,26 +64,6 @@ const ChargePoint = ({ onSubmitHandler, userdata }) => {
             <Option value="50000">+50000원</Option>
           </Select>
         </Form.Item>
-        {/* <Form.Item
-                noStyle
-                shouldUpdate={(prevValues, currentValues) => prevValues.gender !== currentValues.gender}
-            >
-                {({ getFieldValue }) =>
-                    getFieldValue('gender') === 'other' ? (
-                        <Form.Item
-                            name="customizeGender"
-                            label="Customize Gender"
-                            rules={[
-                                {
-                                    required: true,
-                                },
-                            ]}
-                        >
-                            <Input />
-                        </Form.Item>
-                    ) : null
-                }
-            </Form.Item> */}
         <Form.Item {...tailLayout}>
           <Button type="primary" htmlType="submit">
             충전하기

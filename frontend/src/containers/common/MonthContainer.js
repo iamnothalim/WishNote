@@ -17,9 +17,6 @@ import { Calendar, Badge } from "antd";
 
 const MonthContainer = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(auth());
-  }, []);
   function GetListData(value) {
     const category = useSelector((state) => ({
       data: state.user.userData.feedData.feedCategory,
@@ -73,9 +70,6 @@ const MonthContainer = () => {
     return (
       <ul className="events">
         {listData.map((item) => (
-          // <li key={item.content}>
-
-          // </li>
           <Badge status={item.type} text={item.content} />
         ))}
       </ul>
@@ -84,4 +78,4 @@ const MonthContainer = () => {
   return <Calendar dateCellRender={dateCellRender} />;
 };
 
-export default MonthContainer;
+export default withRouter(MonthContainer);

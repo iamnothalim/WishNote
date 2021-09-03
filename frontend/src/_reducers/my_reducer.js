@@ -8,8 +8,6 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case CHALLENGE_MY:
-      console.log("state", state);
-      console.log("payload", action.payload);
       return { ...state, challengeData: action.payload };
     case CREATE_CHALLENGE:
       return {...state,challengeData: action.payload};

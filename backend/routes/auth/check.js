@@ -6,14 +6,10 @@ const Challenge = require("../../models/challenge");
 const Feed = require("../../models/Feed");
 
 router.get("/", async function (req, res, next) {
-  console.log("여긴 check");
-  //console.log(req);
-  //console.log('asdas', req.user);
   if (!req.user) {
     try {
       //challenge 데이터들 불러오기
       const challengeInfo = await Challenge.find();
-      //console.log(challengeInfo);
       const listData = [];
       for (let i = 0; i < challengeInfo.length; i++) {
         listData.push({
@@ -25,7 +21,6 @@ router.get("/", async function (req, res, next) {
           deposit: challengeInfo[i].deposit,
         });
       }
-      //console.log(listData);
 
       res.json({ id: null, listData: listData });
     } catch (e) {
@@ -35,7 +30,6 @@ router.get("/", async function (req, res, next) {
   } else {
     try {
       const getInfo = await ChallengeStatus.findByUser(req.user.id);
-      // console.log("getInfo", getInfo);
       let created = [];
       let participated = [];
       let finished = [];
@@ -58,8 +52,6 @@ router.get("/", async function (req, res, next) {
       await getInfo.forEach((el) => {
         challengeArr.push(el.challenge_name);
       });
-      //console.log("categoryArr", categoryArr);
-
       //////////////////
       //중복된 요소 갯수 추출 함수
       const dupCounter = function (accumulator, val, index, array) {
@@ -80,7 +72,6 @@ router.get("/", async function (req, res, next) {
       const performance = Object.keys(dupCount).indexOf("performance");
       const asset = Object.keys(dupCount).indexOf("asset");
       const health = Object.keys(dupCount).indexOf("health");
-      //console.log(a,b,c,d,e)
 
       //해당 인덱스 키값 알아내기 (갯수 알아내기)
       let hobby_count = dupCount[Object.keys(dupCount)[hobby]];
@@ -88,7 +79,6 @@ router.get("/", async function (req, res, next) {
       let performance_count = dupCount[Object.keys(dupCount)[performance]];
       let asset_count = dupCount[Object.keys(dupCount)[asset]];
       let health_count = dupCount[Object.keys(dupCount)[health]];
-      //console.log(a_count,b_count,c_count,d_count,e_count);
 
       if (hobby_count == undefined) hobby_count = 0;
       if (relationship_count == undefined) relationship_count = 0;
@@ -125,11 +115,6 @@ router.get("/", async function (req, res, next) {
           }
         });
       });
-      // console.log("여긴 바깥", radarData);
-
-      //{ hobby: 2, relationship: 1, performance: 1, asset: 0, health: 0 }
-
-      //console.log('개설: ',created.length);
       participated.forEach((el) => {
         if (el.challenge_state == 1) {
           finished.push(el);
@@ -137,14 +122,10 @@ router.get("/", async function (req, res, next) {
           unfinished.push(el);
         }
       });
-      //console.log('참가중: ',unfinished.length);
-      //console.log('완료: ',finished.length);
       /////////////////////////////////////////////
       const userdata = await User.findByUserId(req.user.id);
-      //console.log(userdata);
       //challenge 데이터들 불러오기
       const challengeInfo = await Challenge.find();
-      //console.log(challengeInfo);
       const listData = [];
       for (let i = 0; i < challengeInfo.length; i++) {
         listData.push({
@@ -162,7 +143,6 @@ router.get("/", async function (req, res, next) {
         let feedCategory = [];
         let feedTitle = [];
         let feedCreatedAt = [];
-        //console.log("feedData.category", feedData.category);
         feedData.forEach((el) => {
           feedCategory.push(el.category);
           feedTitle.push(el.title);
@@ -188,7 +168,6 @@ router.get("/", async function (req, res, next) {
             feedTitle: feedTitle,
           },
           listData: listData,
-          //month:askdhk
         };
         res.json(user);
       } else {
@@ -210,11 +189,9 @@ router.get("/", async function (req, res, next) {
             feedTitle: [""],
           },
           listData: listData,
-          //month:askdhk
         };
         res.json(user);
       }
-      //console.log(user);
     } catch (e) {
       console.log(e.message);
       res.status(500).send("Server Error");

@@ -3,7 +3,6 @@ const express = require("express");
 const router = express.Router();
 
 router.post("/", async function (req, res) {
-  console.log("여긴 로그인");
   const { id, password } = req.body;
   //둘중 하나라도 없으면 에러
   if (!id || !password) {
@@ -11,8 +10,6 @@ router.post("/", async function (req, res) {
   }
   try {
     const user = await User.findByUserId(id);
-    console.log("id", id);
-    console.log("user", user);
     //계정이 없으면 에러
     if (!user) {
       return res.status(400).json({ errors: [{ msg: "User not exists" }] });

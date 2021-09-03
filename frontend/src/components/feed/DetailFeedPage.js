@@ -6,10 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Moment from "react-moment";
 
 function DetailFeedPage(props) {
-  // console.log("디테일 페이지");
   const user = useSelector((state) => state.user);
   const userId = user.userData.id;
-  console.log("요게 윰ㄴㅇㅁㄴㅇ", props.match.params);
   const postId = props.match.params._id;
   const [Feed, setFeed] = useState([]);
   const [FeedCommentLists, setFeedCommentLists] = useState([]);
@@ -23,10 +21,8 @@ function DetailFeedPage(props) {
 
   const updateFeedComment = (newFeedComment) => {
     setFeedCommentLists(FeedCommentLists.concat(newFeedComment));
-    // console.log("Feed!!",Feed);
   };
 
-  // console.log("FeedCommentLists", FeedCommentLists);
 
   return (
     <div

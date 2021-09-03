@@ -8,19 +8,6 @@ router.get("/", (req, res) => {
   console.log("챌린지 등록에 들어왔습니다.");
 });
 
-/*
-postman : post =>http://localhost:8001/challenge
-{
-    "registerId" : "je", 
-    "category": "health",
-    "challengeName" : "VIT-AMeans", 
-    "howTo": "인증샷", 
-    "howMany" : 3,
-    "startDate" : "2021-04-25",
-    "finishDate" : "2021-05-25",
-    "deposit" : 6000
-}
-*/
 //multer setting
 const upload = multer({
     storage: multer.diskStorage({
@@ -40,10 +27,8 @@ const upload = multer({
 router.post("/", upload.single('challengeImg'),async (req, res) => {
   console.log("여긴 챌린지 등록");
   const {
-    //registerId,
     category,
     challengeName,
-    //howTo,
     howMany,
     startDate,
     finishDate,

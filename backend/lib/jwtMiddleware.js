@@ -1,11 +1,8 @@
-//import jwt from "jsonwebtoken";
-//import User from "../models/user";
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 
 const jwtMiddleware = async (req, res, next) => {
   const token = req.cookies.access_token;
-  //console.log('이게 어세스 토큰: ',req.cookies.access_token);
   if (!token) return next(); //토큰 없음
   try {
     console.log("middleware try안쪽");
@@ -27,12 +24,10 @@ const jwtMiddleware = async (req, res, next) => {
         httpOnly: true,
       });
     }
-    //console.log(decoded);
     return next();
   } catch (e) {
     return next(); //토큰 검증 실패
   }
 };
 
-//export default jwtMiddleware;
 module.exports = jwtMiddleware;

@@ -23,10 +23,6 @@ const upload = multer({
 
 ///// 인증 피드 작성
 router.post("/uploadFeed", upload.single("image"), async (req, res) => {
-  console.log("req", req.body);
-  console.log("id는", req.user.id);
-  console.log("파일은!", req.file.filename);
-  console.log("피드 등록 On");
   const { userId, description, title } = req.body;
   console.log(userId, description, title);
   try {
@@ -45,13 +41,6 @@ router.post("/uploadFeed", upload.single("image"), async (req, res) => {
     console.log(e.message);
     res.status(500).send("server error");
   }
-  //   try {
-
-  // const feed = new Feed({
-  //   registerId,
-  //   challengeText,
-  //   challengeName,s
-  // });
 
   const feed = new Feed();
 
@@ -84,8 +73,6 @@ router.get("/getFeeds", function (req, res, next) {
   Feed.find()
     .sort({ createdAt: "-1" })
     .then((feed) => {
-      // console.log("feed", feed);
-      // console.log('read all 완료');
       res.status(200).json({
         data: feed,
       });
@@ -112,7 +99,7 @@ router.get("/", async function (req, res) {
     })
     .catch((err) => {
       res.status(500).json({
-        message: "혹시 여기니",
+        message: "error",
       });
     });
 });
@@ -124,13 +111,11 @@ router.put("/:post_id", async function (req, res, next) {
 
   try {
     var post = await Feed.findById(post_id);
-    // console.log('durl',post)
     if (!post) return res.status(404).json({ message: "post not found" });
     post.description = description;
     post.title = title;
 
     const output = await post.save();
-    // console.log('수정완료');
     res.status(200).json({
       message: "수정 성공",
       data: output,
@@ -144,15 +129,11 @@ router.put("/:post_id", async function (req, res, next) {
 
 // 피드 상세보기
 router.get("/:_id", function (req, res, next) {
-  console.log("디테일 backend");
   const postId = req.params._id;
-  console.log("tlqkf", postId);
 
   Feed.findOne({ _id: postId })
     .then((feed) => {
       if (!feed) return res.status(404).json({ message: "feed not found" });
-
-      // console.log('read detail 완료');
       FeedComment.find({ postId: postId })
         .sort({ updatedAt: "-1" })
         .then((comment) => {
@@ -169,25 +150,6 @@ router.get("/:_id", function (req, res, next) {
       });
     });
 });
-// router.get("/:post_id", function (req, res, next) {
-//   const postId = req.params.post_id;
-//   console.log('tlqkf',postId)
-
-//   Feed.findOne({ _id: postId })
-//     .then((feed) => {
-//       if (!feed) return res.status(404).json({ message: "feed not found" });
-//       // console.log('read detail 완료');
-//       res.status(200).json({
-//         message: "read detail success",
-//         data: feed,
-//       });
-//     })
-//     .catch((err) => {
-//       res.status(500).json({
-//         message: err,
-//       });
-//     });
-// });
 
 // 피드 삭제
 
@@ -198,9 +160,7 @@ router.delete("/:post_id", function (req, res, next) {
     .then((output) => {
       if (output.n == 0)
         return res.status(404).json({ message: "feed not found" });
-      // console.log('삭제 완료');
       res.status(200).json({
-        // message:"삭제 성공"
       });
     })
     .catch((err) => {
@@ -228,7 +188,6 @@ router.post("/feedComment/:postId", async (req, res) => {
   await feedComment
     .save()
     .then((feedComment) => {
-      //   console.log("d");
       res.status(200).json({
         data: feedComment,
       });
@@ -266,106 +225,3 @@ router.put("/feedComment/:postId", async function (req, res, nxet) {
 });
 
 module.exports = router;
-
-// const express = require('express');
-// const router = express.Router();
-// const multer = require('multer');
-// var ffmpeg = require('fluent-ffmpeg');
-// const {Feed} = require('../../models/Feed');
-
-// let storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//         //파일 어디에 저장할지  uploads 파일안에 들어감
-//         cb(null, 'uploads/')
-//     },
-//     filename: (req, file, cb) => {
-//         cb(null, `${Date.now()}_${file.originalname}`)
-//     },  //업로드 날짜와 파일 이름
-//     fileFilter: (req, file, cb) => {
-//         const ext = path.extname(file.originalname)
-//         if (ext !== '.mp4' ) {
-//             return cb(res.status(400).end('only jpg, png, mp4 is allowed'), false);
-//         }
-//         cb(null, true)
-//     }
-// });
-
-// const upload = multer({ storage: storage }).single("file")
-
-// router.post("/uploadfiles", upload,(req, res) => {
-
-//     //파일을 서버에저장
-//     upload(req, res, err => {
-//         if (err) {
-//             return res.json({ success: false, err })
-//         }
-//         return res.json({ success: true, url: res.req.file.path, fileName: res.req.file.filename })
-//     })
-
-// });
-// router.post("/thumbnail", (req, res) => {
-
-//     let thumbsFilePath ="";
-//     let fileDuration ="";
-
-//     ffmpeg.ffprobe(req.body.filePath, function(err, metadata){
-//         console.dir(metadata);
-//         console.log(metadata.format.duration);
-
-//         fileDuration = metadata.format.duration;
-//     })
-
-//     ffmpeg(req.body.filePath)
-//         .on('filenames', function (filenames) {
-//             console.log('Will generate ' + filenames.join(', '))
-//             thumbsFilePath = "uploads/thumbnails/" + filenames[0];
-//         })
-//         .on('end', function () {
-//             console.log('Screenshots taken');
-//             return res.json({ success: true, thumbsFilePath: thumbsFilePath, fileDuration: fileDuration})
-//         })
-//         .screenshots({
-//             count: 3,
-//             folder: 'uploads/thumbnails',
-//             size:'320x240',
-//             // %b input basename ( filename w/o extension )
-//             filename:'thumbnail-%b.png'
-//         });
-
-// });
-
-// router.get("/getFeeds", (req, res) => {
-
-//     Feed.find()
-//         .populate('user')
-//         .exec((err, feeds) => {
-//             if(err) return res.status(400).send(err);
-//             res.status(200).json({ success: true, feeds })
-//         })
-
-// });
-
-// router.post("/uploadFeed", (req, res) => {
-
-//     const feed = new Feed(req.body)
-
-//     feed.save((err, feed) => {
-//         if(err) return res.status(400).json({ success: false, err })
-//         return res.status(200).json({
-//             success: true
-//         })
-//     })
-
-// });
-
-// router.post("/getFeed", (req, res) => {
-
-//     Feed.findOne({ "_id" : req.body.feedId })
-//     .populate('user')
-//     .exec((err, feed) => {
-//         if(err) return res.status(400).send(err);
-//         res.status(200).json({ success: true, feed })
-//     })
-// });
-
-// module.exports = router;

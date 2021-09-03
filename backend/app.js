@@ -4,7 +4,6 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const mongoose = require("mongoose");
-// const api = require("./routes");
 
 const jwtMiddleware = require("./lib/jwtMiddleware");
 
@@ -14,7 +13,6 @@ const feedRouter = require("./routes/feed");
 const challengeRouter = require("./routes/challenge");
 const app = express();
 
-// app.use("/api", api);
 
 //mongoDB
 mongoose
@@ -43,8 +41,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(jwtMiddleware);
 app.use("/api", express.static(path.join(__dirname, "uploads")));
-//app.use("/api",express.static(path.join(__dirname, "uploads")));
-//app.use(express.static('/api/uploads'));
 
 //라우터 설정
 app.use("/api", mainRouter);
@@ -53,7 +49,6 @@ app.use("/api/feed", feedRouter);
 app.use("/api/challenge", challengeRouter);
 app.use("/api/feedComment", require("./routes/feed/feedComment"));
 //proxyTest
-//app.get('/api/hello',(req,res)=>{res.send("안녕 이건 프록시 테스트")});
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

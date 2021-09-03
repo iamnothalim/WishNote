@@ -1,5 +1,4 @@
-import React from 'react'
-import HeaderContainer from "../../containers/common/HeaderContainer";
+import React from 'react';
 import { withRouter } from "react-router";
 import TopMenu from '../../components/antd/TopMenu';
 const FeedDetail = () => {

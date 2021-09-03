@@ -15,8 +15,6 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case LOGIN_USER:
       return { ...state, loginSuccess: action.payload };
-    // case LOGIN_USER:
-    //   return { ...state, user: action.payload };
     case REGISTER_USER:
       return { ...state, register: action.payload };
     case AUTH_USER:

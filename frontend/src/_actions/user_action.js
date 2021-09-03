@@ -24,7 +24,6 @@ export function logoutUser() {
 }
 
 export function registerUser(dataToSubmit) {
-  console.log("회원가입 데이터 들어갑니다!", dataToSubmit);
   const request = axios
     .post("/api/auth/register", dataToSubmit)
     .then((response) => response.data);

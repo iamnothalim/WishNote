@@ -36,7 +36,6 @@ const Month = ({ day, category }) => {
       <MonthBlock>
         <Wrapper>
           <div className="right">
-            {/* <UserInfo>{user.nickname}</UserInfo> */}
             <UserInfo>{day}</UserInfo>
             <UserInfo>{category}</UserInfo>
           </div>

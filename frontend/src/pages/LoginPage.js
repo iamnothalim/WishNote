@@ -15,18 +15,6 @@ function LoginPage() {
           height: "100vh",
         }}
       >
-        {/* <form style={{display:'flex',flexDirection:'column'}}
-                onSubmit={onSubmitHandler}
-            >
-                <label>username</label>
-                <input type="text" value={Username} onChange={onUsernameHandler} />
-                <label>password</label>
-                <input type="password" value={Password} onChange={onPasswordHandler} />
-                <br/>
-                <button>
-                    Login
-                </button>
-            </form> */}
         <LoginContainer />
       </div>
     </>

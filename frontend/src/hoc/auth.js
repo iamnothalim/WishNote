@@ -14,10 +14,10 @@ export default function (SpecificComponent, option, adminRoute = null) {
         console.log('auth안에 데이더',response);
 
         //로그인 하지 않은 상태
-        if (!response.payload.id) {
+        if (response.payload.id == null) {
           if (option) {
-            console.log("바부똥꼬");
             props.history.push("/login");
+            console.log('로그인이 필요하다귱!');
             alert("로그인이 필요한 페이지 입니다.");
           }
         } else {

@@ -17,7 +17,6 @@ router.post("/", async function (req, res) {
   let categoryArr = [];
 
   try {
-    console.log("여긴 챌린지 현황 상태 조회");
     await getInfo.forEach((el) => {
       if (el.userid == el.creator) {
         created.push(el);
@@ -51,7 +50,6 @@ router.post("/", async function (req, res) {
     const performance = Object.keys(dupCount).indexOf("performance");
     const asset = Object.keys(dupCount).indexOf("asset");
     const health = Object.keys(dupCount).indexOf("health");
-    //console.log(a,b,c,d,e)
 
     //해당 인덱스 키값 알아내기 (갯수 알아내기)
     const hobby_count = dupCount[Object.keys(dupCount)[hobby]];
@@ -59,7 +57,6 @@ router.post("/", async function (req, res) {
     const performance_count = dupCount[Object.keys(dupCount)[performance]];
     const asset_count = dupCount[Object.keys(dupCount)[asset]];
     const health_count = dupCount[Object.keys(dupCount)[health]];
-    //console.log(a_count,b_count,c_count,d_count,e_count);
     //객체 반환
     let data_hobby = {};
     if (hobby !== "0") {
@@ -98,9 +95,6 @@ router.post("/", async function (req, res) {
       data_asset,
       data_health,
     };
-    //{ hobby: 2, relationship: 1, performance: 1, asset: 0, health: 0 }
-
-    //console.log('개설: ',created.length);
     participated.forEach((el) => {
       if (el.challenge_state == 1) {
         finished.push(el);
@@ -108,8 +102,6 @@ router.post("/", async function (req, res) {
         unfinished.push(el);
       }
     });
-    //console.log('참가중: ',unfinished.length);
-    //console.log('완료: ',finished.length);
     /////////////////////////////////////////////
     console.log("여긴 보유 포인트 상태 조회");
     const user = await User.findByUsername(userid);
@@ -126,16 +118,8 @@ router.post("/", async function (req, res) {
     console.log(e.message);
     res.status(500).send("server error");
   }
-  //res.send('조회 성공!');
 });
 
-/*
-{
-    "userid" : "haggo",
-    "challengename":"",
-    "category":"hobby"
-}
-*/
 
 // /api/challenge/state/participate
 router.post("/participate", async function (req, res) {

@@ -1,24 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Card, Avatar, Col, Typography, Row } from "antd";
-import moment from "moment";
 import { Link } from "react-router-dom";
-import CenterBlock from "../../components/common/Center";
 const { Title } = Typography;
 const { Meta } = Card;
 
 function FeedList() {
-  // const [feeds, setFeeds] = useState([
-  //   {
-  //     _id: "",
-  //     userId: "",
-  //     title: "",
-  //     description: "",
-  //     category: "",
-  //     views: "",
-  //     image: "",
-  //   },
-  // ]);
   const [feeds, setFeeds] = useState([]);
 
   useEffect(async () => {
@@ -33,7 +20,6 @@ function FeedList() {
       views: data.views,
       image: data.image,
     }));
-    // console.log("data ==> ",data)
     setFeeds(feeds.concat(data));
   }, []);
 
@@ -62,9 +48,6 @@ function FeedList() {
               {feed.title}
             </div>
             <div>{feed.userId}</div>
-            {/* <div>{feed.description}</div> */}
-            {/* <div>{feed.category} </div> */}
-            {/* <div>{feed.views}</div> */}
           </div>
         </Link>
       ))}

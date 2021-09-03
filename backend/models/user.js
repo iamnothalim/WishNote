@@ -1,7 +1,3 @@
-//import mongoose, { Schema } from "mongoose";
-//import bcrypt from "bcrypt";
-//import jwt from "jsonwebtoken";
-
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -34,8 +30,6 @@ UserSchema.methods.serialize = function () {
 };
 
 UserSchema.methods.generateToken = function () {
-  //console.log(this.id);
-  //console.log(this.username);
   const token = jwt.sign(
     //첫번째 파라미터에는 토큰안에 집어 넣고 싶은 데이터를 넣는다.
     {

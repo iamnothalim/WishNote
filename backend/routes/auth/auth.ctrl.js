@@ -1,13 +1,6 @@
 import Joi from "joi";
 import User from "../../models/user";
 //회원가입
-/*
-POST /api/auth/register
-{
-    username:'hong'
-    password:'mypass123'
-}
-*/
 export const register = async (ctx) => {
     //Request Body 검증
     const schema = Joi.object().keys({
@@ -46,11 +39,6 @@ export const register = async (ctx) => {
     }
 };
 //로그인
-//POST /api/auth/register
-// {
-//     username:'hong'
-//     password:'mypass123'
-// }
 export const login = async (ctx) => {
     const { username, password } = ctx.request.body;
     //둘중 하나라도 없으면 에러
